@@ -41,6 +41,8 @@ public class MovementController : MonoBehaviour
         /*if (Input.GetKeyDown(KeyCode.K))
         {
             //Knockback doesn't fully work, no drag so it keeps adding up
+            //Update: there is drag now, but the implementation isn't the greatest, so it slows down at an odd rate, should probably multiply it with 
+            //Mathf.Max(1f, velocity.Magnitude()) or something similar
 
 
 
@@ -67,18 +69,17 @@ public class MovementController : MonoBehaviour
         //Project move dir, TODO somehow orient vector away from the slope
         //incorrect at certain angles in stairs due to the projection, should probably fix at some point
         moveDir = (PlayerData.playerTransform.forward * vertical + PlayerData.playerTransform.right * horizontal);
-        moveDir.y = 0f;
-        moveDir = Vector3.ProjectOnPlane(moveDir, groundRay.normal);
+        //moveDir.y = 0f;
+        //moveDir = Vector3.ProjectOnPlane(moveDir, groundRay.normal);
         moveDir = moveDir.normalized * speed;
 
         Debug.DrawLine(groundRay.point, groundRay.point + groundRay.normal, Color.red);
 
         //Gravity
-        if (!isGrounded) velocity += Vector3.down * CalculateGravityMagnitude();
-        else if (velocity.y <= 0)
-        {
-            velocity.y = 0;
-        }
+        //if (!isGrounded) velocity += Vector3.down * CalculateGravityMagnitude();
+        //else if (velocity.y <= 0) velocity.y = 0;
+        velocity += Vector3.down * CalculateGravityMagnitude();
+        if (isGrounded) velocity.y = Mathf.Max(-5f, velocity.y);
 
 
         //Drag, terrible implementation, technically works, will leave it at that for now
