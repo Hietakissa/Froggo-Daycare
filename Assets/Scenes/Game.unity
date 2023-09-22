@@ -14174,7 +14174,7 @@ MonoBehaviour:
   gravity: 1
   fallMultiplier: 1.8
   drag: 5
-  sphereCastOffset: 0.15
+  sphereCastOffset: 0.07
   rayCastOffset: 0.4
 --- !u!114 &1078442791
 MonoBehaviour:
