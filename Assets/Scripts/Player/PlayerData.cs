@@ -8,4 +8,9 @@ public abstract class PlayerData
 
     public static Transform playerTransform;
     public static Transform cameraTransform;
+
+    public static bool ValidatePlayerReferences()
+    {
+        return playerTransform && cameraTransform;
+    }
 }

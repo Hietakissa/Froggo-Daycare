@@ -15,6 +15,7 @@ public class ReferenceSetter : MonoBehaviour
         SetReferences();
     }
 
+    [ContextMenu("Set References")]
     void SetReferences()
     {
         PlayerData.playerTransform = playerTransform;

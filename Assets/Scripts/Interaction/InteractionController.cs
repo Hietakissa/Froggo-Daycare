@@ -32,6 +32,8 @@ public class InteractionController : MonoBehaviour
 
     void OnDrawGizmos()
     {
+        if (!PlayerData.ValidatePlayerReferences()) return;
+
         if (Physics.Raycast(PlayerData.cameraTransform.position, PlayerData.cameraTransform.forward, out RaycastHit hit, interactionRange) && hit.collider.TryGetComponent(out IGrabbable interactable))
         {
             Gizmos.color = Color.green;
