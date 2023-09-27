@@ -19,5 +19,10 @@ public class DebugTeleportPositions : MonoBehaviour
         {
             Instantiate(foodPrefab, PlayerData.cameraTransform.position + PlayerData.cameraTransform.forward * 3f, Quaternion.identity);
         }));
+
+        CommandSystem.AddCommand(new DebugCommand<float>("timescale", (float timeScale) =>
+        {
+            Time.timeScale = timeScale;
+        }));
     }
 }

@@ -13,6 +13,7 @@ public class MovementController : MonoBehaviour
     [SerializeField] float coyoteTime;
     [SerializeField] float jumpBufferTime;
     [SerializeField] bool allowHoldingJump;
+    [SerializeField] bool keepCrouchPressedAirborne;
 
     [Header("Physics")]
     [SerializeField] float gravity;
@@ -52,13 +53,12 @@ public class MovementController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R)) Time.timeScale = 0.1f;
-        else if (Input.GetKeyDown(KeyCode.T)) Time.timeScale = 1f;
-
         //Grounded check
         isGrounded = Physics.SphereCast(transform.position + Vector3.up * (sphereCastRadius + sphereCastOffset), sphereCastRadius, Vector3.down, out sphereCast, sphereCastOffset * 2);
         Physics.Raycast(transform.position + Vector3.up * rayCastOffset, Vector3.down, out groundRay, rayCastOffset * 2);
 
+        if (isGrounded && !lastGrounded) StartGround();
+        else if (!isGrounded && lastGrounded) StartAir();
 
         HandlePhysics();
         GetInput();
@@ -74,25 +74,23 @@ public class MovementController : MonoBehaviour
         {
             HandleDrag();
             HandleGravity();
-        }
 
-        void HandleDrag()
-        {
-            //terrible implementation, technically works, will leave it at that for now
-            //the implementation isn't the greatest, so it slows down at an odd rate, should probably multiply it with 
-            //Mathf.Max(1f, velocity.Magnitude()) or something similar
-            Vector3 tempVelocity = velocity;
-            tempVelocity.y = 0f;
-            if (tempVelocity.magnitude < 0.1f && velocity.y == 0f) velocity = Vector3.zero;
-            else velocity -= tempVelocity.normalized * drag * Time.deltaTime;
-        }
+            void HandleDrag()
+            {
+                //terrible implementation, technically works, will leave it at that for now
+                //the implementation isn't the greatest, so it slows down at an odd rate, should probably multiply it with 
+                //Mathf.Max(1f, velocity.Magnitude()) or something similar
+                Vector3 tempVelocity = velocity;
+                tempVelocity.y = 0f;
+                if (tempVelocity.magnitude < 0.1f && velocity.y == 0f) velocity = Vector3.zero;
+                else velocity -= tempVelocity.normalized * drag * Time.deltaTime;
+            }
 
-        void HandleGravity()
-        {
-            if (lastGrounded && !isGrounded && velocity.y < 0) velocity.y = 0f;
-
-            velocity += Vector3.down * CalculateGravityMagnitude();
-            if (isGrounded) velocity.y = Mathf.Max(-5f, velocity.y);
+            void HandleGravity()
+            {
+                velocity += Vector3.down * CalculateGravityMagnitude();
+                if (isGrounded) velocity.y = Mathf.Max(-5f, velocity.y);
+            }
         }
 
         void GetInput()
@@ -113,18 +111,30 @@ public class MovementController : MonoBehaviour
                 if (OnSteepGround()) moveDir = Vector3.ProjectOnPlane(Vector3.down, groundRay.normal);
                 else moveDir = (PlayerData.playerTransform.forward * vertical + PlayerData.playerTransform.right * horizontal).normalized; 
                 moveDir *= speed * GetSpeedMultiplier();
+
+
+
+                float GetSpeedMultiplier()
+                {
+                    if (isCrouching) return crouchMultiplier;
+                    else if (Input.GetKey(KeyCode.LeftShift)) return runMultiplier;
+                    else return 1;
+                }
             }
         }
 
         void HandleCrouching()
         {
+            if (Input.GetKeyDown(KeyCode.LeftControl)) crouchKeyHeld = true;
+            else if (Input.GetKeyUp(KeyCode.LeftControl)) crouchKeyHeld = false;
+
             if (!isGrounded)
             {
                 if (isCrouching) EndCrouch();
                 return;
             }
 
-            crouchKeyHeld = Input.GetKey(KeyCode.LeftControl);
+            //crouchKeyHeld = Input.GetKey(KeyCode.LeftControl);
 
             if (crouchKeyHeld && isCrouching) return;
 
@@ -224,14 +234,13 @@ public class MovementController : MonoBehaviour
 
             IEnumerator SetJumpBufferCoroutine()
             {
-                Debug.Log("Started jump buffer");
                 jumpBuffer = true;
-                Debug.Log($"Waiting for {jumpBufferTime} seconds");
                 yield return new WaitForSeconds(jumpBufferTime);
                 jumpBuffer = false;
-                Debug.Log("Ended jump buffer");
             }
         }
+
+
 
         void HandleDebug()
         {
@@ -248,11 +257,17 @@ public class MovementController : MonoBehaviour
         }
 
 
-        float GetSpeedMultiplier()
+
+        void StartAir()
         {
-            if (isCrouching) return crouchMultiplier;
-            else if (Input.GetKey(KeyCode.LeftShift)) return runMultiplier;
-            else return 1;
+            if (lastGrounded && !isGrounded && velocity.y < 0) velocity.y = 0f;
+
+            if (!keepCrouchPressedAirborne) crouchKeyHeld = false;
+        }
+
+        void StartGround()
+        {
+
         }
     }
 
