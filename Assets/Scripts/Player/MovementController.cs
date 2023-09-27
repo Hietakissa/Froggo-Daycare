@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    [SerializeField] Vector3 test;
-
     [SerializeField] float speed;
     [SerializeField] float runMultiplier;
     [SerializeField] float jumpForce;
@@ -46,11 +44,6 @@ public class MovementController : MonoBehaviour
     bool jumpBuffer;
     float timeInAir;
     Coroutine jumpBufferCoroutine;
-
-    void OnValidate()
-    {
-        transform.localScale = test;
-    }
 
     void Awake()
     {
@@ -249,7 +242,7 @@ public class MovementController : MonoBehaviour
             DebugText.Instance.AddText($"Grounded: {isGrounded}");
             //DebugText.Instance.AddText($"Move force: {speed * Time.deltaTime}");
             //DebugText.Instance.AddText($"Gravity force: {CalculateGravityMagnitude()}");
-            DebugText.Instance.AddText($"Ground angle: {Vector3.Angle(groundRay.normal, Vector3.up)}");
+            DebugText.Instance.AddText($"Ground angle: {GetGroundAngle()}");
             DebugText.Instance.AddText($"Coyote: {coyote}, Jump Buffer: {jumpBuffer}");
             DebugText.Instance.AddText($"Steep ground: {OnSteepGround()}");
         }
@@ -263,7 +256,18 @@ public class MovementController : MonoBehaviour
         }
     }
 
-    bool OnSteepGround() => Vector3.Angle(groundRay.normal, Vector3.up) > cc.slopeLimit;
+    bool OnSteepGround()
+    {
+        return GetGroundAngle() > cc.slopeLimit;
+    }
+
+    float GetGroundAngle()
+    {
+        float raycastAngle = Vector3.Angle(groundRay.normal, Vector3.up);
+        float spherecastAngle = Vector3.Angle(sphereCast.normal, Vector3.up);
+        if (raycastAngle < spherecastAngle) return raycastAngle;
+        else return spherecastAngle;
+    }
 
     float CalculateGravityMagnitude() => Gravity * gravity * (velocity.y < 0 ? fallMultiplier : 1) * Time.deltaTime;
 

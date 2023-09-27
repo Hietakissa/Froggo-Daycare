@@ -167,7 +167,7 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.375
-  m_SlopeLimit: 45
+  m_SlopeLimit: 55
   m_StepOffset: 0.3
   m_SkinWidth: 0.01
   m_MinMoveDistance: 0
@@ -184,7 +184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bb3c52bd60721f4db1ff4d71cf2664e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test: {x: 1, y: 1, z: 1}
   speed: 5
   runMultiplier: 1.4
   jumpForce: 4

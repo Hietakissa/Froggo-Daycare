@@ -1,3 +1,4 @@
+using UnityEngine.AI;
 using UnityEngine;
 using System;
 
@@ -28,6 +29,8 @@ public class Frog : MonoBehaviour, IGrabbable
 
     FrogBaseState roamingState = new FrogRoamingState();
 
+    [SerializeField] Transform navigationTarget;
+
     void Awake()
     {
         roamingState.Init(this);
@@ -38,7 +41,16 @@ public class Frog : MonoBehaviour, IGrabbable
 
     void Update()
     {
-        
+        NavMeshPath path = new NavMeshPath();
+
+        if (NavMesh.CalculatePath(transform.position, navigationTarget.position, 1, path)) Debug.DrawRay(transform.position, Vector3.up * 15, Color.black);
+
+        foreach (Vector3 corner in path.corners)
+        {
+            Debug.DrawRay(corner, Vector3.up * 2, Color.green);
+        }
+
+        for (int i = 0; i < path.corners.Length - 1; i++) Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
 
         ConsumeStats();
 
