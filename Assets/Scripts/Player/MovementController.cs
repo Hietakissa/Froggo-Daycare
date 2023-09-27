@@ -244,11 +244,11 @@ public class MovementController : MonoBehaviour
         {
             Debug.DrawRay(transform.position, Vector3.down * rayCastOffset);
 
-            DebugText.Instance.AddText($"Velocity: {velocity}");
-            DebugText.Instance.AddText($"Total move amount: {moveDir + velocity}");
+            //DebugText.Instance.AddText($"Velocity: {velocity}");
+            //DebugText.Instance.AddText($"Total move amount: {moveDir + velocity}");
             DebugText.Instance.AddText($"Grounded: {isGrounded}");
-            DebugText.Instance.AddText($"Move force: {speed * Time.deltaTime}");
-            DebugText.Instance.AddText($"Gravity force: {CalculateGravityMagnitude()}");
+            //DebugText.Instance.AddText($"Move force: {speed * Time.deltaTime}");
+            //DebugText.Instance.AddText($"Gravity force: {CalculateGravityMagnitude()}");
             DebugText.Instance.AddText($"Ground angle: {Vector3.Angle(groundRay.normal, Vector3.up)}");
             DebugText.Instance.AddText($"Coyote: {coyote}, Jump Buffer: {jumpBuffer}");
             DebugText.Instance.AddText($"Steep ground: {OnSteepGround()}");

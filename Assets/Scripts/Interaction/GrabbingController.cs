@@ -36,6 +36,8 @@ public class GrabbingController : MonoBehaviour
 
     public void GrabObject()
     {
+        PlayerData.grabbingObject = true;
+
         grabbedRB = PlayerData.lastGrabObject.GetComponent<Rigidbody>();
         grabbedRB.useGravity = false;
         grabbedRB.interpolation = RigidbodyInterpolation.Interpolate;
@@ -43,6 +45,8 @@ public class GrabbingController : MonoBehaviour
 
     public void UnGrabObject()
     {
+        PlayerData.grabbingObject = false;
+
         grabbedRB.useGravity = true;
         grabbedRB.interpolation = RigidbodyInterpolation.None;
     }
