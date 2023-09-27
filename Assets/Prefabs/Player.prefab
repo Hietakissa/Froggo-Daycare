@@ -184,16 +184,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bb3c52bd60721f4db1ff4d71cf2664e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test: {x: 1, y: 1, z: 1}
   speed: 5
   runMultiplier: 1.4
   jumpForce: 4
-  sphereCastRadius: 0.37
+  crouchHeight: 0.7
+  crouchMultiplier: 0.5
   coyoteTime: 0.08
   jumpBufferTime: 0.13
   allowHoldingJump: 0
   gravity: 1
   fallMultiplier: 1.8
   drag: 5
+  sphereCastRadius: 0.37
   sphereCastOffset: 0.07
   rayCastOffset: 0.4
 --- !u!114 &1308414267037172751
@@ -367,7 +370,6 @@ GameObject:
   - component: {fileID: 2783495718925030428}
   - component: {fileID: 1423748549153835204}
   - component: {fileID: 4071237882501212783}
-  - component: {fileID: 2632232264624566768}
   m_Layer: 0
   m_Name: Visual & Collider
   m_TagString: Untagged
@@ -440,29 +442,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &2632232264624566768
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4196859940844475148}
-  m_Material: {fileID: 13400000, guid: 26b71d4890d71bc46a3260a0eefeb9a5, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1.85
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.075, z: 0}
 --- !u!1 &4900297271293098446
 GameObject:
   m_ObjectHideFlags: 0

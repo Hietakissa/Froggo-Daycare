@@ -3,10 +3,13 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
+    [SerializeField] Vector3 test;
+
     [SerializeField] float speed;
     [SerializeField] float runMultiplier;
     [SerializeField] float jumpForce;
-    [SerializeField] float sphereCastRadius;
+    [SerializeField] float crouchHeight;
+    [SerializeField] float crouchMultiplier;
 
     [Header("QOL / Input")]
     [SerializeField] float coyoteTime;
@@ -27,6 +30,7 @@ public class MovementController : MonoBehaviour
 
     const float Gravity = 9.81f;
 
+    [SerializeField] float sphereCastRadius;
     [SerializeField] float sphereCastOffset = 0.05f;
     [SerializeField] float rayCastOffset = 0.05f;
 
@@ -35,11 +39,18 @@ public class MovementController : MonoBehaviour
 
     bool isGrounded;
     bool lastGrounded;
+    bool isCrouching;
+    bool crouchKeyHeld;
 
     bool coyote;
     bool jumpBuffer;
     float timeInAir;
     Coroutine jumpBufferCoroutine;
+
+    void OnValidate()
+    {
+        transform.localScale = test;
+    }
 
     void Awake()
     {
@@ -59,6 +70,7 @@ public class MovementController : MonoBehaviour
         HandlePhysics();
         GetInput();
         HandleMovement();
+        HandleCrouching();
         HandleJumping();
 
         HandleDebug();
@@ -105,7 +117,63 @@ public class MovementController : MonoBehaviour
             {
                 //TODO somehow orient vector away from the slope
                 //joo ruma ja pitkä rivi koodia, en jaksa tehä hienompaa rn
-                moveDir = (PlayerData.playerTransform.forward * vertical + PlayerData.playerTransform.right * horizontal).normalized * (Input.GetKey(KeyCode.LeftShift) ? speed * runMultiplier: speed);
+                if (OnSteepGround()) moveDir = Vector3.ProjectOnPlane(Vector3.down, groundRay.normal);
+                else moveDir = (PlayerData.playerTransform.forward * vertical + PlayerData.playerTransform.right * horizontal).normalized; 
+                moveDir *= speed * GetSpeedMultiplier();
+            }
+        }
+
+        void HandleCrouching()
+        {
+            if (!isGrounded)
+            {
+                if (isCrouching) EndCrouch();
+                return;
+            }
+
+            crouchKeyHeld = Input.GetKey(KeyCode.LeftControl);
+
+            if (crouchKeyHeld && isCrouching) return;
+
+            if (crouchKeyHeld && !isCrouching)
+            {
+                StartCrouch();
+            }
+            else if (isCrouching)
+            {
+                if (!Physics.SphereCast(transform.position + Vector3.up * (sphereCastRadius + sphereCastOffset), sphereCastRadius, Vector3.up, out RaycastHit hit, 2f - sphereCastRadius * 2 - sphereCastOffset))
+                {
+                    EndCrouch();
+                }
+            }
+
+            //if (Input.GetKeyDown(KeyCode.LeftControl)) StartCrouch();
+            //else if (Input.GetKeyUp(KeyCode.LeftControl)) EndCrouch();
+
+            void StartCrouch()
+            {
+                isCrouching = true;
+
+                //cc.height = crouchHeight;
+                //cc.center = new Vector3(0f, 1f - (2f - crouchHeight) / 2f, 0f);
+
+                //transform.localScale = new Vector3(1f, crouchHeight / 2f, 1f);
+                cc.enabled = false;
+                transform.localScale = new Vector3(1f, crouchHeight, 1f);
+                cc.enabled = true;
+                //Teleport(transform.position - new Vector3(0f, (2f - crouchHeight) / 2f, 0f));
+            }
+
+            void EndCrouch()
+            {
+                isCrouching = false;
+
+                //cc.height = 2f;
+                //cc.center = new Vector3(0f, 1f, 0f);
+                cc.enabled = false;
+                transform.localScale = new Vector3(1f, 1f, 1f);
+                cc.enabled = true;
+                //Teleport(transform.position + new Vector3(0f, (2f - crouchHeight) / 2f, 0f));
             }
         }
 
@@ -118,7 +186,6 @@ public class MovementController : MonoBehaviour
                 if (CanJump()) Jump();
                 else if (!allowHoldingJump)
                 {
-                    Debug.Log("In the air, tried to jump but cant, resetting jump buffer");
                     StopJumpBuffer();
                     jumpBufferCoroutine = StartCoroutine(SetJumpBufferCoroutine());
                 }
@@ -128,7 +195,8 @@ public class MovementController : MonoBehaviour
                 if (CanJump()) Jump();
             }
 
-            bool CanJump() => coyote || (isGrounded && Vector3.Angle(groundRay.normal, Vector3.up) <= cc.slopeLimit);
+            //bool CanJump() => coyote || (isGrounded && Vector3.Angle(groundRay.normal, Vector3.up) <= cc.slopeLimit);
+            bool CanJump() => (coyote || (isGrounded && !OnSteepGround()) && !isCrouching);
 
             void Jump()
             {
@@ -174,6 +242,8 @@ public class MovementController : MonoBehaviour
 
         void HandleDebug()
         {
+            Debug.DrawRay(transform.position, Vector3.down * rayCastOffset);
+
             DebugText.Instance.AddText($"Velocity: {velocity}");
             DebugText.Instance.AddText($"Total move amount: {moveDir + velocity}");
             DebugText.Instance.AddText($"Grounded: {isGrounded}");
@@ -181,8 +251,19 @@ public class MovementController : MonoBehaviour
             DebugText.Instance.AddText($"Gravity force: {CalculateGravityMagnitude()}");
             DebugText.Instance.AddText($"Ground angle: {Vector3.Angle(groundRay.normal, Vector3.up)}");
             DebugText.Instance.AddText($"Coyote: {coyote}, Jump Buffer: {jumpBuffer}");
+            DebugText.Instance.AddText($"Steep ground: {OnSteepGround()}");
+        }
+
+
+        float GetSpeedMultiplier()
+        {
+            if (isCrouching) return crouchMultiplier;
+            else if (Input.GetKey(KeyCode.LeftShift)) return runMultiplier;
+            else return 1;
         }
     }
+
+    bool OnSteepGround() => Vector3.Angle(groundRay.normal, Vector3.up) > cc.slopeLimit;
 
     float CalculateGravityMagnitude() => Gravity * gravity * (velocity.y < 0 ? fallMultiplier : 1) * Time.deltaTime;
 
