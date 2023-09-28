@@ -1,33 +1,64 @@
+using HietakissaUtils;
 using UnityEngine;
 
 public class InteractionController : MonoBehaviour
 {
     [SerializeField] float interactionRange;
+    [SerializeField] LayerMask bookmarkMask;
+
+    RaycastHit hit;
 
     void Update()
     {
-        if (PlayerData.grabbingObject && Input.GetMouseButtonUp(0))
+        if (PlayerData.usingBook)
         {
-            PlayerData.lastGrab.StopGrab();
-            return;
-        }
+            Debug.DrawRay(PlayerData.cameraTransform.position, GetDirectionToMouse() * 5, Color.blue);
 
-        if (Physics.Raycast(PlayerData.cameraTransform.position, PlayerData.cameraTransform.forward, out RaycastHit hit, interactionRange))
-        {
-            DebugText.Instance.AddText("Can interact: True (not necessarily though, too lazy to fix)");
-
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && Physics.Raycast(PlayerData.cameraTransform.position, GetDirectionToMouse(), out hit, 5f, bookmarkMask))
             {
-                if (hit.collider.TryGetComponent(out IGrabbable grab))
-                {
-                    PlayerData.lastGrab = grab;
-                    PlayerData.lastGrabObject = hit.collider.gameObject;
-
-                    grab.StartGrab();
-                }
+                if (hit.collider.TryGetComponent(out Bookmark bookmark)) bookmark.Select();
             }
         }
-        else DebugText.Instance.AddText("Can interact: False");
+
+        HandleUnGrabbingAndInteracting();
+        HandleInteraction();
+        
+
+        void HandleUnGrabbingAndInteracting()
+        {
+            if (PlayerData.grabbingObject && Input.GetMouseButtonUp(0))
+            {
+                PlayerData.lastGrab.StopGrab();
+                return;
+            }
+            else if (PlayerData.usingBook && Input.GetKeyDown(KeyCode.E))
+            {
+                Book.Instance.StopUsing();
+                return;
+            }
+        }
+        void HandleInteraction()
+        {
+            if (Physics.Raycast(PlayerData.cameraTransform.position, PlayerData.cameraTransform.forward, out hit, interactionRange))
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    if (hit.collider.TryGetComponent(out IGrabbable grab))
+                    {
+                        PlayerData.lastGrab = grab;
+                        PlayerData.lastGrabObject = hit.collider.gameObject;
+
+                        grab.StartGrab();
+                    }
+                }
+                else if (Input.GetKeyDown(KeyCode.E) && hit.collider.TryGetComponent(out IInteractable interact)) interact.Interact();
+            }
+        }
+
+        Vector3 GetDirectionToMouse()
+        {
+            return Maf.Direction(PlayerData.cameraTransform.position, PlayerData.playerCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1f)));
+        }
     }
 
     void OnDrawGizmos()

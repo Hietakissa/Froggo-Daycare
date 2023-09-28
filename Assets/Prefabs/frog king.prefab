@@ -192,37 +192,37 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.73
+      value: 1.29
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.316
+      value: 0.33
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.6
+      value: 5.33
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.00835763
+      value: 0.025723623
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.00835763
+      value: -0.025723623
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7070574
+      value: 0.70663875
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.7070574
+      value: 0.70663875
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
@@ -237,7 +237,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 178.646
+      value: 175.83
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
@@ -358,7 +358,7 @@ MonoBehaviour:
     toiletStat:
       consumptionMultiplier: 0.5
     baseConsumption: 2
-  frogName: The Frog King
+  frogName: Sammakko
   angryThreshold: 50
   furiousThreshold: 30
   statCountThreshold: 3

@@ -20,11 +20,21 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        if (PlayerData.usingBook) return;
+
         GetInput();
         Rotate();
     }
 
-    void LateUpdate() => transform.position = holder.position;
+    void LateUpdate()
+    {
+        if (PlayerData.usingBook)
+        {
+            transform.position = PlayerData.bookLookTransform.position;
+            transform.rotation = PlayerData.bookLookTransform.rotation;
+        }
+        else transform.position = holder.position;
+    }
 
     void GetInput()
     {

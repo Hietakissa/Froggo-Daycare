@@ -63,6 +63,9 @@ public class MovementController : MonoBehaviour
         HandlePhysics();
         GetInput();
         HandleMovement();
+
+        if (PlayerData.usingBook) return;
+
         HandleCrouching();
         HandleJumping();
 
@@ -101,7 +104,8 @@ public class MovementController : MonoBehaviour
 
         void HandleMovement()
         {
-            MoveDir();
+            if (PlayerData.usingBook) moveDir = Vector3.zero;
+            else MoveDir();
             cc.Move((moveDir + velocity) * Time.deltaTime);
 
             void MoveDir()

@@ -4,6 +4,7 @@ public class ReferenceSetter : MonoBehaviour
 {
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform cameraTransform;
+    [SerializeField] Camera playerCamera;
 
     void Awake()
     {
@@ -20,5 +21,6 @@ public class ReferenceSetter : MonoBehaviour
     {
         PlayerData.playerTransform = playerTransform;
         PlayerData.cameraTransform = cameraTransform;
+        PlayerData.playerCamera = playerCamera;
     }
 }

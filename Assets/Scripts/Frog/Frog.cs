@@ -2,6 +2,7 @@ using HietakissaUtils;
 using UnityEngine.AI;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 public class Frog : MonoBehaviour, IGrabbable
 {
@@ -81,6 +82,8 @@ public class Frog : MonoBehaviour, IGrabbable
         if (isGrabbed || pathCorners == null || pathIndex == pathCorners.Length) return;
 
         rb.position += Maf.Direction(transform.position, nextPosition) * speed * Time.deltaTime;
+        //rb.MovePosition((transform.position + Maf.Direction(transform.position, nextPosition)).normalized * speed * Time.deltaTime);
+        //Debug.DrawRay(transform.position, Maf.Direction(transform.position, nextPosition), Color.green, 5f);
 
         if ((Vector3.Distance(transform.position, nextPosition) < stoppingDistance))
         {
