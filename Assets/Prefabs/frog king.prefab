@@ -83,37 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &6989627880522649353
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1150227076986566666}
-  m_Layer: 0
-  m_Name: target
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1150227076986566666
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6989627880522649353}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.2097647, y: -0.6752768, z: -0.6752768, w: 0.2097647}
-  m_LocalPosition: {x: -0.00589071, y: -0.00753773, z: -0.0032348623}
-  m_LocalScale: {x: 0.0018348622, y: 0.0018348624, z: 0.0018348622}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9096056824359150577}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8153747641597334908
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,52 +177,52 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 545
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 545
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 545
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.14
+      value: 0.73
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.763
+      value: 0.316
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.08
+      value: 5.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.2097647
+      value: 0.00835763
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.2097647
+      value: -0.00835763
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6752768
+      value: 0.7070574
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.6752768
+      value: 0.7070574
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
@@ -268,7 +237,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 145.487
+      value: 178.646
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
@@ -296,10 +265,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 656797071534290737}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1150227076986566666}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
@@ -309,10 +274,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8757420922542197973}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2690458798955481263}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ead8a131f2dce3f4fa3c92b0da9dc016,
         type: 3}
       insertIndex: -1
@@ -354,7 +315,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8462404238574729547}
   serializedVersion: 4
-  m_Mass: 55
+  m_Mass: 1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -373,18 +334,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2690458798955481263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8462404238574729547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f685ce65c5db7204986ac2ea2ab7a881, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6915955593879978742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,23 +346,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ce9991ba331d04f936313e5c9acaaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hungerStat:
-    consumptionMultiplier: 1
-  moodStat:
-    consumptionMultiplier: 1.2
-  energyStat:
-    consumptionMultiplier: 0.8
-  hygieneStat:
-    consumptionMultiplier: 0.7
-  toiletStat:
-    consumptionMultiplier: 0.5
-  baseConsumption: 2
+  stats:
+    hungerStat:
+      consumptionMultiplier: 1
+    moodStat:
+      consumptionMultiplier: 1.2
+    energyStat:
+      consumptionMultiplier: 1.3
+    hygieneStat:
+      consumptionMultiplier: 0.8
+    toiletStat:
+      consumptionMultiplier: 0.5
+    baseConsumption: 2
   frogName: The Frog King
   angryThreshold: 50
   furiousThreshold: 30
-  statAmount: 3
+  statCountThreshold: 3
   isGrabbed: 0
-  navigationTarget: {fileID: 1150227076986566666}
+  navigationTarget: {fileID: 0}
+  speed: 2
 --- !u!4 &9096056824359150577 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ead8a131f2dce3f4fa3c92b0da9dc016,

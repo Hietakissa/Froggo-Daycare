@@ -1,3 +1,4 @@
+using HietakissaUtils;
 using UnityEngine.AI;
 using UnityEngine;
 using System;
@@ -5,58 +6,95 @@ using System;
 public class Frog : MonoBehaviour, IGrabbable
 {
     [Header("Stats")]
-    [SerializeField] public Stat hungerStat;
-    [SerializeField] public Stat moodStat;
-    [SerializeField] public Stat energyStat;
-    [SerializeField] public Stat hygieneStat;
-    [SerializeField] public Stat toiletStat;
+    [SerializeField] public StatController stats;
 
-    [Header("Other")]
-    [SerializeField] float baseConsumption;
     public string frogName;
 
     [Header("Mood Change")]
     [SerializeField] float angryThreshold;
     [SerializeField] float furiousThreshold;
-    [SerializeField] float statAmount;
-
-    //public event Action onStartGrab;
-    //public event Action onStopGrab;
+    [SerializeField] float statCountThreshold;
 
     public bool isGrabbed;
 
     FrogBaseState currentState;
-
     FrogBaseState roamingState = new FrogRoamingState();
 
     [SerializeField] Transform navigationTarget;
+    Rigidbody rb;
+
+    NavMeshPath path;
+    Vector3[] pathCorners;
+    int pathIndex;
+    Vector3 nextPosition;
+
+    float stoppingDistance = 0.3f;
+    [SerializeField] float speed = 2f;
 
     void Awake()
     {
+        rb = GetComponent<Rigidbody>();
+
         roamingState.Init(this);
 
         currentState = roamingState;
         currentState.EnterState();
+
+        CalculatePath(navigationTarget.position);
     }
 
     void Update()
     {
-        NavMeshPath path = new NavMeshPath();
+        //if (NavMesh.CalculatePath(transform.position, navigationTarget.position, 1, path)) Debug.DrawRay(transform.position, Vector3.up * 15, Color.black);
 
-        if (NavMesh.CalculatePath(transform.position, navigationTarget.position, 1, path)) Debug.DrawRay(transform.position, Vector3.up * 15, Color.black);
-
-        foreach (Vector3 corner in path.corners)
+        /*foreach (Vector3 corner in path.corners)
         {
             Debug.DrawRay(corner, Vector3.up * 2, Color.green);
         }
 
-        for (int i = 0; i < path.corners.Length - 1; i++) Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
+        for (int i = 0; i < path.corners.Length - 1; i++) Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);*/
 
-        ConsumeStats();
+        stats.ConsumeStats();
+        currentState.UpdateState();
 
-        
+        HandleMovement();
     }
 
+
+    void CalculatePath(Vector3 target)
+    {
+        Debug.Log($"Calculating path for {gameObject.name}");
+
+        path = new NavMeshPath();
+        if (NavMesh.CalculatePath(transform.position, target, 1, path))
+        {
+            pathCorners = path.corners;
+            pathIndex = 0;
+            nextPosition = pathCorners[pathIndex];
+            Debug.Log($"Path calculation succeeded for {gameObject.name}");
+        }
+        else Debug.Log($"Path calculation failed for {gameObject.name}");
+    }
+
+    void HandleMovement()
+    {
+        if (isGrabbed || pathCorners == null || pathIndex == pathCorners.Length) return;
+
+        rb.position += Maf.Direction(transform.position, nextPosition) * speed * Time.deltaTime;
+
+        if ((Vector3.Distance(transform.position, nextPosition) < stoppingDistance))
+        {
+            pathIndex++;
+
+            if (pathIndex < pathCorners.Length) nextPosition = pathCorners[pathIndex];
+            else CompletePath();
+        }
+    }
+
+    void CompletePath()
+    {
+        Debug.Log("Path completed");
+    }
 
     void SwitchState(FrogBaseState nextState)
     {
@@ -65,9 +103,37 @@ public class Frog : MonoBehaviour, IGrabbable
         currentState.EnterState();
     }
 
+    public void StartGrab()
+    {
+        GrabbingController.Instance.GrabObject();
 
+        isGrabbed = true;
 
-    void ConsumeStats()
+        Debug.Log("Grabbed");
+    }
+    public void StopGrab()
+    {
+        GrabbingController.Instance.UnGrabObject();
+
+        isGrabbed = false;
+
+        Debug.Log("Ungrabbed");
+        CalculatePath(navigationTarget.position);
+    }
+}
+
+[Serializable]
+public class StatController
+{
+    [SerializeField] public Stat hungerStat;
+    [SerializeField] public Stat moodStat;
+    [SerializeField] public Stat energyStat;
+    [SerializeField] public Stat hygieneStat;
+    [SerializeField] public Stat toiletStat;
+
+    [SerializeField] float baseConsumption = 2f;
+
+    public void ConsumeStats()
     {
         hungerStat.Consume(baseConsumption * Time.deltaTime);
         moodStat.Consume(baseConsumption * Time.deltaTime);
@@ -75,7 +141,7 @@ public class Frog : MonoBehaviour, IGrabbable
         hygieneStat.Consume(baseConsumption * Time.deltaTime);
         toiletStat.Consume(baseConsumption * Time.deltaTime);
     }
-    int GetStatsUnderThreshold(float threshold)
+    public int GetStatsUnderThreshold(float threshold)
     {
         int count = 0;
 
@@ -87,26 +153,7 @@ public class Frog : MonoBehaviour, IGrabbable
 
         return count;
     }
-
-
-
-
-    public void StartGrab()
-    {
-        //onStartGrab?.Invoke();
-        GrabbingController.Instance.GrabObject();
-
-        isGrabbed = true;
-    }
-    public void StopGrab()
-    {
-        //onStopGrab?.Invoke();
-        GrabbingController.Instance.UnGrabObject();
-
-        isGrabbed = false;
-    }
 }
-
 
 [Serializable]
 public class Stat

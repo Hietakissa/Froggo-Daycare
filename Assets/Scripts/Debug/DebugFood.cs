@@ -5,12 +5,12 @@ public class DebugFood : MonoBehaviour
 {
     [SerializeField] float hungerReplenishAmount;
 
-    SphereCollider collider;
+    SphereCollider sphereCollider;
     Rigidbody rb;
 
     void Awake()
     {
-        collider = GetComponent<SphereCollider>();
+        sphereCollider = GetComponent<SphereCollider>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -18,14 +18,14 @@ public class DebugFood : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Frog frog))
         {
-            frog.hungerStat.IncreaseStat(hungerReplenishAmount);
+            frog.stats.hungerStat.IncreaseStat(hungerReplenishAmount);
             StartCoroutine(EatFoodCoroutine(transform.position, collision.transform));
         }
     }
 
     IEnumerator EatFoodCoroutine(Vector3 startPos, Transform target)
     {
-        collider.enabled = false;
+        sphereCollider.enabled = false;
         rb.isKinematic = true;
 
         float t = 0f;

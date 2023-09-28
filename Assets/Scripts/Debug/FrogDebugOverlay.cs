@@ -22,11 +22,11 @@ public class FrogDebugOverlay : MonoBehaviour
             if (hit.collider.TryGetComponent(out Frog frog))
             {
                 frogStatString += frog.frogName;
-                frogStatString += "\nHunger: " + frog.hungerStat.GetStatValue().RoundToDecimalPlaces(2);
-                frogStatString += "\nMood: " + frog.moodStat.GetStatValue().RoundToDecimalPlaces(2);
-                frogStatString += "\nEnergy: " + frog.energyStat.GetStatValue().RoundToDecimalPlaces(2);
-                frogStatString += "\nHygiene: " + frog.hygieneStat.GetStatValue().RoundToDecimalPlaces(2);
-                frogStatString += "\nToilet: " + frog.toiletStat.GetStatValue().RoundToDecimalPlaces(2);
+                frogStatString += "\nHunger: " + frog.stats.hungerStat.GetStatValue().RoundToDecimalPlaces(2);
+                frogStatString += "\nMood: " + frog.stats.moodStat.GetStatValue().RoundToDecimalPlaces(2);
+                frogStatString += "\nEnergy: " + frog.stats.energyStat.GetStatValue().RoundToDecimalPlaces(2);
+                frogStatString += "\nHygiene: " + frog.stats.hygieneStat.GetStatValue().RoundToDecimalPlaces(2);
+                frogStatString += "\nToilet: " + frog.stats.toiletStat.GetStatValue().RoundToDecimalPlaces(2);
             }
             
 
