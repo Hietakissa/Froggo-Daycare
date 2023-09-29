@@ -119,19 +119,12 @@ public class Frog : MonoBehaviour, IGrabbable
 
     public void StartGrab()
     {
-        GrabbingController.Instance.GrabObject();
-
         isGrabbed = true;
-
-        Debug.Log("Grabbed");
     }
     public void StopGrab()
     {
-        GrabbingController.Instance.UnGrabObject();
-
         isGrabbed = false;
 
-        Debug.Log("Ungrabbed");
         CalculatePath(navigationTarget.position);
     }
 }

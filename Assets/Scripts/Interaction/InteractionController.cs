@@ -40,6 +40,7 @@ public class InteractionController : MonoBehaviour
         {
             if (PlayerData.grabbingObject && Input.GetMouseButtonUp(0))
             {
+                GrabbingController.Instance.UnGrabObject();
                 PlayerData.lastGrab.StopGrab();
                 return;
             }
@@ -55,6 +56,7 @@ public class InteractionController : MonoBehaviour
                         PlayerData.lastGrab = grab;
                         PlayerData.lastGrabObject = hit.collider.gameObject;
 
+                        GrabbingController.Instance.GrabObject();
                         grab.StartGrab();
                     }
                 }
