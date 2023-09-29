@@ -11,6 +11,7 @@ public abstract class Appliance : MonoBehaviour
         if (Application.isPlaying) return;
 
         HingeJoint joint = GetComponent<HingeJoint>();
+        Rigidbody doorRB = dynamicDoor.GetComponent<Rigidbody>();
 
         switch (doorOrientation)
         {
@@ -25,6 +26,10 @@ public abstract class Appliance : MonoBehaviour
         joint.anchor = dynamicDoor.transform.localPosition;
         joint.autoConfigureConnectedAnchor = false;
         joint.connectedAnchor = Vector3.zero;
+
+        doorRB.interpolation = RigidbodyInterpolation.Interpolate;
+        doorRB.useGravity = false;
+        doorRB.drag = 7f;
     }
 }
 

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public abstract class PlayerData
 {
+    //joo t‰‰ll‰ on asioita mit‰ ei tarvis mut menis liikaa aikaa teh‰ hyvin
+
     public static IGrabbable lastGrab;
     public static GameObject lastGrabObject;
     public static bool grabbingObject;
@@ -15,6 +17,8 @@ public abstract class PlayerData
     public static Transform bookLookTransform;
 
     public static bool usingBook;
+
+    public static LayerMask interactionMask;
 
     public static bool ValidatePlayerReferences()
     {

@@ -2,7 +2,6 @@ using HietakissaUtils;
 using UnityEngine.AI;
 using UnityEngine;
 using System;
-using Unity.VisualScripting;
 
 public class Frog : MonoBehaviour, IGrabbable
 {
@@ -32,6 +31,8 @@ public class Frog : MonoBehaviour, IGrabbable
     float stoppingDistance = 0.3f;
     [SerializeField] float speed = 2f;
 
+    [SerializeField] bool disableMovement;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -58,9 +59,19 @@ public class Frog : MonoBehaviour, IGrabbable
         stats.ConsumeStats();
         currentState.UpdateState();
 
-        HandleMovement();
+        if (!disableMovement) HandleMovement();
     }
 
+
+    public void EnterOven()
+    {
+        stats.consumptionMultiplier = 10f;
+    }
+
+    public void ExitOven()
+    {
+        stats.consumptionMultiplier = 1f;
+    }
 
     void CalculatePath(Vector3 target)
     {
@@ -135,14 +146,15 @@ public class StatController
     [SerializeField] public Stat toiletStat;
 
     [SerializeField] float baseConsumption = 2f;
+    public float consumptionMultiplier = 1f;
 
     public void ConsumeStats()
     {
-        hungerStat.Consume(baseConsumption * Time.deltaTime);
-        moodStat.Consume(baseConsumption * Time.deltaTime);
-        energyStat.Consume(baseConsumption * Time.deltaTime);
-        hygieneStat.Consume(baseConsumption * Time.deltaTime);
-        toiletStat.Consume(baseConsumption * Time.deltaTime);
+        hungerStat.Consume(baseConsumption * consumptionMultiplier * Time.deltaTime);
+        moodStat.Consume(baseConsumption * consumptionMultiplier * Time.deltaTime);
+        energyStat.Consume(baseConsumption * consumptionMultiplier * Time.deltaTime);
+        hygieneStat.Consume(baseConsumption * consumptionMultiplier * Time.deltaTime);
+        toiletStat.Consume(baseConsumption * consumptionMultiplier * Time.deltaTime);
     }
     public int GetStatsUnderThreshold(float threshold)
     {

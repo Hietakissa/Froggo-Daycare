@@ -4,9 +4,15 @@ using UnityEngine;
 public class InteractionController : MonoBehaviour
 {
     [SerializeField] float interactionRange;
+    [SerializeField] LayerMask interactionMask;
     [SerializeField] LayerMask bookmarkMask;
 
     RaycastHit hit;
+
+    void Awake()
+    {
+        PlayerData.interactionMask = interactionMask;
+    }
 
     void Update()
     {
@@ -40,7 +46,7 @@ public class InteractionController : MonoBehaviour
         }
         void HandleInteraction()
         {
-            if (Physics.Raycast(PlayerData.cameraTransform.position, PlayerData.cameraTransform.forward, out hit, interactionRange))
+            if (Physics.Raycast(PlayerData.cameraTransform.position, PlayerData.cameraTransform.forward, out hit, interactionRange, interactionMask))
             {
                 if (Input.GetMouseButtonDown(0))
                 {

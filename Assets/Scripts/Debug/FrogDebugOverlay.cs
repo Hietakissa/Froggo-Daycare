@@ -15,7 +15,7 @@ public class FrogDebugOverlay : MonoBehaviour
 
     void Update()
     {
-        if (Physics.Raycast(PlayerData.cameraTransform.position, PlayerData.cameraTransform.forward, out RaycastHit hit, 5f))
+        if (Physics.Raycast(PlayerData.cameraTransform.position, PlayerData.cameraTransform.forward, out RaycastHit hit, 5f, PlayerData.interactionMask))
         {
             //Debug.Log($"hit {hit.collider.name}");
 
