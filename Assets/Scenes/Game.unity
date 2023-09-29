@@ -2554,7 +2554,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 50840686152689575, guid: 13a842e76736d3d4588f38aef0e3e364,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 13a842e76736d3d4588f38aef0e3e364, type: 3}
 --- !u!1 &1075103273 stripped
 GameObject:
@@ -5189,42 +5193,42 @@ PrefabInstance:
     - target: {fileID: -6865666649933542929, guid: af5d2274f135c724eabc15512d50fcad,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.369
+      value: 0.22
       objectReference: {fileID: 0}
     - target: {fileID: -6865666649933542929, guid: af5d2274f135c724eabc15512d50fcad,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.547
+      value: 0.338
       objectReference: {fileID: 0}
     - target: {fileID: -6865666649933542929, guid: af5d2274f135c724eabc15512d50fcad,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.076
+      value: 0.188
       objectReference: {fileID: 0}
     - target: {fileID: -6865666649933542929, guid: af5d2274f135c724eabc15512d50fcad,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.697713
+      value: 0.91716135
       objectReference: {fileID: 0}
     - target: {fileID: -6865666649933542929, guid: af5d2274f135c724eabc15512d50fcad,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.65578926
+      value: 0.27509636
       objectReference: {fileID: 0}
     - target: {fileID: -6865666649933542929, guid: af5d2274f135c724eabc15512d50fcad,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.21009815
+      value: -0.2761793
       objectReference: {fileID: 0}
     - target: {fileID: -6865666649933542929, guid: af5d2274f135c724eabc15512d50fcad,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.19747388
+      value: 0.0828381
       objectReference: {fileID: 0}
     - target: {fileID: -6865666649933542929, guid: af5d2274f135c724eabc15512d50fcad,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 86.452
+      value: 33.393
       objectReference: {fileID: 0}
     - target: {fileID: -6865666649933542929, guid: af5d2274f135c724eabc15512d50fcad,
         type: 3}
@@ -5351,6 +5355,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: "KEITTI\xD6"
       objectReference: {fileID: 0}
+    - target: {fileID: 3236442298583933021, guid: af5d2274f135c724eabc15512d50fcad,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4c8fdf5624a249c4c9ecca477393325e, type: 2}
     - target: {fileID: 7336416937768811638, guid: af5d2274f135c724eabc15512d50fcad,
         type: 3}
       propertyPath: m_LocalScale.x
