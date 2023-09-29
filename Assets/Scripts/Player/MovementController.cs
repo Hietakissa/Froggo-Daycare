@@ -50,8 +50,6 @@ public class MovementController : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
 
-        cc.detectCollisions = false;
-
         PlayerData.playerTransform = transform;
         PlayerData.cameraHolder = transform.Find("Camera Holder");
     }
