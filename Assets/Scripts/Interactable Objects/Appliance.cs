@@ -3,38 +3,40 @@ using UnityEngine;
 [RequireComponent(typeof(HingeJoint))]
 public abstract class Appliance : MonoBehaviour
 {
-    [SerializeField] DynamicDoor dynamicDoor;
-    [SerializeField] Orientation doorOrientation;
+    [SerializeField] protected DynamicDoor dynamicDoor;
 
     void OnValidate()
     {
         if (Application.isPlaying) return;
 
+        ValidateVariables();
+    }
+
+    [ContextMenu("Validate")]
+    void ValidateVariables()
+    {
         HingeJoint joint = GetComponent<HingeJoint>();
         Rigidbody doorRB = dynamicDoor.GetComponent<Rigidbody>();
 
-        switch (doorOrientation)
-        {
-            case Orientation.Horizontal:
-                joint.axis = Vector3.up;
-                break;
-            case Orientation.Vertical:
-                joint.axis = Vector3.right;
-            break;
-        }
+        joint.connectedBody = doorRB;
+
+        joint.axis = dynamicDoor.GetOrientationAxis();
 
         joint.anchor = dynamicDoor.transform.localPosition;
         joint.autoConfigureConnectedAnchor = false;
         joint.connectedAnchor = Vector3.zero;
 
+        JointLimits limits = new JointLimits();
+        limits.min = 0;
+        limits.max = 110;
+
+        joint.useLimits = true;
+        joint.limits = limits;
+
         doorRB.interpolation = RigidbodyInterpolation.Interpolate;
         doorRB.useGravity = false;
-        doorRB.drag = 7f;
+        doorRB.drag = 0f;
+        doorRB.angularDrag = 0.3f;
+        doorRB.mass = 1;
     }
-}
-
-enum Orientation
-{
-    Horizontal,
-    Vertical
 }
