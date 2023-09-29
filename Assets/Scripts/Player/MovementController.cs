@@ -49,6 +49,9 @@ public class MovementController : MonoBehaviour
     void Awake()
     {
         cc = GetComponent<CharacterController>();
+
+        PlayerData.playerTransform = transform;
+        PlayerData.cameraHolder = transform.Find("Camera Holder");
     }
 
     void Update()

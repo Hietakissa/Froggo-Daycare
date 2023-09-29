@@ -2,20 +2,29 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] Transform holder;
-
     [SerializeField] float sensitivity;
 
     [SerializeField] bool invertVertical;
     [SerializeField] bool invertHorizontal;
 
-    [SerializeField] float maxLookAngle = 89f;
+    [SerializeField] float maxLookAngle = 90f;
+
+    Transform holder;
 
     float xRot, yRot;
 
     void Awake()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
+        PlayerData.cameraTransform = transform;
+        PlayerData.playerCamera = GetComponent<Camera>();
+
+        Book.Instance.StartUsing();
+    }
+
+    void Start()
+    {
+        holder = PlayerData.cameraHolder;
     }
 
     void Update()

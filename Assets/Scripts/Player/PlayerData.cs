@@ -10,6 +10,7 @@ public abstract class PlayerData
 
     public static Transform playerTransform;
     public static Transform cameraTransform;
+    public static Transform cameraHolder;
 
     public static Transform bookLookTransform;
 

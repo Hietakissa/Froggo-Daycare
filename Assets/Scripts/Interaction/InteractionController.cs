@@ -12,6 +12,12 @@ public class InteractionController : MonoBehaviour
     {
         if (PlayerData.usingBook)
         {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Book.Instance.StopUsing();
+                return;
+            }
+
             Debug.DrawRay(PlayerData.cameraTransform.position, GetDirectionToMouse() * 5, Color.blue);
 
             if (Input.GetMouseButtonDown(0) && Physics.Raycast(PlayerData.cameraTransform.position, GetDirectionToMouse(), out hit, 5f, bookmarkMask))
@@ -29,11 +35,6 @@ public class InteractionController : MonoBehaviour
             if (PlayerData.grabbingObject && Input.GetMouseButtonUp(0))
             {
                 PlayerData.lastGrab.StopGrab();
-                return;
-            }
-            else if (PlayerData.usingBook && Input.GetKeyDown(KeyCode.E))
-            {
-                Book.Instance.StopUsing();
                 return;
             }
         }
