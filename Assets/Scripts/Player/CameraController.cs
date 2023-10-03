@@ -16,15 +16,17 @@ public class CameraController : MonoBehaviour
     void Awake()
     {
         //Cursor.lockState = CursorLockMode.Locked;
+        Application.targetFrameRate = 144;
+
         PlayerData.cameraTransform = transform;
         PlayerData.playerCamera = GetComponent<Camera>();
-
-        Book.Instance.StartUsing();
     }
 
     void Start()
     {
         holder = PlayerData.cameraHolder;
+
+        Book.Instance.StartUsing();
     }
 
     void Update()

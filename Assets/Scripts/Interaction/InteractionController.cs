@@ -5,7 +5,7 @@ public class InteractionController : MonoBehaviour
 {
     [SerializeField] float interactionRange;
     [SerializeField] LayerMask interactionMask;
-    [SerializeField] LayerMask bookmarkMask;
+    [SerializeField] LayerMask worldspaceButtonMask;
 
     RaycastHit hit;
 
@@ -26,9 +26,9 @@ public class InteractionController : MonoBehaviour
 
             Debug.DrawRay(PlayerData.cameraTransform.position, GetDirectionToMouse() * 5, Color.blue);
 
-            if (Input.GetMouseButtonDown(0) && Physics.Raycast(PlayerData.cameraTransform.position, GetDirectionToMouse(), out hit, 5f, bookmarkMask))
+            if (Input.GetMouseButtonDown(0) && Physics.Raycast(PlayerData.cameraTransform.position, GetDirectionToMouse(), out hit, 5f, worldspaceButtonMask))
             {
-                if (hit.collider.TryGetComponent(out Bookmark bookmark)) bookmark.Select();
+                if (hit.collider.TryGetComponent(out WorldSpaceButton button)) button.Click();
             }
         }
 

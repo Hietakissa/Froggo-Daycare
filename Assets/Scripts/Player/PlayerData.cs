@@ -7,6 +7,7 @@ public abstract class PlayerData
     public static IGrabbable lastGrab;
     public static GameObject lastGrabObject;
     public static bool grabbingObject;
+    public static Vector3 lastInteractionPoint;
 
     public static Camera playerCamera;
 
