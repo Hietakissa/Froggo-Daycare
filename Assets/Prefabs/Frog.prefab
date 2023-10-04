@@ -1,0 +1,190 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6408142023619142117
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.7264307
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.286
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.1574104
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 878369673905125307, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 878369673905125307, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.007999986
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+        type: 3}
+      propertyPath: m_Name
+      value: Frog
+      objectReference: {fileID: 0}
+    - target: {fileID: 1395425667271707076, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.008
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4781637666426686642}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3767020877210191029}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7137979372114061988}
+  m_SourcePrefab: {fileID: 100100000, guid: 55fe5b4d224f22b47ad37dc748b7c8a4, type: 3}
+--- !u!1 &6066105594733878452 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6408142023619142117}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &4781637666426686642
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6066105594733878452}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7773245415674716998, guid: 55fe5b4d224f22b47ad37dc748b7c8a4, type: 3}
+--- !u!54 &3767020877210191029
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6066105594733878452}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &7137979372114061988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6066105594733878452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2ce9991ba331d04f936313e5c9acaaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    hungerStat:
+      consumptionMultiplier: 1
+    moodStat:
+      consumptionMultiplier: 1.2
+    energyStat:
+      consumptionMultiplier: 1.3
+    hygieneStat:
+      consumptionMultiplier: 0.8
+    toiletStat:
+      consumptionMultiplier: 0.5
+    baseConsumption: 2
+    consumptionMultiplier: 1
+  frogName: Sammakko
+  angryThreshold: 50
+  furiousThreshold: 30
+  statCountThreshold: 3
+  isGrabbed: 0
+  navigationTarget: {fileID: 0}
+  speed: 2
+  disableMovement: 0

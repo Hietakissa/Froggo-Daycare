@@ -2,8 +2,6 @@ using HietakissaUtils;
 using UnityEngine.AI;
 using UnityEngine;
 using System;
-using Unity.VisualScripting;
-using UnityEditor.Profiling.Memory.Experimental;
 
 public class Frog : MonoBehaviour, IGrabbable
 {
@@ -41,6 +39,10 @@ public class Frog : MonoBehaviour, IGrabbable
 
     float cannotMoveTime;
 
+    float waitUntilGettingPath;
+
+    Vector3 GetRandomPosition => PathfindingManager.Instance.GetRandomPosition();
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -49,8 +51,11 @@ public class Frog : MonoBehaviour, IGrabbable
 
         currentState = roamingState;
         currentState.EnterState();
+    }
 
-        CalculatePath(navigationTarget.position);
+    void Start()
+    {
+        CalculatePathToRandomPosition();
     }
 
     void Update()
@@ -67,6 +72,9 @@ public class Frog : MonoBehaviour, IGrabbable
         stats.ConsumeStats();
         currentState.UpdateState();
 
+        waitUntilGettingPath -= Time.deltaTime;
+        if (waitUntilGettingPath > 0f) return;
+
         if (cannotMoveTime > 5f)
         {
             rb.AddForce(Maf.Direction(transform.position, new Vector3(0f, 10f, 0f)) * 10, ForceMode.VelocityChange);
@@ -79,7 +87,7 @@ public class Frog : MonoBehaviour, IGrabbable
             if (pathCalculationTime >= pathCalculationDelay)
             {
                 pathCalculationTime -= pathCalculationDelay;
-                CalculatePath(navigationTarget.position);
+                CalculatePathToRandomPosition();
             }
         }
     }
@@ -150,6 +158,8 @@ public class Frog : MonoBehaviour, IGrabbable
     {
         Debug.Log("Path completed");
         hasPath = false;
+
+        waitUntilGettingPath = 3f;
     }
 
     void SwitchState(FrogBaseState nextState)
@@ -168,7 +178,12 @@ public class Frog : MonoBehaviour, IGrabbable
     {
         isGrabbed = false;
 
-        CalculatePath(navigationTarget.position);
+        CalculatePathToRandomPosition();
+    }
+
+    void CalculatePathToRandomPosition()
+    {
+        CalculatePath(GetRandomPosition);
     }
 
     float GetPathLength(NavMeshPath path)

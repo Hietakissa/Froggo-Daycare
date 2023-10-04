@@ -74,9 +74,9 @@ public class GrabbingController : MonoBehaviour
             grabOrigin.transform.position = PlayerData.lastGrabPoint;
             grabOrigin.transform.parent = PlayerData.lastGrabObject.transform;
 
-            grabbingDistance = Mathf.Max(1f, Vector3.Distance(grabOrigin.transform.position, PlayerData.cameraTransform.position));
+            grabbingDistance = Mathf.Max(1.5f, Vector3.Distance(grabOrigin.transform.position, PlayerData.cameraTransform.position));
         }
-        else grabbingDistance = Mathf.Max(1f, Vector3.Distance(grabbedRB.position, PlayerData.cameraTransform.position));
+        else grabbingDistance = Mathf.Max(1.5f, Vector3.Distance(grabbedRB.position, PlayerData.cameraTransform.position));
     }
 
     public void UnGrabObject()

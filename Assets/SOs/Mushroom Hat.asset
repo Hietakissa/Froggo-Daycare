@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5520b2a92c873784f9e7a31e40d14971, type: 3}
   m_Name: Mushroom Hat
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 4877859509357996821, guid: 97cd74d9b401f0643b7d25226bee8430, type: 3}
+  Prefab: {fileID: 6912612343975280092, guid: 814f30ec9efd43f43a91fa068a9a5566, type: 3}
   ID: 0

@@ -7,6 +7,8 @@ public class Book : MonoBehaviour, IInteractable
     [SerializeField] Transform bookLookTransform;
     Bookmark activeBookmark;
 
+    [SerializeField] Menu[] menus;
+
     void Awake()
     {
         Instance = this;
@@ -19,6 +21,14 @@ public class Book : MonoBehaviour, IInteractable
         if (activeBookmark != null) activeBookmark.UnSelect();
         activeBookmark = bookmark;
         Debug.Log($"Selected bookmark {activeBookmark.index}");
+    }
+
+    public void OpenMenu(int index)
+    {
+        for (int i = 0; i < menus.Length; i++)
+        {
+            menus[i].gameObject.SetActive(i == index);
+        }
     }
 
     public void Interact()
