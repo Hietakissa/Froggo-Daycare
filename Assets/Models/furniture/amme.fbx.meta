@@ -3,7 +3,17 @@ guid: 87b6e3a66df622844a7dbbec90280ad1
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: amme
+    second: {fileID: 2100000, guid: cf751da9de6229c4580085f50dc4614e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: vesi
+    second: {fileID: 2100000, guid: 2a6ba5271919bec4b96076b12cdf6b82, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
