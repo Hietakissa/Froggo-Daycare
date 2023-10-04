@@ -1,8 +1,10 @@
+using HietakissaUtils;
 using UnityEngine;
 
 public class Fridge : Appliance
 {
     [SerializeField] GameObject foodPrefab;
+    [SerializeField] GameObject[] foodPrefabs;
     [SerializeField] Transform foodSpawnPos;
 
     GameObject food;
@@ -24,7 +26,7 @@ public class Fridge : Appliance
 
     void SpawnFood()
     {
-        food = Instantiate(foodPrefab, foodSpawnPos.position, Quaternion.identity);
+        food = Instantiate(foodPrefabs.RandomElement(), foodSpawnPos.position, Quaternion.identity);
     }
 
     void OnEnable()

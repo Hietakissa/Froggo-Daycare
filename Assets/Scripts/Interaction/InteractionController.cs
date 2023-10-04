@@ -41,7 +41,7 @@ public class InteractionController : MonoBehaviour
             if (PlayerData.grabbingObject && Input.GetMouseButtonUp(0))
             {
                 GrabbingController.Instance.UnGrabObject();
-                PlayerData.lastGrab.StopGrab();
+                //PlayerData.lastGrab.StopGrab();
                 return;
             }
         }
@@ -55,6 +55,9 @@ public class InteractionController : MonoBehaviour
                     {
                         PlayerData.lastGrab = grab;
                         PlayerData.lastGrabObject = hit.collider.gameObject;
+                        PlayerData.lastGrabPoint = hit.point;
+
+                        PlayerData.GrabIsDoor = hit.collider.TryGetComponent(out DynamicDoor door);
 
                         GrabbingController.Instance.GrabObject();
                         grab.StartGrab();

@@ -5,12 +5,12 @@ public class DebugFood : MonoBehaviour
 {
     [SerializeField] float hungerReplenishAmount;
 
-    SphereCollider sphereCollider;
+    new Collider collider;
     Rigidbody rb;
 
     void Awake()
     {
-        sphereCollider = GetComponent<SphereCollider>();
+        collider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -25,7 +25,7 @@ public class DebugFood : MonoBehaviour
 
     IEnumerator EatFoodCoroutine(Vector3 startPos, Transform target)
     {
-        sphereCollider.enabled = false;
+        collider.enabled = false;
         rb.isKinematic = true;
 
         float t = 0f;

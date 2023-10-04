@@ -11,9 +11,9 @@ public class Frog : MonoBehaviour, IGrabbable
     public string frogName;
 
     [Header("Mood Change")]
-    [SerializeField] float angryThreshold;
-    [SerializeField] float furiousThreshold;
-    [SerializeField] float statCountThreshold;
+    [SerializeField] float angryThreshold = 50;
+    [SerializeField] float furiousThreshold = 30;
+    [SerializeField] float statCountThreshold = 3;
 
     public bool isGrabbed;
 
