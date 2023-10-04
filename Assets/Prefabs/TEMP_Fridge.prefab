@@ -213,17 +213,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 396c3b6a3a49b7a4a8e58f8169891c5b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.99
+      value: 6.205021
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 396c3b6a3a49b7a4a8e58f8169891c5b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.020000696
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 396c3b6a3a49b7a4a8e58f8169891c5b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.95
+      value: 3.2527533
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 396c3b6a3a49b7a4a8e58f8169891c5b,
         type: 3}
@@ -453,8 +453,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dynamicDoor: {fileID: 8669895749567229182}
-  foodPrefab: {fileID: 2719146200052411805, guid: fe3b2a0b2ce7289428b5e53c3c7f4e38,
-    type: 3}
+  foodPrefabs:
+  - {fileID: 5358271927001681629, guid: 329b1d8936bd1e64c9690a17de1a9b8f, type: 3}
+  - {fileID: 5523944976447195928, guid: 59656b8d66cdc824a9b900d3bdbb2b28, type: 3}
   foodSpawnPos: {fileID: 452249093411233063}
 --- !u!1 &1751232387886558176 stripped
 GameObject:

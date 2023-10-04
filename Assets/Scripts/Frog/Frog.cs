@@ -2,6 +2,8 @@ using HietakissaUtils;
 using UnityEngine.AI;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
+using UnityEditor.Profiling.Memory.Experimental;
 
 public class Frog : MonoBehaviour, IGrabbable
 {
@@ -33,6 +35,12 @@ public class Frog : MonoBehaviour, IGrabbable
 
     [SerializeField] bool disableMovement;
 
+    bool hasPath;
+    float pathCalculationTime;
+    float pathCalculationDelay = 1f;
+
+    float cannotMoveTime;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -59,7 +67,21 @@ public class Frog : MonoBehaviour, IGrabbable
         stats.ConsumeStats();
         currentState.UpdateState();
 
-        if (!disableMovement) HandleMovement();
+        if (cannotMoveTime > 5f)
+        {
+            rb.AddForce(Maf.Direction(transform.position, new Vector3(0f, 10f, 0f)) * 10, ForceMode.VelocityChange);
+            cannotMoveTime = 0f;
+        }
+        else if (!hasPath && !isGrabbed && rb.velocity.magnitude < 1f)
+        {
+            pathCalculationTime += Time.deltaTime;
+
+            if (pathCalculationTime >= pathCalculationDelay)
+            {
+                pathCalculationTime -= pathCalculationDelay;
+                CalculatePath(navigationTarget.position);
+            }
+        }
     }
 
 
@@ -80,17 +102,36 @@ public class Frog : MonoBehaviour, IGrabbable
         path = new NavMeshPath();
         if (NavMesh.CalculatePath(transform.position, target, 1, path))
         {
+            if (GetPathLength(path) < 1f) CalculationFail();
+            else CalculationSuccess();
+        }
+        else CalculationFail();
+
+        void CalculationSuccess()
+        {
+            hasPath = true;
+
             pathCorners = path.corners;
             pathIndex = 0;
             nextPosition = pathCorners[pathIndex];
+
+            cannotMoveTime = 0f;
+
             Debug.Log($"Path calculation succeeded for {gameObject.name}");
         }
-        else Debug.Log($"Path calculation failed for {gameObject.name}");
+
+        void CalculationFail()
+        {
+            Debug.Log($"Path calculation failed for {gameObject.name}");
+            cannotMoveTime += pathCalculationDelay;
+
+        }
     }
 
-    void HandleMovement()
+    public void HandleMovement()
     {
-        if (isGrabbed || pathCorners == null || pathIndex == pathCorners.Length) return;
+        //if (pathCorners == null || pathIndex == pathCorners.Length) return;
+        if (!hasPath || disableMovement) return;
 
         rb.position += Maf.Direction(transform.position, nextPosition) * speed * Time.deltaTime;
         //rb.MovePosition((transform.position + Maf.Direction(transform.position, nextPosition)).normalized * speed * Time.deltaTime);
@@ -108,6 +149,7 @@ public class Frog : MonoBehaviour, IGrabbable
     void CompletePath()
     {
         Debug.Log("Path completed");
+        hasPath = false;
     }
 
     void SwitchState(FrogBaseState nextState)
@@ -120,12 +162,21 @@ public class Frog : MonoBehaviour, IGrabbable
     public void StartGrab()
     {
         isGrabbed = true;
+        hasPath = false;
     }
     public void StopGrab()
     {
         isGrabbed = false;
 
         CalculatePath(navigationTarget.position);
+    }
+
+    float GetPathLength(NavMeshPath path)
+    {
+        float length = 0f;
+
+        for (int i = 0; i < path.corners.Length - 1; i++) length += Vector3.Distance(path.corners[i], path.corners[i + 1]);
+        return length;
     }
 }
 

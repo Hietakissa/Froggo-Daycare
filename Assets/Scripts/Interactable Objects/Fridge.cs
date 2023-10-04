@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Fridge : Appliance
 {
-    [SerializeField] GameObject foodPrefab;
     [SerializeField] GameObject[] foodPrefabs;
     [SerializeField] Transform foodSpawnPos;
 

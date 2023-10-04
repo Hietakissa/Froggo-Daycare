@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using HietakissaUtils;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class InteractionController : MonoBehaviour
@@ -14,6 +17,11 @@ public class InteractionController : MonoBehaviour
         PlayerData.interactionMask = interactionMask;
     }
 
+    /// <summary>
+    /// tosi rumaa spagettia!!!
+    /// toivottavasti ei tarvii ikin‰ en‰‰ koskee t‰h‰n koodiin (foreshadowing)
+    /// </summary>
+
     void Update()
     {
         if (PlayerData.usingBook)
@@ -26,15 +34,31 @@ public class InteractionController : MonoBehaviour
 
             Debug.DrawRay(PlayerData.cameraTransform.position, GetDirectionToMouse() * 5, Color.blue);
 
-            if (Input.GetMouseButtonDown(0) && Physics.Raycast(PlayerData.cameraTransform.position, GetDirectionToMouse(), out hit, 5f, worldspaceButtonMask))
+            if (Input.GetMouseButtonDown(0))
             {
-                if (hit.collider.TryGetComponent(out WorldSpaceButton button)) button.Click();
-            }
-        }
+                //if (hit.collider.TryGetComponent(out WorldSpaceButton button)) button.Click();
+                if (Physics.Raycast(PlayerData.cameraTransform.position, GetDirectionToMouse(), out hit, 5f, worldspaceButtonMask))
+                {
+                    if (hit.collider.TryGetComponent(out WorldSpaceButton button)) button.Click();
+                }
+                else
+                {
+                    PointerEventData pointerData = new PointerEventData(EventSystem.current);
+                    pointerData.position = Input.mousePosition;
+                    List<RaycastResult> results = new List<RaycastResult>();
+                    EventSystem.current.RaycastAll(pointerData, results);
 
+                    foreach (RaycastResult result in results)
+                    {
+                        if (result.gameObject.TryGetComponent(out Button button)) button.OnPointerClick(pointerData);
+                    }
+                }
+            }
+
+
+        }
         HandleUnGrabbingAndInteracting();
         HandleInteraction();
-        
 
         void HandleUnGrabbingAndInteracting()
         {

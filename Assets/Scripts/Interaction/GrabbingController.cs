@@ -11,8 +11,6 @@ public class GrabbingController : MonoBehaviour
     GameObject grabOrigin;
     Rigidbody grabbedRB;
 
-    [SerializeField] AnimationCurve grabbingForceCurve;
-
     void Awake()
     {
         Instance = this;
@@ -62,7 +60,8 @@ public class GrabbingController : MonoBehaviour
         grabbedRB.useGravity = false;
         grabbedRB.interpolation = RigidbodyInterpolation.Interpolate;
 
-        grabbedRB.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        //grabbedRB.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        grabbedRB.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
 
         grabbedRB.drag = 4f;
         grabbedRB.angularDrag = 2f;
@@ -103,9 +102,9 @@ public class GrabbingController : MonoBehaviour
     {
         return Vector3.Distance(PlayerData.GrabIsDoor ? grabOrigin.transform.position : grabbedRB.position, targetPosition);
     }
-    Vector3 CalculateTotalForce(Vector3 dir, float distance)
+    /*Vector3 CalculateTotalForce(Vector3 dir, float distance)
     {
         Debug.Log($"Calclated force: {(dir * grabbingForce * Mathf.Clamp(grabbingForceCurve.Evaluate(distance / grabbingDistance), 0.1f, 1f)).magnitude}, Direction: {dir}, Distance: {distance}, Force: {grabbingForce}, Curve Multiplier: {Mathf.Clamp(grabbingForceCurve.Evaluate(distance / grabbingDistance), 0.1f, 1f)}");
         return dir * grabbingForce * grabbingForceCurve.Evaluate(distance / grabbingDistance);
-    }
+    }*/
 }
