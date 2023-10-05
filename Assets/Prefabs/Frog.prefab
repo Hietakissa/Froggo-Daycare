@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2673936245847461536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9176186317606282276}
+  m_Layer: 0
+  m_Name: Hat Holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9176186317606282276
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2673936245847461536}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.16, z: -0.169}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6873885333108229646}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6408142023619142117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85,7 +116,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9176186317606282276}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
         type: 3}
@@ -187,4 +222,11 @@ MonoBehaviour:
   isGrabbed: 0
   navigationTarget: {fileID: 0}
   speed: 2
-  disableMovement: 0
+  disableMovement: 1
+  hatHolder: {fileID: 9176186317606282276}
+--- !u!4 &6873885333108229646 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6408142023619142117}
+  m_PrefabAsset: {fileID: 0}

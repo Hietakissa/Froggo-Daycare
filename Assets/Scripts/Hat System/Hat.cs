@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Hat : MonoBehaviour, IGrabbable
 {
+    public HatSO hatSO;
+
     MeshCollider hatCollider;
     Rigidbody rb;
 
@@ -27,12 +29,12 @@ public class Hat : MonoBehaviour, IGrabbable
     {
         if (collision.collider.TryGetComponent(out Frog frog))
         {
-            if (PlayerData.lastGrabObject == gameObject) GrabbingController.Instance.UnGrabObject();
+            if (isGrabbed && PlayerData.lastGrabObject == gameObject) GrabbingController.Instance.UnGrabObject();
 
             Destroy(hatCollider);
             Destroy(rb);
             Destroy(this);
-            frog.EquipHat(transform);
+            frog.EquipHat(transform, hatSO);
         }
     }
 }

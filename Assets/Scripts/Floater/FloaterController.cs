@@ -4,6 +4,9 @@ public class FloaterController : MonoBehaviour
 {
     Floater[] floaters;
 
+    [SerializeField] float uprightTorque;
+    [SerializeField] float uprightTorqueDamping;
+
     [HideInInspector] public LayerMask waterMask;
     [HideInInspector] public Rigidbody rb;
 
@@ -28,17 +31,26 @@ public class FloaterController : MonoBehaviour
                 floater.Process();
             }
         }
+        
 
         if (underwater)
         {
             rb.drag = 2f;
             rb.angularDrag = 2f;
+
+            Quaternion difference = Quaternion.FromToRotation(transform.up, Vector3.up);
+            float angle;
+            Vector3 axis;
+
+            difference.ToAngleAxis(out angle, out axis);
+
+            rb.AddTorque(-rb.angularVelocity * uprightTorqueDamping, ForceMode.Acceleration);
+            rb.AddTorque(axis.normalized * angle * uprightTorque * Time.deltaTime, ForceMode.Acceleration);
         }
         else
         {
             rb.drag = 0f;
             rb.angularDrag = 0.05f;
         }
-        //rb.useGravity = !underwater;
     }
 }

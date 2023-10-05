@@ -1,12 +1,5 @@
 public class FrogRoamingState : FrogBaseState
 {
-    Frog frog;
-
-    public override void Init(Frog frog)
-    {
-        this.frog = frog;
-    }
-
     public override void EnterState()
     {
         
@@ -14,7 +7,7 @@ public class FrogRoamingState : FrogBaseState
 
     public override void ExitState()
     {
-        
+        frog.rb.freezeRotation = false;
     }
 
     public override void UpdateState()

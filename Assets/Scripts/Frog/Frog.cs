@@ -1,7 +1,6 @@
 using HietakissaUtils;
 using UnityEngine.AI;
 using UnityEngine;
-using System;
 
 public class Frog : MonoBehaviour, IGrabbable
 {
@@ -19,9 +18,10 @@ public class Frog : MonoBehaviour, IGrabbable
 
     FrogBaseState currentState;
     FrogBaseState roamingState = new FrogRoamingState();
+    FrogBaseState pottyState = new FrogPottyState();
 
     [SerializeField] Transform navigationTarget;
-    Rigidbody rb;
+    [HideInInspector] public Rigidbody rb;
 
     NavMeshPath path;
     Vector3[] pathCorners;
@@ -30,8 +30,11 @@ public class Frog : MonoBehaviour, IGrabbable
 
     float stoppingDistance = 0.3f;
     [SerializeField] float speed = 2f;
+    [SerializeField] float rotationSmoothing;
 
     [SerializeField] bool disableMovement;
+    [HideInInspector] public bool shouldOverridePosition;
+    [HideInInspector] public Transform overridePosition;
 
     bool hasPath;
     float pathCalculationTime;
@@ -45,13 +48,13 @@ public class Frog : MonoBehaviour, IGrabbable
 
     [Header("Other")]
     [SerializeField] Transform hatHolder;
-    GameObject equippedHat;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
 
         roamingState.Init(this);
+        pottyState.Init(this);
 
         currentState = roamingState;
         currentState.EnterState();
@@ -75,6 +78,14 @@ public class Frog : MonoBehaviour, IGrabbable
 
         stats.ConsumeStats();
         currentState.UpdateState();
+
+        if (shouldOverridePosition)
+        {
+            rb.position = overridePosition.position;
+            rb.rotation = overridePosition.rotation;
+
+            return;
+        }
 
         if (disableMovement) return;
 
@@ -147,40 +158,91 @@ public class Frog : MonoBehaviour, IGrabbable
         Debug.Log("Path completed");
         hasPath = false;
 
-        waitUntilGettingPath = 3f;
+        waitUntilGettingPath = Random.Range(2.5f, 4f);
     }
 
     public void HandleMovement()
     {
         //if (pathCorners == null || pathIndex == pathCorners.Length) return;
-        if (!hasPath || disableMovement) return;
+        if (!hasPath || disableMovement || rb.velocity.magnitude > 1f)
+        {
+            rb.freezeRotation = false;
+            return;
+        }
+        else rb.freezeRotation = true;
 
         rb.position += Maf.Direction(transform.position, nextPosition) * speed * Time.deltaTime;
         //rb.MovePosition((transform.position + Maf.Direction(transform.position, nextPosition)).normalized * speed * Time.deltaTime);
         //Debug.DrawRay(transform.position, Maf.Direction(transform.position, nextPosition), Color.green, 5f);
 
+        //lookRotation = Vector3.Lerp(lookRotation, Maf.Direction(transform.position, nextPosition), rotationSmoothing * Time.deltaTime);
+        //transform.forward = transform.TransformDirection(lookRotation);
+
+        Quaternion lookRotation = Quaternion.LookRotation(Maf.Direction(transform.position, nextPosition));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSmoothing * Time.deltaTime);
+
         if ((Vector3.Distance(transform.position, nextPosition) < stoppingDistance))
         {
             pathIndex++;
 
-            if (pathIndex < pathCorners.Length) nextPosition = pathCorners[pathIndex];
+            if (pathIndex < pathCorners.Length)
+            {
+                nextPosition = pathCorners[pathIndex];
+            }
             else CompletePath();
         }
     }
 
-    
+    public void EnablePhysics()
+    {
+        rb.useGravity = true;
+        rb.constraints = RigidbodyConstraints.None;
+    }
 
-    void SwitchState(FrogBaseState nextState)
+    public void DisablePhysics()
+    {
+        rb.useGravity = false;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+    }
+
+
+    public void EnterState(FrogState state)
+    {
+        ChangeState(GetStateForEnum(state));
+    }
+
+    void ChangeState(FrogBaseState nextState)
     {
         currentState.ExitState();
         currentState = nextState;
         currentState.EnterState();
     }
 
+    public bool StateIs(FrogState state)
+    {
+        return currentState == GetStateForEnum(state);
+    }
+
+    FrogBaseState GetStateForEnum(FrogState enumState)
+    {
+        switch (enumState)
+        {
+            case FrogState.Roaming:
+                return roamingState;
+            case FrogState.Potty:
+                return pottyState;
+            default: return null;
+        }
+    }
+
     public void StartGrab()
     {
         isGrabbed = true;
         hasPath = false;
+
+        shouldOverridePosition = false;
+
+        EnterState(FrogState.Roaming);
     }
     public void StopGrab()
     {
@@ -202,17 +264,23 @@ public class Frog : MonoBehaviour, IGrabbable
         return length;
     }
 
-    public void EquipHat(Transform hatObject)
+    public void EquipHat(Transform hatObject, HatSO hat)
     {
         hatHolder.DestroyChildren();
 
         hatObject.parent = hatHolder;
-        hatObject.position = hatHolder.position;
+        hatObject.localPosition = hat.offset;
         hatObject.rotation = hatHolder.rotation;
     }
 }
 
-[Serializable]
+public enum FrogState
+{
+    Roaming,
+    Potty
+}
+
+[System.Serializable]
 public class StatController
 {
     [SerializeField] public Stat hungerStat;
@@ -246,9 +314,10 @@ public class StatController
     }
 }
 
-[Serializable]
+[System.Serializable]
 public class Stat
 {
+    [HideInInspector] public bool DisableConsumption;
     [SerializeField] float consumptionMultiplier = 1f;
     float value = 100f;
 
@@ -261,6 +330,8 @@ public class Stat
     }
     public void DecreaseStat(float amount)
     {
+        if (DisableConsumption) return;
+
         value -= amount;
         ClampStatValue();
     }

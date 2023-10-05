@@ -11,5 +11,6 @@ public class HatManager : MonoBehaviour
     {
         if (spawnedHat != null) Destroy(spawnedHat.gameObject);
         spawnedHat = Instantiate(hats[id].Prefab, hatSpawnPosition.position, Quaternion.identity).GetComponent<Hat>();
+        spawnedHat.hatSO = hats[id];
     }
 }

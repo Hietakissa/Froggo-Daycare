@@ -57,8 +57,11 @@ public class InteractionController : MonoBehaviour
 
 
         }
-        HandleUnGrabbingAndInteracting();
-        HandleInteraction();
+        else
+        {
+            HandleUnGrabbingAndInteracting();
+            HandleInteraction();
+        }
 
         void HandleUnGrabbingAndInteracting()
         {

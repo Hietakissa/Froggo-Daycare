@@ -1,6 +1,8 @@
 public abstract class FrogBaseState
 {
-    public abstract void Init(Frog frog);
+    protected Frog frog;
+
+    public void Init(Frog frog) => this.frog = frog;
 
     public abstract void EnterState();
     public abstract void ExitState();
