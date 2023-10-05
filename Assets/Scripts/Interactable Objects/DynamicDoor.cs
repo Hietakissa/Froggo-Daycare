@@ -6,6 +6,7 @@ using TMPro;
 public class DynamicDoor : MonoBehaviour, IGrabbable
 {
     [SerializeField] public Orientation orientation;
+    [SerializeField] public bool invertMaxAngle;
 
     [SerializeField] int snapShutAngle = 1;
     [SerializeField] float snapShutMinVelocity = 2f;
@@ -21,7 +22,7 @@ public class DynamicDoor : MonoBehaviour, IGrabbable
 
     float DoorAngle => Quaternion.Angle(closedRot, transform.rotation);
 
-    TMP_Text text;
+    //TMP_Text text;
 
     Vector3 orientationAxis;
 
@@ -33,12 +34,12 @@ public class DynamicDoor : MonoBehaviour, IGrabbable
 
         orientationAxis = GetOrientationAxis();
 
-        text = transform.parent.GetComponentInChildren<TMP_Text>();
+        //text = transform.parent.GetComponentInChildren<TMP_Text>();
     }
 
     void Update()
     {
-        text.text = $"Grabbed: {isGrabbed}\nClosed: {IsClosed}";
+        //text.text = $"Grabbed: {isGrabbed}\nClosed: {IsClosed}";
 
         if (isGrabbed) return;
         
@@ -49,7 +50,7 @@ public class DynamicDoor : MonoBehaviour, IGrabbable
     {
         if (isGrabbed || IsClosed) return;
 
-        rb.AddTorque(orientationAxis * closingAssistForce * Time.deltaTime, ForceMode.Acceleration);
+        rb.AddTorque(transform.InverseTransformDirection(orientationAxis) * closingAssistForce * Time.deltaTime, ForceMode.Acceleration);
     }
 
     void CheckShut()

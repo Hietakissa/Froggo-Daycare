@@ -28,7 +28,7 @@ public abstract class Appliance : MonoBehaviour
 
         JointLimits limits = new JointLimits();
         limits.min = 0;
-        limits.max = 110;
+        limits.max = dynamicDoor.invertMaxAngle ? -110 : 110;
 
         joint.useLimits = true;
         joint.limits = limits;

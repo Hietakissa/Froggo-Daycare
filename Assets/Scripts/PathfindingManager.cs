@@ -25,10 +25,13 @@ public class PathfindingManager : MonoBehaviour
         return randomPoint + randomOffset;
     }
 
+#if UNITY_EDITOR
+    [SerializeField] bool showGizmos;
     void OnDrawGizmos()
     {
-        if (roamPoints == null || roamPoints.Length == 0) return;
+        if (!showGizmos || roamPoints == null || roamPoints.Length == 0) return;
 
         foreach (Transform point in roamPoints) Gizmos.DrawWireSphere(point.position, roamRadius);
     }
+#endif
 }

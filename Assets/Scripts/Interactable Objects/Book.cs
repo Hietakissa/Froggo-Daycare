@@ -9,6 +9,8 @@ public class Book : MonoBehaviour, IInteractable
 
     [SerializeField] Menu[] menus;
 
+    [SerializeField] Transform hatButtonHolder;
+
     void Awake()
     {
         Instance = this;
@@ -51,5 +53,16 @@ public class Book : MonoBehaviour, IInteractable
         PlayerData.usingBook = false;
 
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void UnlockHat(int id)
+    {
+        Debug.Log($"Unlocked hat {id}");
+        
+        if (hatButtonHolder == null)
+        {
+            Debug.Log("Hat button holder / book stuff hasn't been implemented yet!");
+        }
+        else hatButtonHolder.GetChild(id).gameObject.SetActive(true);
     }
 }

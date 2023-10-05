@@ -43,6 +43,10 @@ public class Frog : MonoBehaviour, IGrabbable
 
     Vector3 GetRandomPosition => PathfindingManager.Instance.GetRandomPosition();
 
+    [Header("Other")]
+    [SerializeField] Transform hatHolder;
+    GameObject equippedHat;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -71,6 +75,8 @@ public class Frog : MonoBehaviour, IGrabbable
 
         stats.ConsumeStats();
         currentState.UpdateState();
+
+        if (disableMovement) return;
 
         waitUntilGettingPath -= Time.deltaTime;
         if (waitUntilGettingPath > 0f) return;
@@ -136,6 +142,14 @@ public class Frog : MonoBehaviour, IGrabbable
         }
     }
 
+    void CompletePath()
+    {
+        Debug.Log("Path completed");
+        hasPath = false;
+
+        waitUntilGettingPath = 3f;
+    }
+
     public void HandleMovement()
     {
         //if (pathCorners == null || pathIndex == pathCorners.Length) return;
@@ -154,13 +168,7 @@ public class Frog : MonoBehaviour, IGrabbable
         }
     }
 
-    void CompletePath()
-    {
-        Debug.Log("Path completed");
-        hasPath = false;
-
-        waitUntilGettingPath = 3f;
-    }
+    
 
     void SwitchState(FrogBaseState nextState)
     {
@@ -192,6 +200,15 @@ public class Frog : MonoBehaviour, IGrabbable
 
         for (int i = 0; i < path.corners.Length - 1; i++) length += Vector3.Distance(path.corners[i], path.corners[i + 1]);
         return length;
+    }
+
+    public void EquipHat(Transform hatObject)
+    {
+        hatHolder.DestroyChildren();
+
+        hatObject.parent = hatHolder;
+        hatObject.position = hatHolder.position;
+        hatObject.rotation = hatHolder.rotation;
     }
 }
 
