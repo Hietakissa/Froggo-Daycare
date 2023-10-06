@@ -9,6 +9,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Frog_sticker
     second: {fileID: 2100000, guid: 3a36a17326aa9b840ae3fe3091dc06c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Page_left
+    second: {fileID: 2100000, guid: c0d87a419f232f74fa6a782994176a02, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Page_right
+    second: {fileID: 2100000, guid: c0d87a419f232f74fa6a782994176a02, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
