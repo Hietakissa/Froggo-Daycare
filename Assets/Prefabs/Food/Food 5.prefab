@@ -82,7 +82,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4529cb2a80fcf1c4a9a2292b54b6e892,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6271183644780601026}
+      addedObject: {fileID: 7518409163794091175}
   m_SourcePrefab: {fileID: 100100000, guid: 4529cb2a80fcf1c4a9a2292b54b6e892, type: 3}
 --- !u!1 &1059989390501247761 stripped
 GameObject:
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f685ce65c5db7204986ac2ea2ab7a881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6271183644780601026
+--- !u!114 &7518409163794091175
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1059989390501247761}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2ee8a1f68f327842a9578bc3272491a, type: 3}
+  m_Script: {fileID: 11500000, guid: f4001031ee1ecef438df316c840aabd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hungerReplenishAmount: 30
+  nutrition: 40

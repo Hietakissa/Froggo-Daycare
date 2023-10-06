@@ -4,8 +4,8 @@ public class FloaterController : MonoBehaviour
 {
     Floater[] floaters;
 
-    [SerializeField] float uprightTorque;
-    [SerializeField] float uprightTorqueDamping;
+    [SerializeField] float uprightTorque = 60;
+    [SerializeField] float uprightTorqueDamping = 2;
 
     [HideInInspector] public LayerMask waterMask;
     [HideInInspector] public Rigidbody rb;

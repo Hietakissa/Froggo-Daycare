@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6783487441702810850}
   - component: {fileID: 6473269281464391448}
   - component: {fileID: 1805557584200983849}
-  - component: {fileID: 1084834286900434727}
+  - component: {fileID: 2726909111307469721}
   m_Layer: 0
   m_Name: Food 1
   m_TagString: Untagged
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f685ce65c5db7204986ac2ea2ab7a881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1084834286900434727
+--- !u!114 &2726909111307469721
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5358271927001681629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2ee8a1f68f327842a9578bc3272491a, type: 3}
+  m_Script: {fileID: 11500000, guid: f4001031ee1ecef438df316c840aabd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hungerReplenishAmount: 100
+  nutrition: 40

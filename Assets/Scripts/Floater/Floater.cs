@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Floater : MonoBehaviour
 {
-    [SerializeField] float buoyancy = 3f;
+    [SerializeField] float buoyancy = 50f;
     [HideInInspector] public LayerMask mask;
 
     Rigidbody rb;

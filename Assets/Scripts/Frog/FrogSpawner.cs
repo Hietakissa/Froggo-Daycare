@@ -2,11 +2,19 @@ using UnityEngine;
 
 public class FrogSpawner : MonoBehaviour
 {
+    public static FrogSpawner Instance;
+
     [SerializeField] GameObject frogPrefab;
+    [SerializeField] GameObject jarPrefab;
     [SerializeField] float frogSpawnDelay;
     float frogSpawnTime;
 
     [SerializeField] bool spawnFrogs;
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     void Update()
     {
@@ -17,12 +25,18 @@ public class FrogSpawner : MonoBehaviour
         if (frogSpawnTime >= frogSpawnDelay)
         {
             frogSpawnTime -= frogSpawnDelay;
-            SpawnFrog();
+            //SpawnFrog();
+            SpawnJar();
         }
     }
 
-    void SpawnFrog()
+    void SpawnJar()
     {
-        Instantiate(frogPrefab, transform.position, transform.rotation);
+        Instantiate(jarPrefab, transform.position, transform.rotation);
+    }
+
+    public void SpawnFrog(Transform jarTransform)
+    {
+        Instantiate(frogPrefab, jarTransform.position, jarTransform.rotation);
     }
 }

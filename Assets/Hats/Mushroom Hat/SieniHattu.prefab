@@ -61,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1e69990f432fb7749b4e95ed02fa762e,
         type: 3}
       propertyPath: m_Name
-      value: SieniHattu (2)
+      value: SieniHattu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -147,3 +147,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f52104530dd414f96861a024852469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hatSO: {fileID: 11400000, guid: 1d6ebc7aeef6bfe499e43a52b9c49c92, type: 2}

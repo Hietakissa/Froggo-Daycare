@@ -48,6 +48,8 @@ public class Frog : MonoBehaviour, IGrabbable
 
     [Header("Other")]
     [SerializeField] Transform hatHolder;
+    [SerializeField] float uprightTorque;
+    [SerializeField] float uprightTorqueDamping;
 
     void Awake()
     {
@@ -87,6 +89,8 @@ public class Frog : MonoBehaviour, IGrabbable
             return;
         }
 
+        Torque();
+
         if (disableMovement) return;
 
         waitUntilGettingPath -= Time.deltaTime;
@@ -106,6 +110,18 @@ public class Frog : MonoBehaviour, IGrabbable
                 pathCalculationTime -= pathCalculationDelay;
                 CalculatePathToRandomPosition();
             }
+        }
+
+        void Torque()
+        {
+            Quaternion difference = Quaternion.FromToRotation(transform.up, Vector3.up);
+            float angle;
+            Vector3 axis;
+
+            difference.ToAngleAxis(out angle, out axis);
+
+            rb.AddTorque(-rb.angularVelocity * uprightTorqueDamping, ForceMode.Acceleration);
+            rb.AddTorque(axis.normalized * angle * uprightTorque * Time.deltaTime, ForceMode.Acceleration);
         }
     }
 
