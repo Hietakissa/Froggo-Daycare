@@ -13,9 +13,10 @@ public class Potty : MonoBehaviour
         if (other.TryGetComponent(out Frog frog) && lastFrogThrowTime + 5f < Time.time)
         {
             if (lastFrog != null && lastFrog.StateIs(FrogState.Potty)) return;
+            if (frog.StateIs(FrogState.Furious) && !frog.isGrabbed) return;
 
             lastFrog = frog;
-            frog.overridePosition = pottyPosition;
+            frog.OverridePosition = pottyPosition;
             frog.EnterState(FrogState.Potty);
         }
     }
@@ -30,7 +31,7 @@ public class Potty : MonoBehaviour
                 lastFrog.EnterState(FrogState.Roaming);
 
                 float horizontalForce = 2f;
-                float verticalForce = 7f;
+                float verticalForce = 5f;
                 Vector3 randomForce = new Vector3(Random.Range(-horizontalForce, horizontalForce), verticalForce, Random.Range(-horizontalForce, horizontalForce));
                 lastFrog.rb.AddForce(randomForce, ForceMode.Impulse);
 

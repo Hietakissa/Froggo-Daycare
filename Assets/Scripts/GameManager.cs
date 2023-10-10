@@ -10,6 +10,10 @@ public static class GameManager
 
     public static event Action OnFoodEaten;
 
+    public static event Action OnFuriousChange;
+
+    public static int FuriousFrogCount;
+
     public static void Pause()
     {
         OnPause?.Invoke();
@@ -19,6 +23,8 @@ public static class GameManager
     {
         OnUnPause?.Invoke();
     }
+
+
 
     public static void EnterBook()
     {
@@ -30,8 +36,26 @@ public static class GameManager
         OnExitBook?.Invoke();
     }
 
+
+
     public static void EatFood()
     {
         OnFoodEaten?.Invoke();
+    }
+
+
+
+    public static void FrogEnterFurious()
+    {
+        FuriousFrogCount++;
+
+        OnFuriousChange?.Invoke();
+    }
+
+    public static void FrogExitFurious()
+    {
+        FuriousFrogCount--;
+
+        OnFuriousChange?.Invoke();
     }
 }

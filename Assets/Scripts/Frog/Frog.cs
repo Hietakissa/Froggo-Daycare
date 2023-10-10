@@ -10,16 +10,12 @@ public class Frog : MonoBehaviour, IGrabbable
 
     public string frogName;
 
-    [Header("Mood Change")]
-    [SerializeField] float angryThreshold = 50;
-    [SerializeField] float furiousThreshold = 30;
-    [SerializeField] float statCountThreshold = 3;
-
     public bool isGrabbed;
 
     FrogBaseState currentState;
     FrogBaseState roamingState = new FrogRoamingState();
     FrogBaseState pottyState = new FrogPottyState();
+    FrogBaseState furiousState = new FrogFuriousState();
 
     [HideInInspector] public Rigidbody rb;
 
@@ -28,14 +24,22 @@ public class Frog : MonoBehaviour, IGrabbable
     int pathIndex;
     Vector3 nextPosition;
 
-    [Header("Pathfinding / Movement")]
     float stoppingDistance = 0.3f;
+
+    [Header("Furious")]
+    [SerializeField] float furiousThreshold = 30;
+    [SerializeField] float statCountThreshold = 3;
+    [SerializeField] public LayerMask FuriousBounceMask;
+    [SerializeField] public float BounceSpeed;
+    [SerializeField] public float BounceDistanceOffset;
+
+    [Header("Pathfinding/Movement")]
     [SerializeField] float speed = 2f;
     [SerializeField] float rotationSmoothing;
 
-    [SerializeField] public bool disableMovement;
-    [HideInInspector] public bool shouldOverridePosition;
-    [HideInInspector] public Transform overridePosition;
+    [SerializeField] public bool DisableMovement;
+    [HideInInspector] public bool ShouldOverridePosition;
+    [HideInInspector] public Transform OverridePosition;
 
     bool hasPath;
     float pathCalculationTime;
@@ -60,12 +64,19 @@ public class Frog : MonoBehaviour, IGrabbable
     float toyPlayTime;
     float accumulatedToyPlayChance;
 
+    [Header("Animation")]
+    [SerializeField] Transform armature;
+    Animator animator;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
 
+        animator = GetComponent<Animator>();
+
         roamingState.Init(this);
         pottyState.Init(this);
+        furiousState.Init(this);
 
         currentState = roamingState;
         currentState.EnterState();
@@ -73,6 +84,9 @@ public class Frog : MonoBehaviour, IGrabbable
 
     void Start()
     {
+        //animator.applyRootMotion = true;
+        //armature.localPosition = new Vector3(0f, 0.38f, 0f);
+
         CalculatePathToRandomPosition();
     }
 
@@ -90,19 +104,26 @@ public class Frog : MonoBehaviour, IGrabbable
         stats.ConsumeStats();
         currentState.UpdateState();
 
-        if (shouldOverridePosition)
+        if (ShouldOverridePosition)
         {
-            rb.position = overridePosition.position;
-            rb.rotation = overridePosition.rotation;
+            rb.position = OverridePosition.position;
+            rb.rotation = OverridePosition.rotation;
 
             return;
         }
+
+        if (stats.GetStatsUnderThreshold(furiousThreshold) >= statCountThreshold)
+        {
+            if (!StateIs(FrogState.Furious)) EnterState(FrogState.Furious);
+            return;
+        }
+        else EnterState(FrogState.Roaming);
 
         Torque();
 
         PlayWithToys();
 
-        if (disableMovement) return;
+        if (DisableMovement) return;
 
         waitUntilGettingPath -= Time.deltaTime;
         if (waitUntilGettingPath > 0f) return;
@@ -155,7 +176,7 @@ public class Frog : MonoBehaviour, IGrabbable
 
                 Collider[] toys = Physics.OverlapSphere(transform.position, toyCheckRadius);
 
-                foreach  (Collider col in toys)
+                foreach (Collider col in toys)
                 {
                     if (col.CompareTag("Toy"))
                     {
@@ -223,7 +244,7 @@ public class Frog : MonoBehaviour, IGrabbable
     public void HandleMovement()
     {
         //if (pathCorners == null || pathIndex == pathCorners.Length) return;
-        if (!hasPath || disableMovement || rb.velocity.magnitude > 1f)
+        if (!hasPath || DisableMovement || rb.velocity.magnitude > 1f)
         {
             rb.freezeRotation = false;
             return;
@@ -290,6 +311,8 @@ public class Frog : MonoBehaviour, IGrabbable
                 return roamingState;
             case FrogState.Potty:
                 return pottyState;
+            case FrogState.Furious:
+                return furiousState;
             default: return null;
         }
     }
@@ -299,7 +322,7 @@ public class Frog : MonoBehaviour, IGrabbable
         isGrabbed = true;
         hasPath = false;
 
-        shouldOverridePosition = false;
+        ShouldOverridePosition = false;
 
         EnterState(FrogState.Roaming);
         
@@ -340,7 +363,8 @@ public class Frog : MonoBehaviour, IGrabbable
 public enum FrogState
 {
     Roaming,
-    Potty
+    Potty,
+    Furious
 }
 
 [System.Serializable]

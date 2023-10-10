@@ -20,9 +20,9 @@ public class BedArea : MonoBehaviour
             {
                 frog.stats.consumptionMultiplier = 1f;
                 //frog.stats.energyStat.DisableConsumption = false;
-                frog.disableMovement = false;
+                frog.DisableMovement = false;
 
-                frog.rb.AddForce(Maf.Direction(frog.rb.position, Vector3.up * 4f) * 8f, ForceMode.Impulse);
+                frog.rb.AddForce(Maf.Direction(frog.rb.position, Vector3.up * 4f) * 5f, ForceMode.Impulse);
 
                 frogs.Remove(frog);
             }
@@ -31,14 +31,11 @@ public class BedArea : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger enter");
         if (other.TryGetComponent(out Frog frog))
         {
-            Debug.Log("Frog enter");
-
             frog.stats.consumptionMultiplier = 0f;
             //frog.stats.energyStat.DisableConsumption = true;
-            frog.disableMovement = true;
+            frog.DisableMovement = true;
             frogs.Add(frog);
         }
     }
@@ -52,7 +49,7 @@ public class BedArea : MonoBehaviour
 
             frog.stats.consumptionMultiplier = 1f;
             //frog.stats.energyStat.DisableConsumption = false;
-            frog.disableMovement = false;
+            frog.DisableMovement = false;
             frogs.Remove(frog);
         }
     }

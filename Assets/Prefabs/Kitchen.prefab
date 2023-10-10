@@ -1519,6 +1519,7 @@ MonoBehaviour:
   - {fileID: 1166693707012725405}
   - {fileID: 2594774113814913760}
   - {fileID: 2068232785213174166}
+  maxFoodAmount: 0
 --- !u!1001 &4500064157201783500
 PrefabInstance:
   m_ObjectHideFlags: 0

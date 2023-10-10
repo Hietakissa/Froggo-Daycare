@@ -11,6 +11,9 @@ public class GrabbingController : MonoBehaviour
     GameObject grabOrigin;
     Rigidbody grabbedRB;
 
+    Transform transformOverride;
+    bool objectHasTransformOverride;
+
     void Awake()
     {
         Instance = this;
@@ -41,13 +44,21 @@ public class GrabbingController : MonoBehaviour
         }
         else
         {
-            Vector3 dirToGrabPos = Maf.Direction(grabbedRB.position, targetPosition);
+            Vector3 dirToGrabPos = Maf.Direction((objectHasTransformOverride ? transformOverride.position : grabbedRB.position), targetPosition);
             Vector3 targetVelocity = dirToGrabPos * distance * grabbingForce;
 
             grabbedRB.velocity = targetVelocity;
         }
 
-        
+        Quaternion difference = Quaternion.FromToRotation(grabbedRB.transform.up, Vector3.up);
+        float angle;
+        Vector3 axis;
+
+        difference.ToAngleAxis(out angle, out axis);
+
+        grabbedRB.AddTorque(-grabbedRB.angularVelocity * 0.3f, ForceMode.Acceleration);
+        grabbedRB.AddTorque(axis.normalized * angle * 10f * Time.deltaTime, ForceMode.Acceleration);
+
         //Debug.Log($"Velocity: {targetVelocity}, Magnitude: {targetVelocity.magnitude} {(PlayerData.GrabIsDoor ? "door" : "")}");
         //grabbedRB.AddForceAtPosition(CalculateTotalForce(dirToGrabPos, distance) * Time.deltaTime, grabOrigin.transform.position);
     }
@@ -57,7 +68,7 @@ public class GrabbingController : MonoBehaviour
         PlayerData.grabbingObject = true;
 
         grabbedRB = PlayerData.lastGrabObject.GetComponent<Rigidbody>();
-        grabbedRB.useGravity = false;
+        if (!(PlayerData.lastGrabObject.TryGetComponent(out Frog frog) && frog.StateIs(FrogState.Furious))) grabbedRB.useGravity = false;
         grabbedRB.interpolation = RigidbodyInterpolation.Interpolate;
 
         //grabbedRB.collisionDetectionMode = CollisionDetectionMode.Continuous;
@@ -66,7 +77,10 @@ public class GrabbingController : MonoBehaviour
         grabbedRB.drag = 4f;
         grabbedRB.angularDrag = 2f;
 
-        
+        transformOverride = grabbedRB.transform.Find("Grab Transform Override");
+
+        if (transformOverride != null) objectHasTransformOverride = true;
+        else objectHasTransformOverride = false;
 
         if (PlayerData.GrabIsDoor)
         {
@@ -100,7 +114,13 @@ public class GrabbingController : MonoBehaviour
     }
     float CalculateDistance(Vector3 targetPosition)
     {
-        return Vector3.Distance(PlayerData.GrabIsDoor ? grabOrigin.transform.position : grabbedRB.position, targetPosition);
+        Vector3 startPos;
+
+        if (PlayerData.GrabIsDoor) startPos = grabOrigin.transform.position;
+        else if (objectHasTransformOverride) startPos = transformOverride.position;
+        else startPos = grabbedRB.position;
+
+        return Vector3.Distance(startPos, targetPosition);
     }
     /*Vector3 CalculateTotalForce(Vector3 dir, float distance)
     {

@@ -23,8 +23,8 @@ public class FeedingChair : MonoBehaviour
 
             lastFrog = frog;
             frog.DisablePhysics();
-            frog.overridePosition = chairPosition;
-            frog.shouldOverridePosition = true;
+            frog.OverridePosition = chairPosition;
+            frog.ShouldOverridePosition = true;
             frog.stats.consumptionMultiplier = 0.7f;
         }
     }
@@ -32,7 +32,7 @@ public class FeedingChair : MonoBehaviour
     void FrogGrab()
     {
         lastFrog.EnablePhysics();
-        lastFrog.shouldOverridePosition = false;
+        lastFrog.ShouldOverridePosition = false;
         lastFrog.stats.consumptionMultiplier = 1f;
 
         occupied = false;

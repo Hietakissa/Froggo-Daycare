@@ -74,16 +74,37 @@ public class InteractionController : MonoBehaviour
         {
             if (Physics.Raycast(PlayerData.cameraTransform.position, PlayerData.cameraTransform.forward, out hit, interactionRange, interactionMask))
             {
+                Debug.Log($"Raycast hitting {hit.collider.name}");
                 if (Input.GetMouseButtonDown(0))
                 {
-                    if (hit.collider.TryGetComponent(out IGrabbable grab))
+                    IGrabbable grab;
+                    bool hasGrab = false;
+
+                    if (hit.collider.TryGetComponent(out GrabBranch branch))
+                    {
+                        Debug.Log($"Grabbed branch of {branch.RootObject.name}");
+
+                        IGrabbable root = branch.RootObject.GetComponent<IGrabbable>();
+
+                        PlayerData.lastGrab = root;
+                        PlayerData.lastGrabObject = branch.RootObject;
+                        grab = root;
+
+                        hasGrab = true;
+                    }
+                    else if (hit.collider.TryGetComponent(out grab))
                     {
                         PlayerData.lastGrab = grab;
                         PlayerData.lastGrabObject = hit.collider.gameObject;
-                        PlayerData.lastGrabPoint = hit.point;
 
+                        PlayerData.lastGrabPoint = hit.point;
                         PlayerData.GrabIsDoor = hit.collider.TryGetComponent(out DynamicDoor door);
 
+                        hasGrab = true;
+                    }
+
+                    if (hasGrab)
+                    {
                         GrabbingController.Instance.GrabObject();
                         grab.StartGrab();
                     }

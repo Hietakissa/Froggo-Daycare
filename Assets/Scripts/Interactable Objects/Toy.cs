@@ -13,8 +13,8 @@ public class Toy : MonoBehaviour
     {
         if (PlayerData.lastGrabObject == gameObject) GrabbingController.Instance.UnGrabObject();
 
-        float horizontalForce = 2f;
-        float verticalForce = 5f;
+        float horizontalForce = 1.5f;
+        float verticalForce = 3.5f;
         Vector3 randomForce = new Vector3(Random.Range(-horizontalForce, horizontalForce), verticalForce, Random.Range(-horizontalForce, horizontalForce));
         rb.AddForce(randomForce, ForceMode.Impulse);
         rb.AddTorque(Random.onUnitSphere * 3f);

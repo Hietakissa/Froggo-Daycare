@@ -4,7 +4,7 @@ public class FrogPottyState : FrogBaseState
 {
     public override void EnterState()
     {
-        frog.shouldOverridePosition = true;
+        frog.ShouldOverridePosition = true;
 
         frog.DisablePhysics();
 
@@ -13,7 +13,7 @@ public class FrogPottyState : FrogBaseState
 
     public override void ExitState()
     {
-        frog.shouldOverridePosition = false;
+        frog.ShouldOverridePosition = false;
 
         frog.EnablePhysics();
 

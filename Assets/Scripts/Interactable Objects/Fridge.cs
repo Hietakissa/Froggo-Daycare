@@ -5,27 +5,48 @@ public class Fridge : Appliance
 {
     [SerializeField] GameObject[] foodPrefabs;
     [SerializeField] Transform[] foodSpawnPositions;
-
-    GameObject food;
+    [SerializeField] int maxFoodAmount;
+    int currentFoodAmount;
 
     void Awake()
     {
-        SpawnFood();
+        CheckForMissingFood();
     }
 
     void DoorClosed()
     {
-        if (!food) SpawnFood();
+        //Debug.Log("Door closed");
+
+        //if (!food) SpawnFood();
+        /*if (!food)*/ CheckForMissingFood();
     }
 
     void AteFood()
     {
-        if (dynamicDoor.IsClosed) SpawnFood();
+        currentFoodAmount--;
+
+        //if (dynamicDoor.IsClosed) SpawnFood();
+        if (dynamicDoor.IsClosed) CheckForMissingFood();
+    }
+
+    void CheckForMissingFood()
+    {
+        if (currentFoodAmount < 0) currentFoodAmount = 0;
+        int missingFood = maxFoodAmount - currentFoodAmount;
+
+        //Debug.Log($"{currentFoodAmount} food, {missingFood} missing");
+
+        for (int i = 0; i < missingFood; i++)
+        {
+            SpawnFood();
+        }
     }
 
     void SpawnFood()
     {
-        food = Instantiate(foodPrefabs.RandomElement(), foodSpawnPositions.RandomElement().position, Quaternion.identity);
+        currentFoodAmount++;
+
+        Instantiate(foodPrefabs.RandomElement(), foodSpawnPositions.RandomElement().position, Quaternion.identity);
     }
 
     void OnEnable()

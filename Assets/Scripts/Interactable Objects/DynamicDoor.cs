@@ -34,6 +34,7 @@ public class DynamicDoor : MonoBehaviour, IGrabbable
 
         orientationAxis = GetOrientationAxis();
 
+        SnapShut();
         //text = transform.parent.GetComponentInChildren<TMP_Text>();
     }
 
@@ -57,7 +58,7 @@ public class DynamicDoor : MonoBehaviour, IGrabbable
     {
         if (DoorAngle <= snapShutAngle)
         {
-            if (rb.angularVelocity.magnitude <= snapShutMinVelocity) SnapShut();
+            if ((rb.velocity != Vector3.zero) && rb.angularVelocity.magnitude <= snapShutMinVelocity) SnapShut();
         }
         else IsClosed = false;
     }
