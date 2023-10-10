@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -7,7 +6,7 @@ public class LevelManager : MonoBehaviour
 
     int currentLevel = 1;
     int requiredXP;
-    int xp;
+    [SerializeField] float xp;
 
     [SerializeField] AnimationCurve xpRequirementCurve;
 
@@ -28,7 +27,7 @@ public class LevelManager : MonoBehaviour
         CheckForHatUnlock();
     }
 
-    public void AddXP(int xpToAdd)
+    public void AddXP(float xpToAdd)
     {
         xp += xpToAdd;
 

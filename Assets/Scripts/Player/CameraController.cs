@@ -13,6 +13,14 @@ public class CameraController : MonoBehaviour
 
     float xRot, yRot;
 
+    [SerializeField] float lerpSpeed = 1.5f;
+
+    Vector3 targetPos;
+    Quaternion targetRot;
+    Vector3 startPos;
+    Quaternion startRot;
+    float lerpTime = 5f;
+
     void Awake()
     {
         //Cursor.lockState = CursorLockMode.Locked;
@@ -20,13 +28,15 @@ public class CameraController : MonoBehaviour
 
         PlayerData.cameraTransform = transform;
         PlayerData.playerCamera = GetComponent<Camera>();
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Start()
     {
         holder = PlayerData.cameraHolder;
 
-        Book.Instance.StartUsing();
+        //Book.Instance.StartUsing();
     }
 
     void Update()
@@ -39,12 +49,25 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        if (PlayerData.usingBook)
+        /*if (lerpTime >= 1f && !PlayerData.usingBook) transform.position = holder.position;
+        else
         {
-            transform.position = PlayerData.bookLookTransform.position;
-            transform.rotation = PlayerData.bookLookTransform.rotation;
+            lerpTime += Time.deltaTime * lerpSpeed;
+
+            transform.position = Vector3.Slerp(startPos, targetPos, lerpTime);
+            transform.rotation = Quaternion.Slerp(startRot, targetRot, lerpTime);
+        }*/
+
+        if (!PlayerData.usingBook)
+        {
+            targetPos = holder.position;
+            targetRot = holder.rotation;
         }
-        else transform.position = holder.position;
+
+        lerpTime += Time.deltaTime * lerpSpeed;
+
+        transform.position = Vector3.Slerp(startPos, targetPos, lerpTime);
+        transform.rotation = Quaternion.Slerp(startRot, targetRot, lerpTime);
     }
 
     void GetInput()
@@ -60,7 +83,41 @@ public class CameraController : MonoBehaviour
 
     void Rotate()
     {
-        transform.rotation = Quaternion.Euler(xRot, yRot, 0f);
+        holder.rotation = Quaternion.Euler(xRot, yRot, 0f);
         PlayerData.playerTransform.rotation = Quaternion.Euler(0f, yRot, 0f);
+    }
+
+    void EnterBook()
+    {
+        lerpTime = 0f;
+
+        startPos = transform.position;
+        startRot = transform.rotation;
+
+        targetPos = PlayerData.bookLookTransform.position;
+        targetRot = PlayerData.bookLookTransform.rotation;
+    }
+
+    void ExitBook()
+    {
+        lerpTime = 0f;
+
+        //targetRot = startRot;
+        //targetPos = startPos;
+
+        startPos = transform.position;
+        startRot = transform.rotation;
+    }
+
+    void OnEnable()
+    {
+        GameManager.OnEnterBook += EnterBook;
+        GameManager.OnExitBook += ExitBook;
+    }
+
+    void OnDisable()
+    {
+        GameManager.OnEnterBook -= EnterBook;
+        GameManager.OnExitBook -= ExitBook;
     }
 }

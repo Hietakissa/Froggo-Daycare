@@ -33,6 +33,6 @@ public class FrogDebugOverlay : MonoBehaviour
             text.text = frogStatString;
             frogStatString = string.Empty;
         }
-        else text.text = "no frog data found";
+        else text.text = "";
     }
 }

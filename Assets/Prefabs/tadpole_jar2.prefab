@@ -63,10 +63,35 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4c8fdf5624a249c4c9ecca477393325e, type: 2}
+    - target: {fileID: -1148748337112726586, guid: 9284d48831ed89c4baa485793653b2b2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.118
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9284d48831ed89c4baa485793653b2b2,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9284d48831ed89c4baa485793653b2b2,
         type: 3}
       propertyPath: m_Name
-      value: tadpole_jar 1
+      value: tadpole_jar2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807181389591668452, guid: 9284d48831ed89c4baa485793653b2b2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807181389591668452, guid: 9284d48831ed89c4baa485793653b2b2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4064736439670251879, guid: 9284d48831ed89c4baa485793653b2b2,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -75,7 +100,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9284d48831ed89c4baa485793653b2b2,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1669023865411901195}
+      addedObject: {fileID: 7557788714913104438}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9284d48831ed89c4baa485793653b2b2,
         type: 3}
       insertIndex: -1
@@ -95,8 +120,8 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7158749331623743657}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &1669023865411901195
-CapsuleCollider:
+--- !u!64 &7557788714913104438
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -113,11 +138,10 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.17
-  m_Height: 0.52
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.21, z: 0}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5804058669299535711, guid: 9284d48831ed89c4baa485793653b2b2, type: 3}
 --- !u!54 &2689038111177554295
 Rigidbody:
   m_ObjectHideFlags: 0

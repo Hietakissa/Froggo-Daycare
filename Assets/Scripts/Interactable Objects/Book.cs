@@ -43,6 +43,7 @@ public class Book : MonoBehaviour, IInteractable
     public void StartUsing()
     {
         //GameManager.Pause();
+        GameManager.EnterBook();
         PlayerData.usingBook = true;
 
         Cursor.lockState = CursorLockMode.None;
@@ -50,6 +51,7 @@ public class Book : MonoBehaviour, IInteractable
 
     public void StopUsing()
     {
+        GameManager.ExitBook();
         PlayerData.usingBook = false;
 
         Cursor.lockState = CursorLockMode.Locked;

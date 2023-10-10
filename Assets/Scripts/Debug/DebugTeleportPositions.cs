@@ -24,5 +24,10 @@ public class DebugTeleportPositions : MonoBehaviour
         {
             Time.timeScale = timeScale;
         }));
+
+        CommandSystem.AddCommand(new DebugCommand<float>("add_xp", (float xp) =>
+        {
+            LevelManager.Instance.AddXP(xp);
+        }));
     }
 }

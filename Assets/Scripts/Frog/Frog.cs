@@ -1,6 +1,7 @@
 using HietakissaUtils;
 using UnityEngine.AI;
 using UnityEngine;
+using System;
 
 public class Frog : MonoBehaviour, IGrabbable
 {
@@ -20,7 +21,6 @@ public class Frog : MonoBehaviour, IGrabbable
     FrogBaseState roamingState = new FrogRoamingState();
     FrogBaseState pottyState = new FrogPottyState();
 
-    [SerializeField] Transform navigationTarget;
     [HideInInspector] public Rigidbody rb;
 
     NavMeshPath path;
@@ -28,11 +28,12 @@ public class Frog : MonoBehaviour, IGrabbable
     int pathIndex;
     Vector3 nextPosition;
 
+    [Header("Pathfinding / Movement")]
     float stoppingDistance = 0.3f;
     [SerializeField] float speed = 2f;
     [SerializeField] float rotationSmoothing;
 
-    [SerializeField] bool disableMovement;
+    [SerializeField] public bool disableMovement;
     [HideInInspector] public bool shouldOverridePosition;
     [HideInInspector] public Transform overridePosition;
 
@@ -46,10 +47,18 @@ public class Frog : MonoBehaviour, IGrabbable
 
     Vector3 GetRandomPosition => PathfindingManager.Instance.GetRandomPosition();
 
+    public event Action OnGrab;
+    public event Action OnUnGrab;
+
     [Header("Other")]
     [SerializeField] Transform hatHolder;
+    [SerializeField] int toyPlayChance = 8;
+    [SerializeField] float toyCheckRadius = 2.5f;
     [SerializeField] float uprightTorque;
     [SerializeField] float uprightTorqueDamping;
+
+    float toyPlayTime;
+    float accumulatedToyPlayChance;
 
     void Awake()
     {
@@ -91,6 +100,8 @@ public class Frog : MonoBehaviour, IGrabbable
 
         Torque();
 
+        PlayWithToys();
+
         if (disableMovement) return;
 
         waitUntilGettingPath -= Time.deltaTime;
@@ -123,6 +134,38 @@ public class Frog : MonoBehaviour, IGrabbable
             rb.AddTorque(-rb.angularVelocity * uprightTorqueDamping, ForceMode.Acceleration);
             rb.AddTorque(axis.normalized * angle * uprightTorque * Time.deltaTime, ForceMode.Acceleration);
         }
+
+        void PlayWithToys()
+        {
+            toyPlayTime += Time.deltaTime;
+
+            if (toyPlayTime >= 1f)
+            {
+                toyPlayTime -= 1f;
+
+                accumulatedToyPlayChance += toyPlayChance;
+
+                if (accumulatedToyPlayChance >= 100f)
+                {
+                    accumulatedToyPlayChance -= 100f;
+                }
+                else if (!Maf.RandomBool(toyPlayChance)) return;
+
+                accumulatedToyPlayChance = 0f;
+
+                Collider[] toys = Physics.OverlapSphere(transform.position, toyCheckRadius);
+
+                foreach  (Collider col in toys)
+                {
+                    if (col.CompareTag("Toy"))
+                    {
+                        col.GetComponent<Toy>().Fling();
+                        stats.moodStat.IncreaseStat(40f);
+                        return;
+                    }
+                }
+            }
+        }
     }
 
 
@@ -138,7 +181,7 @@ public class Frog : MonoBehaviour, IGrabbable
 
     void CalculatePath(Vector3 target)
     {
-        Debug.Log($"Calculating path for {gameObject.name}");
+        //Debug.Log($"Calculating path for {gameObject.name}");
 
         path = new NavMeshPath();
         if (NavMesh.CalculatePath(transform.position, target, 1, path))
@@ -158,12 +201,12 @@ public class Frog : MonoBehaviour, IGrabbable
 
             cannotMoveTime = 0f;
 
-            Debug.Log($"Path calculation succeeded for {gameObject.name}");
+            //Debug.Log($"Path calculation succeeded for {gameObject.name}");
         }
 
         void CalculationFail()
         {
-            Debug.Log($"Path calculation failed for {gameObject.name}");
+            //Debug.Log($"Path calculation failed for {gameObject.name}");
             cannotMoveTime += pathCalculationDelay;
 
         }
@@ -171,10 +214,10 @@ public class Frog : MonoBehaviour, IGrabbable
 
     void CompletePath()
     {
-        Debug.Log("Path completed");
+        //Debug.Log("Path completed");
         hasPath = false;
 
-        waitUntilGettingPath = Random.Range(2.5f, 4f);
+        waitUntilGettingPath = UnityEngine.Random.Range(2.5f, 4f);
     }
 
     public void HandleMovement()
@@ -259,12 +302,16 @@ public class Frog : MonoBehaviour, IGrabbable
         shouldOverridePosition = false;
 
         EnterState(FrogState.Roaming);
+        
+        OnGrab?.Invoke();
     }
     public void StopGrab()
     {
         isGrabbed = false;
 
         CalculatePathToRandomPosition();
+
+        OnUnGrab?.Invoke();
     }
 
     void CalculatePathToRandomPosition()
@@ -341,6 +388,10 @@ public class Stat
 
     public void IncreaseStat(float amount)
     {
+        amount = Mathf.Min(max - value, amount);
+
+        LevelManager.Instance.AddXP(amount);
+
         value += amount;
         ClampStatValue();
     }

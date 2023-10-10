@@ -279,7 +279,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.088
+      value: -6.61
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
         type: 3}
@@ -440,10 +440,10 @@ MonoBehaviour:
   stats:
     hungerStat:
       DisableConsumption: 0
-      consumptionMultiplier: 1
+      consumptionMultiplier: 0.9
     moodStat:
       DisableConsumption: 0
-      consumptionMultiplier: 1.2
+      consumptionMultiplier: 1
     energyStat:
       DisableConsumption: 0
       consumptionMultiplier: 1.3
@@ -453,7 +453,7 @@ MonoBehaviour:
     toiletStat:
       DisableConsumption: 0
       consumptionMultiplier: 0.5
-    baseConsumption: 2
+    baseConsumption: 0.5
     consumptionMultiplier: 1
   frogName: Sammakko
   angryThreshold: 50
@@ -464,10 +464,12 @@ MonoBehaviour:
   rb: {fileID: 0}
   speed: 2
   rotationSmoothing: 5
-  disableMovement: 1
+  disableMovement: 0
   shouldOverridePosition: 0
   overridePosition: {fileID: 0}
   hatHolder: {fileID: 9176186317606282276}
+  toyPlayChance: 15
+  toyCheckRadius: 1.5
   uprightTorque: 45
   uprightTorqueDamping: 1.5
 --- !u!114 &2303440400777104897

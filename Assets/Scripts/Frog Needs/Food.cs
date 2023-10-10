@@ -8,7 +8,7 @@ public class Food : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Frog frog))
         {
-            frog.stats.hungerStat.IncreaseStat(nutrition);
+            frog.stats.hungerStat.IncreaseStat(nutrition * Random.Range(0.9f, 1.2f));
             if (PlayerData.lastGrabObject == gameObject) GrabbingController.Instance.UnGrabObject();
             Destroy(gameObject);
 
