@@ -23,13 +23,17 @@ public class GrabbingController : MonoBehaviour
     {
         if (!PlayerData.grabbingObject) return; 
         
-        if (CalculateDistance(CalculateTargetPosition()) > grabbingDistance * 1.3f) UnGrabObject();
+        if (CalculateDistance(CalculateTargetPosition()) > grabbingDistance * 1.3f)
+        {
+            Debug.Log($"Ungrabbed object due to distance, distance: {CalculateDistance(CalculateTargetPosition())}/{grabbingDistance * 1.3f}");
+            UnGrabObject();
+        }
         //DebugText.Instance.AddText($"Grabbing object: {PlayerData.grabbingObject}, Distance: {CalculateDistanceToTarget(CalculateTargetPosition())}");
     }
 
     void FixedUpdate()
     {
-        if (!PlayerData.grabbingObject) return;
+        if (!PlayerData.grabbingObject || grabbedRB.isKinematic) return;
 
         Vector3 targetPosition = CalculateTargetPosition();
         //Vector3 dirToGrabPos = Maf.Direction(grabOrigin.transform.position, targetPosition);

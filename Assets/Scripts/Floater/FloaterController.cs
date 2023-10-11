@@ -10,6 +10,8 @@ public class FloaterController : MonoBehaviour
     [HideInInspector] public LayerMask waterMask;
     [HideInInspector] public Rigidbody rb;
 
+    [HideInInspector] public bool underwater;
+
     void Awake()
     {
         waterMask = LayerMask.GetMask("Water");
@@ -21,7 +23,7 @@ public class FloaterController : MonoBehaviour
 
     void FixedUpdate()
     {
-        bool underwater = false;
+        underwater = false;
 
         foreach (Floater floater in floaters)
         {

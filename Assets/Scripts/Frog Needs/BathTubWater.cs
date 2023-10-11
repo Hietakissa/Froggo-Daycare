@@ -17,7 +17,7 @@ public class BathTubWater : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Frog frog))
+        if (GameManager.TryGetFrog(other, out Frog frog) && !frogs.Contains(frog))
         {
             frog.stats.hygieneStat.DisableConsumption = true;
             frogs.Add(frog);
@@ -26,7 +26,7 @@ public class BathTubWater : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out Frog frog))
+        if (GameManager.TryGetFrog(other, out Frog frog))
         {
             frog.stats.hygieneStat.DisableConsumption = false;
             frogs.Remove(frog);

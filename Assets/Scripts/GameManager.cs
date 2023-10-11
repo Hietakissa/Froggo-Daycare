@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public static class GameManager
 {
@@ -57,5 +58,19 @@ public static class GameManager
         FuriousFrogCount--;
 
         OnFuriousChange?.Invoke();
+    }
+
+    public static bool TryGetFrog(Collider coll, out Frog frog)
+    {
+        if (coll.TryGetComponent(out GrabBranch branch))
+        {
+            frog = branch.RootObject.GetComponent<Frog>();
+            return true;
+        }
+        else
+        {
+            frog = null;
+            return false;
+        }
     }
 }

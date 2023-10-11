@@ -31,7 +31,7 @@ public class BedArea : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Frog frog))
+        if (GameManager.TryGetFrog(other, out Frog frog) && !frogs.Contains(frog))
         {
             frog.stats.consumptionMultiplier = 0f;
             //frog.stats.energyStat.DisableConsumption = true;
@@ -43,7 +43,7 @@ public class BedArea : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         Debug.Log("Trigger exit");
-        if (other.TryGetComponent(out Frog frog))
+        if (GameManager.TryGetFrog(other, out Frog frog))
         {
             Debug.Log("Frog exit");
 

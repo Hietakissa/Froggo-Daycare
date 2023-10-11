@@ -11,6 +11,9 @@ public class Book : MonoBehaviour, IInteractable
 
     [SerializeField] Transform hatButtonHolder;
 
+    [SerializeField] Transform[] generalBookmarkPages;
+    [SerializeField] Transform[] hatBookmarkPages;
+
     void Awake()
     {
         Instance = this;
@@ -23,6 +26,17 @@ public class Book : MonoBehaviour, IInteractable
         if (activeBookmark != null) activeBookmark.UnSelect();
         activeBookmark = bookmark;
         Debug.Log($"Selected bookmark {activeBookmark.index}");
+
+        if (activeBookmark.index == 0)
+        {
+            foreach (Transform t in generalBookmarkPages) t.gameObject.SetActive(true);
+            foreach (Transform t in hatBookmarkPages) t.gameObject.SetActive(false);
+        }
+        else
+        {
+            foreach (Transform t in generalBookmarkPages) t.gameObject.SetActive(false);
+            foreach (Transform t in hatBookmarkPages) t.gameObject.SetActive(true);
+        }
     }
 
     public void OpenMenu(int index)

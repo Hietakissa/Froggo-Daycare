@@ -7,7 +7,11 @@ public class Jar : MonoBehaviour, IInteractable
         FrogSpawner.Instance.SpawnFrog(transform);
         LevelManager.Instance.AddXP(100);
 
-        if (PlayerData.lastGrabObject == gameObject) GrabbingController.Instance.UnGrabObject();
+        if (PlayerData.lastGrabObject == gameObject)
+        {
+            Debug.Log("Jar ungrabbed object");
+            GrabbingController.Instance.UnGrabObject();
+        }
         Destroy(gameObject);
     }
 }

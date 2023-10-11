@@ -27,10 +27,14 @@ public class Hat : MonoBehaviour, IGrabbable
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.TryGetComponent(out Frog frog))
+        if (GameManager.TryGetFrog(collision.collider, out Frog frog))
         {
-            if (isGrabbed && PlayerData.lastGrabObject == gameObject) GrabbingController.Instance.UnGrabObject();
-
+            if (isGrabbed && PlayerData.lastGrabObject == gameObject)
+            {
+                Debug.Log("Hat ungrabbed object");
+                GrabbingController.Instance.UnGrabObject();
+            }
+            
             Destroy(hatCollider);
             Destroy(rb);
             Destroy(this);

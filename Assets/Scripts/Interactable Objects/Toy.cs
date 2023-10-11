@@ -11,7 +11,11 @@ public class Toy : MonoBehaviour
 
     public void Fling()
     {
-        if (PlayerData.lastGrabObject == gameObject) GrabbingController.Instance.UnGrabObject();
+        if (PlayerData.lastGrabObject == gameObject)
+        {
+            Debug.Log("Toy ungrabbed object");
+            GrabbingController.Instance.UnGrabObject();
+        }
 
         float horizontalForce = 1.5f;
         float verticalForce = 3.5f;

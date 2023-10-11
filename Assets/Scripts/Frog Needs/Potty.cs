@@ -10,10 +10,12 @@ public class Potty : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Frog frog) && lastFrogThrowTime + 5f < Time.time)
+        if (GameManager.TryGetFrog(other, out Frog frog) && lastFrogThrowTime + 5f < Time.time)
         {
             if (lastFrog != null && lastFrog.StateIs(FrogState.Potty)) return;
             if (frog.StateIs(FrogState.Furious) && !frog.isGrabbed) return;
+
+            if (PlayerData.lastGrabObject == frog.gameObject) GrabbingController.Instance.UnGrabObject();
 
             lastFrog = frog;
             frog.OverridePosition = pottyPosition;

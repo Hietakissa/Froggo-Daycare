@@ -6,10 +6,14 @@ public class Food : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent(out Frog frog))
+        if (GameManager.TryGetFrog(collision.collider, out Frog frog))
         {
             frog.stats.hungerStat.IncreaseStat(nutrition * Random.Range(0.9f, 1.2f));
-            if (PlayerData.lastGrabObject == gameObject) GrabbingController.Instance.UnGrabObject();
+            if (PlayerData.lastGrabObject == gameObject)
+            {
+                Debug.Log("Food ungrabbed object");
+                GrabbingController.Instance.UnGrabObject();
+            }
             Destroy(gameObject);
 
             GameManager.EatFood();

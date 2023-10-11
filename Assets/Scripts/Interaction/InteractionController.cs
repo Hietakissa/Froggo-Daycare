@@ -41,7 +41,7 @@ public class InteractionController : MonoBehaviour
                 {
                     if (hit.collider.TryGetComponent(out WorldSpaceButton button)) button.Click();
                 }
-                else
+                /*else
                 {
                     PointerEventData pointerData = new PointerEventData(EventSystem.current);
                     pointerData.position = Input.mousePosition;
@@ -52,7 +52,7 @@ public class InteractionController : MonoBehaviour
                     {
                         if (result.gameObject.TryGetComponent(out Button button)) button.OnPointerClick(pointerData);
                     }
-                }
+                }*/
             }
         }
         else
@@ -65,6 +65,7 @@ public class InteractionController : MonoBehaviour
         {
             if (PlayerData.grabbingObject && Input.GetMouseButtonUp(0))
             {
+                Debug.Log("Ungrabbed object because mouse was released");
                 GrabbingController.Instance.UnGrabObject();
                 //PlayerData.lastGrab.StopGrab();
                 return;
@@ -74,7 +75,6 @@ public class InteractionController : MonoBehaviour
         {
             if (Physics.Raycast(PlayerData.cameraTransform.position, PlayerData.cameraTransform.forward, out hit, interactionRange, interactionMask))
             {
-                Debug.Log($"Raycast hitting {hit.collider.name}");
                 if (Input.GetMouseButtonDown(0))
                 {
                     IGrabbable grab;
@@ -89,6 +89,8 @@ public class InteractionController : MonoBehaviour
                         PlayerData.lastGrab = root;
                         PlayerData.lastGrabObject = branch.RootObject;
                         grab = root;
+
+                        PlayerData.GrabIsDoor = false;
 
                         hasGrab = true;
                     }

@@ -19,7 +19,7 @@ public class FrogDebugOverlay : MonoBehaviour
         {
             //Debug.Log($"hit {hit.collider.name}");
 
-            if (hit.collider.TryGetComponent(out Frog frog))
+            if (GameManager.TryGetFrog(hit.collider, out Frog frog))
             {
                 frogStatString += frog.frogName;
                 frogStatString += "\nHunger: " + frog.stats.hungerStat.GetStatValue().RoundToDecimalPlaces(2);

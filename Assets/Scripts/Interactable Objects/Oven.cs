@@ -4,7 +4,7 @@ public class Oven : Appliance
 {
     void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Frog frog))
+        if (GameManager.TryGetFrog(other, out Frog frog))
         {
             frog.EnterOven();
         }
@@ -12,7 +12,7 @@ public class Oven : Appliance
 
     void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out Frog frog))
+        if (GameManager.TryGetFrog(other, out Frog frog))
         {
             frog.ExitOven();
         }

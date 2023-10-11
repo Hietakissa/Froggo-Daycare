@@ -61,18 +61,19 @@ public class Frog : MonoBehaviour, IGrabbable
     [SerializeField] float uprightTorque;
     [SerializeField] float uprightTorqueDamping;
 
+    public float TimeNotOverriddenPositionFor;
+
     float toyPlayTime;
     float accumulatedToyPlayChance;
 
-    [Header("Animation")]
-    [SerializeField] Transform armature;
-    Animator animator;
+    [HideInInspector] public FrogAnimator animator;
+    FloaterController floaterController;
 
     void Awake()
     {
+        floaterController = GetComponent<FloaterController>();
+        animator = GetComponent<FrogAnimator>();
         rb = GetComponent<Rigidbody>();
-
-        animator = GetComponent<Animator>();
 
         roamingState.Init(this);
         pottyState.Init(this);
@@ -101,6 +102,15 @@ public class Frog : MonoBehaviour, IGrabbable
 
         for (int i = 0; i < path.corners.Length - 1; i++) Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);*/
 
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            animator.PlayAnimation(FrogAnimation.Idle);
+        }
+        else if (Input.GetKeyDown(KeyCode.H))
+        {
+            animator.PlayAnimation(FrogAnimation.Walk);
+        }
+
         stats.ConsumeStats();
         currentState.UpdateState();
 
@@ -109,8 +119,11 @@ public class Frog : MonoBehaviour, IGrabbable
             rb.position = OverridePosition.position;
             rb.rotation = OverridePosition.rotation;
 
+            TimeNotOverriddenPositionFor = 0f;
+
             return;
         }
+        else TimeNotOverriddenPositionFor += Time.deltaTime;
 
         if (stats.GetStatsUnderThreshold(furiousThreshold) >= statCountThreshold)
         {
@@ -130,7 +143,9 @@ public class Frog : MonoBehaviour, IGrabbable
 
         if (cannotMoveTime > 5f)
         {
-            rb.AddForce(Maf.Direction(transform.position, new Vector3(0f, 10f, 0f)) * 10, ForceMode.VelocityChange);
+            if (floaterController.underwater && stats.hygieneStat.GetStatValue() != 100f) return;
+
+            rb.AddForce(Maf.Direction(transform.position, new Vector3(0f, 10f, 0f)) * 7, ForceMode.VelocityChange);
             cannotMoveTime = 0f;
         }
         else if (!hasPath && !isGrabbed && rb.velocity.magnitude < 1f)
@@ -182,6 +197,7 @@ public class Frog : MonoBehaviour, IGrabbable
                     {
                         col.GetComponent<Toy>().Fling();
                         stats.moodStat.IncreaseStat(40f);
+                        animator.PlayAnimation(FrogAnimation.Play1);
                         return;
                     }
                 }
@@ -192,7 +208,7 @@ public class Frog : MonoBehaviour, IGrabbable
 
     public void EnterOven()
     {
-        stats.consumptionMultiplier = 10f;
+        stats.consumptionMultiplier = 100f;
     }
 
     public void ExitOven()
@@ -275,12 +291,14 @@ public class Frog : MonoBehaviour, IGrabbable
 
     public void EnablePhysics()
     {
+        rb.isKinematic = false;
         rb.useGravity = true;
         rb.constraints = RigidbodyConstraints.None;
     }
 
     public void DisablePhysics()
     {
+        rb.isKinematic = true;
         rb.useGravity = false;
         rb.constraints = RigidbodyConstraints.FreezeAll;
     }
@@ -288,11 +306,15 @@ public class Frog : MonoBehaviour, IGrabbable
 
     public void EnterState(FrogState state)
     {
+        if (GetStateForEnum(state) == currentState) return;
+
         ChangeState(GetStateForEnum(state));
     }
 
     void ChangeState(FrogBaseState nextState)
     {
+        Debug.Log($"Changing state from {GetEnumForState(currentState)} to {GetEnumForState(nextState)}");
+
         currentState.ExitState();
         currentState = nextState;
         currentState.EnterState();
@@ -316,9 +338,21 @@ public class Frog : MonoBehaviour, IGrabbable
             default: return null;
         }
     }
+    FrogState GetEnumForState(FrogBaseState state)
+    {
+        if (state.GetType() == typeof(FrogRoamingState)) return FrogState.Roaming;
+        else if (state.GetType() == typeof(FrogPottyState)) return FrogState.Potty;
+        else if (state.GetType() == typeof(FrogFuriousState)) return FrogState.Furious;
+        Debug.Log($"Could not get enum for state type {state.GetType()}, {state}");
+        return FrogState.Roaming;
+    }
 
     public void StartGrab()
     {
+        //if (ShouldOverridePosition) rb.isKinematic = false;
+
+        Debug.Log("Grabbed frog");
+
         isGrabbed = true;
         hasPath = false;
 
@@ -330,6 +364,10 @@ public class Frog : MonoBehaviour, IGrabbable
     }
     public void StopGrab()
     {
+        Debug.Log("Ungrabbed frog");
+
+        cannotMoveTime = 0f;
+
         isGrabbed = false;
 
         CalculatePathToRandomPosition();

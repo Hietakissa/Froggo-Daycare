@@ -10,7 +10,7 @@ public class FeedingChair : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!occupied && other.TryGetComponent(out Frog frog))
+        if (!occupied/* && other.TryGetComponent(out Frog frog)*/ && GameManager.TryGetFrog(other, out Frog frog) && (!frog.ShouldOverridePosition && frog.TimeNotOverriddenPositionFor > 2f))
         {
             if (lastFrog != null && lastFrog != frog)
             {
@@ -19,13 +19,19 @@ public class FeedingChair : MonoBehaviour
 
             frog.OnGrab += FrogGrab;
 
-            if (PlayerData.lastGrabObject == gameObject) GrabbingController.Instance.UnGrabObject();
+            if (PlayerData.lastGrabObject == frog.gameObject)
+            {
+                Debug.Log("Feeding chair ungrabbed object");
+                GrabbingController.Instance.UnGrabObject();
+            }
 
             lastFrog = frog;
             frog.DisablePhysics();
             frog.OverridePosition = chairPosition;
             frog.ShouldOverridePosition = true;
             frog.stats.consumptionMultiplier = 0.7f;
+
+            Debug.Log("Frog entered feeding chair");
         }
     }
 

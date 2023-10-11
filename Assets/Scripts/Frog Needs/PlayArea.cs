@@ -17,7 +17,7 @@ public class PlayArea : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Frog frog))
+        if (GameManager.TryGetFrog(other, out Frog frog) && !frogs.Contains(frog))
         {
             frog.stats.moodStat.DisableConsumption = true;
             frogs.Add(frog);
@@ -26,7 +26,7 @@ public class PlayArea : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out Frog frog))
+        if (GameManager.TryGetFrog(other, out Frog frog))
         {
             frog.stats.moodStat.DisableConsumption = false;
             frogs.Remove(frog);

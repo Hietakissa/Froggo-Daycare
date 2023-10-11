@@ -3463,12 +3463,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!4 &277020214 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6198440161500571875, guid: 2bfe7a440e1b1c84d88b30a456c0a91d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1916914911}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &287894919
 Mesh:
   m_ObjectHideFlags: 0
@@ -8289,11 +8283,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4db75ec44b06048a27eca77d8e7d17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holder: {fileID: 277020214}
   sensitivity: 1
   invertVertical: 0
   invertHorizontal: 0
   maxLookAngle: 90
+  lerpSpeed: 1.5
 --- !u!114 &861447726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8385,7 +8379,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1911
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
