@@ -206,12 +206,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 23bba7adadfa7734bae8f7d3d941ea79, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 66dee897dc7a8ce4e94fb1d23f6a7be0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.05, y: 1.47}
+  m_Size: {x: 1.9, y: 1.47}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2417,12 +2417,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8950a6ca8ec16f54eb20f16829cbe80c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 33d26ab674e98134ab51efafa6b696a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.05, y: 1.47}
+  m_Size: {x: 1.9, y: 1.38}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2916,6 +2916,8 @@ MonoBehaviour:
   - {fileID: 97069245809900695}
   - {fileID: 7429752401278492410}
   hatButtonHolder: {fileID: 0}
+  generalBookmarkPages: []
+  hatBookmarkPages: []
 --- !u!65 &162893947995999253
 BoxCollider:
   m_ObjectHideFlags: 0
