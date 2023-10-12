@@ -42,11 +42,8 @@ public class BedArea : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        Debug.Log("Trigger exit");
         if (GameManager.TryGetFrog(other, out Frog frog))
         {
-            Debug.Log("Frog exit");
-
             frog.stats.consumptionMultiplier = 1f;
             //frog.stats.energyStat.DisableConsumption = false;
             frog.DisableMovement = false;

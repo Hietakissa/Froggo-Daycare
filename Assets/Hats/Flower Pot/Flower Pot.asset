@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5520b2a92c873784f9e7a31e40d14971, type: 3}
-  m_Name: Teddy Bear
+  m_Name: Flower Pot
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 207988969290964253, guid: 50d44fb3d1cd3cc41ad30ee9ecf33673, type: 3}
-  ID: 2
-  offset: {x: 0, y: 0.163, z: 0.182}
+  Prefab: {fileID: 470849586059723509, guid: d412b2d78178d714cbab97401b368eef, type: 3}
+  ID: 3
+  offset: {x: 0, y: 0.251, z: 0.1694}

@@ -7,7 +7,7 @@ public class Book : MonoBehaviour, IInteractable
     [SerializeField] Transform bookLookTransform;
     Bookmark activeBookmark;
 
-    [SerializeField] Menu[] menus;
+    [SerializeField] Transform[] menus;
 
     [SerializeField] Transform hatButtonHolder;
 

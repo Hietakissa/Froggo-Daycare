@@ -26,7 +26,7 @@ public class InteractionController : MonoBehaviour
     {
         if (PlayerData.usingBook)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape))
             {
                 Book.Instance.StopUsing();
                 return;

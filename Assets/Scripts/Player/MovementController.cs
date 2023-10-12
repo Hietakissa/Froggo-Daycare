@@ -54,6 +54,11 @@ public class MovementController : MonoBehaviour
         PlayerData.cameraHolder = transform.Find("Camera Holder");
     }
 
+    void Start()
+    {
+        isCrouching = false;
+    }
+
     void Update()
     {
         //Grounded check

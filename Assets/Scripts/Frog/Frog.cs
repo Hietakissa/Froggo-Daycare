@@ -66,6 +66,8 @@ public class Frog : MonoBehaviour, IGrabbable
     float toyPlayTime;
     float accumulatedToyPlayChance;
 
+    [HideInInspector] public Hat equippedHat;
+
     [HideInInspector] public FrogAnimator animator;
     FloaterController floaterController;
 
@@ -102,14 +104,7 @@ public class Frog : MonoBehaviour, IGrabbable
 
         for (int i = 0; i < path.corners.Length - 1; i++) Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);*/
 
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            animator.PlayAnimation(FrogAnimation.Idle);
-        }
-        else if (Input.GetKeyDown(KeyCode.H))
-        {
-            animator.PlayAnimation(FrogAnimation.Walk);
-        }
+        if (transform.position.y <= -5f) transform.position = Vector3.one;
 
         stats.ConsumeStats();
         currentState.UpdateState();
@@ -388,12 +383,20 @@ public class Frog : MonoBehaviour, IGrabbable
         return length;
     }
 
-    public void EquipHat(Transform hatObject, HatSO hat)
+    public void EquipHat(Transform hatObject, Hat hat, HatSO hatSO)
     {
-        hatHolder.DestroyChildren();
+        if (equippedHat != null)
+        {
+            Debug.Log("Already had a hat");
+            
+            equippedHat.ActivateHat();
+        }
+
+        equippedHat = hat;
+        //hatHolder.DestroyChildren();
 
         hatObject.parent = hatHolder;
-        hatObject.localPosition = hat.offset;
+        hatObject.localPosition = hatSO.offset;
         hatObject.rotation = hatHolder.rotation;
     }
 }

@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class Jar : MonoBehaviour, IInteractable
 {
+    [SerializeField] Transform spawnPos;
+
     public void Interact()
     {
-        FrogSpawner.Instance.SpawnFrog(transform);
+        FrogSpawner.Instance.SpawnFrog(spawnPos);
         LevelManager.Instance.AddXP(100);
 
         if (PlayerData.lastGrabObject == gameObject)
