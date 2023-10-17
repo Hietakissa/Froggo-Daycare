@@ -58,11 +58,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7918335002988649766, guid: 4529cb2a80fcf1c4a9a2292b54b6e892,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0b005de7680d132489b7c255831ae422, type: 2}
     - target: {fileID: 919132149155446097, guid: 4529cb2a80fcf1c4a9a2292b54b6e892,
         type: 3}
       propertyPath: m_Name
       value: Food 5
       objectReference: {fileID: 0}
+    - target: {fileID: 7202271454713460447, guid: 4529cb2a80fcf1c4a9a2292b54b6e892,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b43ac1e82cd251746a78c0a2201bba0a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
