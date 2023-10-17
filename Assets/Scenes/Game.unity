@@ -27395,6 +27395,11 @@ PrefabInstance:
       propertyPath: uprightTorqueDamping
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7137979372114061988, guid: dc44006750bc8e44e960f12b5bd38c49,
+        type: 3}
+      propertyPath: stats.hygieneStat.consumptionMultiplier
+      value: 80
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

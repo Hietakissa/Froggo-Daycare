@@ -29,6 +29,8 @@ public class BathTubWater : MonoBehaviour
             //frogs.Add(frog);
             frogCollidersInWater.TryAdd(frog, 1); //Add frog if it's not registered
             frogCollidersInWater[frog]++; //Increment underwater collider count
+
+            Debug.Log($"Frog collider in water, total of {frogCollidersInWater[frog]}");
         }
     }
 
@@ -36,10 +38,15 @@ public class BathTubWater : MonoBehaviour
     {
         if (GameManager.TryGetFrog(other, out Frog frog))
         {
-            frog.stats.hygieneStat.DisableConsumption = false;
+            
             //frogs.Remove(frog);
             frogCollidersInWater[frog]--;
-            if (frogCollidersInWater[frog] <= 0) frogCollidersInWater.Remove(frog);
+            Debug.Log($"Frog collider exit water, total of {frogCollidersInWater[frog]}");
+            if (frogCollidersInWater[frog] <= 0)
+            {
+                frogCollidersInWater.Remove(frog);
+                frog.stats.hygieneStat.DisableConsumption = false;
+            }
         }
     }
 }

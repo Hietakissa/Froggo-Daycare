@@ -14,8 +14,6 @@ public class StatBubbleController : MonoBehaviour
     {
         float statValue = frog.stats.GetLowestStat(out FrogStat stat);
 
-        Debug.Log($"Lowest stat '{stat}' with value of '{statValue}'");
-
         if (statValue < minBubbleThreshold)
         {
             DeactivateLastBubble();
