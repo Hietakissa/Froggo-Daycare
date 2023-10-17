@@ -23,6 +23,11 @@ public class Hat : MonoBehaviour, IGrabbable
         startRot = transform.rotation;
     }
 
+    void Start()
+    {
+        PauseManager.Instance.RegisterRigidbody(rb);
+    }
+
     void Update()
     {
         if (transform.position.y <= -5f)
@@ -70,7 +75,10 @@ public class Hat : MonoBehaviour, IGrabbable
         transform.parent = null;
         hatCollider.enabled = true;
         rb = gameObject.AddComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         rb.AddForce(Random.insideUnitSphere * 3f, ForceMode.Impulse);
+
+        PauseManager.Instance.RegisterRigidbody(rb);
 
         lastEquipped = Time.time;
     }
@@ -80,6 +88,8 @@ public class Hat : MonoBehaviour, IGrabbable
         if (PlayerData.lastGrabObject == gameObject) GrabbingController.Instance.UnGrabObject();
 
         hatCollider.enabled = false;
+
+        PauseManager.Instance.UnregisterRigidbody(rb);
         Destroy(rb);
     }
 }

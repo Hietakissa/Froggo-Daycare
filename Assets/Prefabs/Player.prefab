@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1166883617576900178}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 0,2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6198440161500571875}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Camera Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4136841143553049163}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 0,0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 6864712558413423723}
   - component: {fileID: 1308414267037172751}
   - component: {fileID: 624171612748364740}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.375
   m_SlopeLimit: 55
-  m_StepOffset: 0.3
+  m_StepOffset: 0.45
   m_SkinWidth: 0.01
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 1, z: 0}
@@ -198,7 +198,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionRange: 2.5
-  bookmarkMask:
+  interactionMask:
+    serializedVersion: 2
+    m_Bits: 1511
+  worldspaceButtonMask:
     serializedVersion: 2
     m_Bits: 256
 --- !u!114 &624171612748364740
@@ -214,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabbingDistance: 2.5
-  grabbingForce: 6
+  grabbingForce: 10
 --- !u!1 &1883683012925829326
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +227,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2816294552795724331}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 0,1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6577174194344255740}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ground Checks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +298,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5806100279893713783}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 1,2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +329,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5678461795696548999}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 2,1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,7 +362,7 @@ GameObject:
   - component: {fileID: 2783495718925030428}
   - component: {fileID: 1423748549153835204}
   - component: {fileID: 4071237882501212783}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Visual & Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -440,7 +443,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3764168849468141174}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 1,0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -471,7 +474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3573610327224245235}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 2,0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -502,7 +505,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2225314847943203077}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 1,1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -533,7 +536,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2683099401170309307}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 1,2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

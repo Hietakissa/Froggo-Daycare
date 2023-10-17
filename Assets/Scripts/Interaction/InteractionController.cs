@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using UnityEngine.EventSystems;
 using HietakissaUtils;
-using UnityEngine.UI;
 using UnityEngine;
 
 public class InteractionController : MonoBehaviour
@@ -24,11 +21,14 @@ public class InteractionController : MonoBehaviour
 
     void Update()
     {
+        //if press esc > pause
+        //if paused and press esc > unpause
+
         if (PlayerData.usingBook)
         {
             if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape))
             {
-                Book.Instance.StopUsing();
+                Book.Instance.StopUsingBook();
                 return;
             }
 
@@ -55,6 +55,11 @@ public class InteractionController : MonoBehaviour
                 }*/
             }
         }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GameManager.IsPaused) GameManager.UnPause();
+            else GameManager.Pause();
+        }
         else
         {
             HandleUnGrabbingAndInteracting();
@@ -73,6 +78,7 @@ public class InteractionController : MonoBehaviour
         }
         void HandleInteraction()
         {
+            //Physics.Raycast(PlayerData.cameraTransform.position, PlayerData.cameraTransform.forward, out hit, interactionRange, interactionMask)
             if (Physics.Raycast(PlayerData.cameraTransform.position, PlayerData.cameraTransform.forward, out hit, interactionRange, interactionMask))
             {
                 if (Input.GetMouseButtonDown(0))

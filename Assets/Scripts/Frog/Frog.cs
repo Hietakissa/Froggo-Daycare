@@ -90,6 +90,9 @@ public class Frog : MonoBehaviour, IGrabbable
         //animator.applyRootMotion = true;
         //armature.localPosition = new Vector3(0f, 0.38f, 0f);
 
+        animator.PlayAnimation(FrogAnimation.Idle);
+
+        PauseManager.Instance.RegisterRigidbody(rb);
         CalculatePathToRandomPosition();
     }
 
@@ -97,12 +100,19 @@ public class Frog : MonoBehaviour, IGrabbable
     {
         //if (NavMesh.CalculatePath(transform.position, navigationTarget.position, 1, path)) Debug.DrawRay(transform.position, Vector3.up * 15, Color.black);
 
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            animator.PlayAnimation(FrogAnimation.Dance);
+        }
+
         /*foreach (Vector3 corner in path.corners)
         {
             Debug.DrawRay(corner, Vector3.up * 2, Color.green);
         }
 
         for (int i = 0; i < path.corners.Length - 1; i++) Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);*/
+
+        if (GameManager.IsPaused) return;
 
         if (transform.position.y <= -5f) transform.position = Vector3.one;
 
@@ -385,6 +395,8 @@ public class Frog : MonoBehaviour, IGrabbable
 
     public void EquipHat(Transform hatObject, Hat hat, HatSO hatSO)
     {
+        if (equippedHat == hat) return;
+
         if (equippedHat != null)
         {
             Debug.Log("Already had a hat");
@@ -428,6 +440,41 @@ public class StatController
         hygieneStat.Consume(baseConsumption * consumptionMultiplier * Time.deltaTime);
         toiletStat.Consume(baseConsumption * consumptionMultiplier * Time.deltaTime);
     }
+    
+    public float GetLowestStat(out FrogStat stat)
+    {
+        float lowestStat = 100f;
+        stat = FrogStat.None;
+
+        if (hungerStat.GetStatValue() < lowestStat)
+        {
+            lowestStat = hungerStat.GetStatValue();
+            stat = FrogStat.Hunger;
+        }
+        if (moodStat.GetStatValue() < lowestStat)
+        {
+            lowestStat = moodStat.GetStatValue();
+            stat = FrogStat.Mood;
+        }
+        if (energyStat.GetStatValue() < lowestStat)
+        {
+            lowestStat = energyStat.GetStatValue();
+            stat = FrogStat.Energy;
+        }
+        if (hygieneStat.GetStatValue() < lowestStat)
+        {
+            lowestStat = hygieneStat.GetStatValue();
+            stat = FrogStat.Hygiene;
+        }
+        if (toiletStat.GetStatValue() < lowestStat)
+        {
+            lowestStat = toiletStat.GetStatValue();
+            stat = FrogStat.Toilet;
+        }
+
+        return lowestStat;
+    }
+    
     public int GetStatsUnderThreshold(float threshold)
     {
         int count = 0;
@@ -479,4 +526,14 @@ public class Stat
     public float GetStatValue() => value;
 
     public bool IsAtOrUnderThreshold(float threshold) => value <= threshold;
+}
+
+public enum FrogStat
+{
+    Hunger = 0,
+    Mood = 1,
+    Energy = 2,
+    Hygiene = 3,
+    Toilet = 4,
+    None
 }

@@ -17,6 +17,11 @@ public class GrabbableObject : MonoBehaviour, IGrabbable
         startRot = transform.rotation;
     }
 
+    void Start()
+    {
+        PauseManager.Instance.RegisterRigidbody(rb);
+    }
+
     void Update()
     {
         if (transform.position.y <= -5f)

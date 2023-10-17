@@ -44,7 +44,7 @@ public class GrabbingController : MonoBehaviour
         {
             Vector3 dirToGrabPos = Maf.Direction(grabOrigin.transform.position, targetPosition);
 
-            grabbedRB.AddForceAtPosition(dirToGrabPos * distance * 700f * Time.deltaTime, grabOrigin.transform.position);
+            grabbedRB.AddForceAtPosition(dirToGrabPos * distance * 1300f * Time.deltaTime, grabOrigin.transform.position);
         }
         else
         {
@@ -92,7 +92,7 @@ public class GrabbingController : MonoBehaviour
             grabOrigin.transform.position = PlayerData.lastGrabPoint;
             grabOrigin.transform.parent = PlayerData.lastGrabObject.transform;
 
-            grabbingDistance = Mathf.Max(1.5f, Vector3.Distance(grabOrigin.transform.position, PlayerData.cameraTransform.position));
+            grabbingDistance = Mathf.Max(1.5f, Vector3.Distance(grabOrigin.transform.position, PlayerData.cameraTransform.position)) * 0.8f;
         }
         else grabbingDistance = Mathf.Max(1.5f, Vector3.Distance(grabbedRB.position, PlayerData.cameraTransform.position));
     }

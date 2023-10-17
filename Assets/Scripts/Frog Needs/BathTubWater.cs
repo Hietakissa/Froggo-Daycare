@@ -6,12 +6,18 @@ public class BathTubWater : MonoBehaviour
     [SerializeField] float cleanRate;
 
     List<Frog> frogs = new List<Frog>();
+    Dictionary<Frog, int> frogCollidersInWater = new Dictionary<Frog, int>();
 
     void Update()
     {
-        foreach (Frog frog in frogs)
+        //foreach (Frog frog in frogs)
+        //{
+        //    frog.stats.hygieneStat.IncreaseStat(cleanRate * Time.deltaTime);
+        //}
+
+        foreach (KeyValuePair<Frog, int> frogPair in frogCollidersInWater)
         {
-            frog.stats.hygieneStat.IncreaseStat(cleanRate * Time.deltaTime);
+            frogPair.Key.stats.hygieneStat.IncreaseStat(cleanRate * Time.deltaTime);
         }
     }
 
@@ -20,7 +26,9 @@ public class BathTubWater : MonoBehaviour
         if (GameManager.TryGetFrog(other, out Frog frog) && !frogs.Contains(frog))
         {
             frog.stats.hygieneStat.DisableConsumption = true;
-            frogs.Add(frog);
+            //frogs.Add(frog);
+            frogCollidersInWater.TryAdd(frog, 1); //Add frog if it's not registered
+            frogCollidersInWater[frog]++; //Increment underwater collider count
         }
     }
 
@@ -29,7 +37,9 @@ public class BathTubWater : MonoBehaviour
         if (GameManager.TryGetFrog(other, out Frog frog))
         {
             frog.stats.hygieneStat.DisableConsumption = false;
-            frogs.Remove(frog);
+            //frogs.Remove(frog);
+            frogCollidersInWater[frog]--;
+            if (frogCollidersInWater[frog] <= 0) frogCollidersInWater.Remove(frog);
         }
     }
 }

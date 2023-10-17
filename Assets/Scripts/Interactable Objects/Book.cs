@@ -19,6 +19,7 @@ public class Book : MonoBehaviour, IInteractable
         Instance = this;
 
         PlayerData.bookLookTransform = bookLookTransform;
+        StartUsingBook();
     }
 
     public void SelectBookmark(Bookmark bookmark)
@@ -26,6 +27,8 @@ public class Book : MonoBehaviour, IInteractable
         if (activeBookmark != null) activeBookmark.UnSelect();
         activeBookmark = bookmark;
         Debug.Log($"Selected bookmark {activeBookmark.index}");
+
+        OpenMenu(0);
 
         if (activeBookmark.index == 0)
         {
@@ -51,24 +54,28 @@ public class Book : MonoBehaviour, IInteractable
     {
         Debug.Log("Interacted with book");
 
-        StartUsing();
+        StartUsingBook();
     }
 
-    public void StartUsing()
+    public void StartUsingBook()
     {
         //GameManager.Pause();
         GameManager.EnterBook();
         PlayerData.usingBook = true;
 
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
-    public void StopUsing()
+    public void StopUsingBook()
     {
         GameManager.ExitBook();
         PlayerData.usingBook = false;
 
         Cursor.lockState = CursorLockMode.Locked;
+
+        SettingsManager.Instance.SaveSettings();
+        Cursor.visible = false;
     }
 
     public void UnlockHat(int id)

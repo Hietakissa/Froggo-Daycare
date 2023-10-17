@@ -3,6 +3,12 @@ using UnityEngine;
 public class Food : MonoBehaviour
 {
     [SerializeField] float nutrition;
+    Rigidbody rb;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     void OnCollisionEnter(Collision collision)
     {
@@ -14,6 +20,7 @@ public class Food : MonoBehaviour
                 Debug.Log("Food ungrabbed object");
                 GrabbingController.Instance.UnGrabObject();
             }
+            PauseManager.Instance.UnregisterRigidbody(rb);
             Destroy(gameObject);
 
             GameManager.EatFood();

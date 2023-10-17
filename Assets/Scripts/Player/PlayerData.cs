@@ -23,6 +23,8 @@ public abstract class PlayerData
 
     public static LayerMask interactionMask;
 
+    public static float sensitivity;
+
     public static bool ValidatePlayerReferences()
     {
         return playerTransform && cameraTransform;

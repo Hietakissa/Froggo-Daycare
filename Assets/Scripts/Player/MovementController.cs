@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MovementController : MonoBehaviour
 {
@@ -52,6 +53,8 @@ public class MovementController : MonoBehaviour
 
         PlayerData.playerTransform = transform;
         PlayerData.cameraHolder = transform.Find("Camera Holder");
+
+        Debug.Log($"Furious frogs: {GameManager.FuriousFrogCount}");
     }
 
     void Start()
@@ -61,6 +64,8 @@ public class MovementController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.IsPaused) return;
+
         //Grounded check
         isGrounded = Physics.SphereCast(transform.position + Vector3.up * (sphereCastRadius + sphereCastOffset), sphereCastRadius, Vector3.down, out sphereCast, sphereCastOffset * 2);
         Physics.Raycast(transform.position + Vector3.up * rayCastOffset, Vector3.down, out groundRay, rayCastOffset * 2);

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] float sensitivity;
+    //[SerializeField] float sensitivity;
 
     [SerializeField] bool invertVertical;
     [SerializeField] bool invertHorizontal;
@@ -30,17 +30,22 @@ public class CameraController : MonoBehaviour
         PlayerData.playerCamera = GetComponent<Camera>();
 
         Cursor.lockState = CursorLockMode.Locked;
+
+        yRot = transform.rotation.y;
     }
 
     void Start()
     {
         holder = PlayerData.cameraHolder;
 
+        lerpTime = 1f;
+
         //Book.Instance.StartUsing();
     }
 
     void Update()
     {
+        if (GameManager.IsPaused) return;
         if (PlayerData.usingBook) return;
 
         GetInput();
@@ -72,8 +77,8 @@ public class CameraController : MonoBehaviour
 
     void GetInput()
     {
-        yRot += Input.GetAxisRaw("Mouse X") * (invertHorizontal ? -sensitivity : sensitivity);
-        xRot += Input.GetAxisRaw("Mouse Y") * (invertVertical ? sensitivity : -sensitivity);
+        yRot += Input.GetAxisRaw("Mouse X") * (invertHorizontal ? -PlayerData.sensitivity : PlayerData.sensitivity);
+        xRot += Input.GetAxisRaw("Mouse Y") * (invertVertical ? PlayerData.sensitivity : -PlayerData.sensitivity);
 
         xRot = Mathf.Clamp(xRot, -maxLookAngle, maxLookAngle);
 

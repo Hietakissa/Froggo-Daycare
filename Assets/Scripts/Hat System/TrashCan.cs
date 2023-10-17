@@ -8,6 +8,7 @@ public class TrashCan : MonoBehaviour
         {
             if (PlayerData.lastGrabObject == collision.gameObject) GrabbingController.Instance.UnGrabObject();
 
+            hat.DeactivateHat();
             Destroy(collision.gameObject);
         }
     }

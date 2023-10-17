@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FrogAnimator : MonoBehaviour
@@ -6,6 +8,12 @@ public class FrogAnimator : MonoBehaviour
     Animator animator;
 
     Dictionary<FrogAnimation, int> animations = new Dictionary<FrogAnimation, int>();
+
+    FrogAnimation baseAnimation;
+
+    Coroutine animCoroutine;
+
+    FrogAnimation[] BaseAnimations = { FrogAnimation.Idle, FrogAnimation.AngryIdle, FrogAnimation.FoodNear, FrogAnimation.Walk, FrogAnimation.SleepStanding, FrogAnimation.PottySit};
 
     void Awake()
     {
@@ -33,10 +41,62 @@ public class FrogAnimator : MonoBehaviour
         animations.Add(FrogAnimation.SleepFaceDown, Animator.StringToHash("Base Layer.Armature|sleepy_sleeper_loop"));
     }
 
+    //looping base animation(idle, angry idle, food near, walk, sleep, potty sit)
+    //overriding one-off animations
+    //one-off animations immediately play their own respective animation and then go back to the base animation
+
     public void PlayAnimation(FrogAnimation anim)
     {
         //animator.Play(animations[anim]);
-        animator.CrossFade(animations[anim], 0.5f);
+        if (BaseAnimations.Contains(anim))
+        {
+            baseAnimation = anim;
+            if (animCoroutine == null) ForcePlayAnimation(baseAnimation);
+        }
+        else
+        {
+            if (animCoroutine != null) StopCoroutine(animCoroutine);
+            animCoroutine = StartCoroutine(OverrideAnimCoroutine(anim));
+        }
+    }
+
+    IEnumerator OverrideAnimCoroutine(FrogAnimation anim)
+    {
+        ForcePlayAnimation(anim);
+        float animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
+
+        Debug.Log($"Played one-off animation with a duration of {animationLength} seconds");
+
+        yield return new WaitForSeconds(animationLength);
+
+        ForcePlayAnimation(baseAnimation);
+    }
+
+    void ForcePlayAnimation(FrogAnimation anim, float transition = 0.5f)
+    {
+        animator.CrossFade(animations[anim], transition);
+    }
+
+    void OnEnable()
+    {
+        GameManager.OnPause += PauseAnimations;
+        GameManager.OnUnPause += UnpauseAnimations;
+    }
+
+    void OnDisable()
+    {
+        GameManager.OnPause -= PauseAnimations;
+        GameManager.OnUnPause -= UnpauseAnimations;
+    }
+
+    void PauseAnimations()
+    {
+        animator.speed = 0f;
+    }
+    
+    void UnpauseAnimations()
+    {
+        animator.speed = 1f;
     }
 }
 
