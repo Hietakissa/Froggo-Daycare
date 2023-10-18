@@ -48,11 +48,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _1st_ShadeMap:
-        m_Texture: {fileID: 2800000, guid: 2816006148420554c9f7e5508cbd0606, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1c17f6f24c0aee14c88fefbc004260c9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _2nd_ShadeMap:
-        m_Texture: {fileID: 2800000, guid: 2816006148420554c9f7e5508cbd0606, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1c17f6f24c0aee14c88fefbc004260c9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AngelRing_Sampler:
@@ -144,7 +144,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 2816006148420554c9f7e5508cbd0606, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1c17f6f24c0aee14c88fefbc004260c9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
