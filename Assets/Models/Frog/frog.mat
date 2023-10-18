@@ -335,7 +335,7 @@ Material:
     - _Farthest_Distance: 100
     - _FirstShadeOverridden: 0
     - _FirstShadeVisible: 1
-    - _GI_Intensity: 0
+    - _GI_Intensity: 0.436
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -367,7 +367,7 @@ Material:
     - _Is_ColorShift: 0
     - _Is_Filter_HiCutPointLightColor: 1
     - _Is_Filter_LightColor: 1
-    - _Is_LightColor_1st_Shade: 1
+    - _Is_LightColor_1st_Shade: 0
     - _Is_LightColor_2nd_Shade: 1
     - _Is_LightColor_AR: 1
     - _Is_LightColor_Ap_RimLight: 1
@@ -401,10 +401,10 @@ Material:
     - _OcclusionStrength: 1
     - _Offset_X_Axis_BLD: -0.05
     - _Offset_Y_Axis_BLD: 0.09
-    - _Offset_Z: 2.59
+    - _Offset_Z: 0.94
     - _OutlineOverridden: 0
     - _OutlineVisible: 1
-    - _Outline_Width: 6.18
+    - _Outline_Width: 3.99
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
     - _PPDMinSamples: 5
@@ -510,7 +510,7 @@ Material:
     - _utsVersionY: 9
     - _utsVersionZ: 5
     m_Colors:
-    - _1st_ShadeColor: {r: 0.59073514, g: 0.7075472, b: 0.65921116, a: 1}
+    - _1st_ShadeColor: {r: 0.5730242, g: 0.745283, b: 0.6969323, a: 1}
     - _2nd_ShadeColor: {r: 0.22272162, g: 0.3301887, b: 0.3206452, a: 1}
     - _AngelRingMaskColor: {r: 0, g: 1, b: 0, a: 1}
     - _AngelRing_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -533,7 +533,7 @@ Material:
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineMaskColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Outline_Color: {r: 0.24995552, g: 0.38679248, b: 0.30917823, a: 1}
+    - _Outline_Color: {r: 0, g: 0.4811321, b: 0.47681966, a: 1}
     - _RimLightColor: {r: 0.8773585, g: 0.7325116, b: 0.8302371, a: 1}
     - _RimLightMaskColor: {r: 1, g: 0, b: 1, a: 1}
     - _SecondShadeMaskColor: {r: 0, g: 0, b: 1, a: 1}
