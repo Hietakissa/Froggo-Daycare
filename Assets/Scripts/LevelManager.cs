@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class LevelManager : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] AnimationCurve xpRequirementCurve;
 
     [SerializeField] HatLevelRequirement[] hatRequirements;
+
+    public event Action<int, int> OnXPGain;
+    bool xpGained;
 
     [ContextMenu("Add 100 XP")]
     void Add100XP()
@@ -25,10 +29,19 @@ public class LevelManager : MonoBehaviour
         requiredXP = GetXPToNextLevel();
 
         CheckForHatUnlock();
+
+        Debug.Log("Level manager awake");
+    }
+
+    void LateUpdate()
+    {
+        if (xpGained) OnXPGain?.Invoke((int)xp, requiredXP);
     }
 
     public void AddXP(float xpToAdd)
     {
+        xpGained = true;
+
         xp += xpToAdd;
 
         //Debug.Log($"Adding {xpToAdd}XP, current level: {currentLevel}");

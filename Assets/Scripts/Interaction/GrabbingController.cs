@@ -14,6 +14,8 @@ public class GrabbingController : MonoBehaviour
     Transform transformOverride;
     bool objectHasTransformOverride;
 
+    [SerializeField] AudioClip throwSound;
+
     void Awake()
     {
         Instance = this;
@@ -23,6 +25,14 @@ public class GrabbingController : MonoBehaviour
     {
         if (!PlayerData.grabbingObject) return; 
         
+        if (Input.GetMouseButtonDown(1))
+        {
+            grabbedRB.AddForce(PlayerData.cameraHolder.forward * 7f, ForceMode.Impulse);
+            UnGrabObject();
+            SoundManager.Instance.PlayPooledSoundAtPosition(throwSound, transform.position);
+            return;
+        }
+
         if (CalculateDistance(CalculateTargetPosition()) > grabbingDistance * 1.3f)
         {
             Debug.Log($"Ungrabbed object due to distance, distance: {CalculateDistance(CalculateTargetPosition())}/{grabbingDistance * 1.3f}");

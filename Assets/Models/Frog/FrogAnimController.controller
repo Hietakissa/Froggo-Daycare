@@ -145,9 +145,6 @@ AnimatorStateMachine:
     m_State: {fileID: 8615755190651901698}
     m_Position: {x: 340, y: 380, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -289675169678252973}
-    m_Position: {x: 440, y: 110, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: -1087828302819466122}
     m_Position: {x: 340, y: 250, z: 0}
   m_ChildStateMachines: []
@@ -155,9 +152,9 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 150, y: 30, z: 0}
+  m_AnyStatePosition: {x: 150, y: 60, z: 0}
   m_EntryPosition: {x: 150, y: 120, z: 0}
-  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ExitPosition: {x: 150, y: 90, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -5838582639997775462}
 --- !u!1102 &-4254560144812161659
@@ -290,32 +287,6 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: 8911028433419299246, guid: da765fb007dac4a458779a47ae1d9ae7,
     type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-289675169678252973
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Blend Tree
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7542614077177586975}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -517,39 +488,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!206 &7542614077177586975
-BlendTree:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Anim Blend
-  m_Childs:
-  - serializedVersion: 2
-    m_Motion: {fileID: -3262625002244257806, guid: da765fb007dac4a458779a47ae1d9ae7,
-      type: 3}
-    m_Threshold: 0
-    m_Position: {x: 0, y: 0}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: Blend
-    m_Mirror: 0
-  - serializedVersion: 2
-    m_Motion: {fileID: 8849868817492384701, guid: da765fb007dac4a458779a47ae1d9ae7,
-      type: 3}
-    m_Threshold: 1
-    m_Position: {x: 0, y: 0}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: Blend
-    m_Mirror: 0
-  m_BlendParameter: Blend
-  m_BlendParameterY: Blend
-  m_MinThreshold: 0
-  m_MaxThreshold: 1
-  m_UseAutomaticThresholds: 1
-  m_NormalizedBlendValues: 0
-  m_BlendType: 0
 --- !u!206 &7767207911514567853
 BlendTree:
   m_ObjectHideFlags: 1

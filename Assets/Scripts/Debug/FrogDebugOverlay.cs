@@ -21,7 +21,7 @@ public class FrogDebugOverlay : MonoBehaviour
 
             if (GameManager.TryGetFrog(hit.collider, out Frog frog))
             {
-                frogStatString += frog.frogName;
+                frogStatString += frog.animator.CurrentlyPlaying;
                 frogStatString += "\nHunger: " + frog.stats.hungerStat.GetStatValue().RoundToDecimalPlaces(2);
                 frogStatString += "\nMood: " + frog.stats.moodStat.GetStatValue().RoundToDecimalPlaces(2);
                 frogStatString += "\nEnergy: " + frog.stats.energyStat.GetStatValue().RoundToDecimalPlaces(2);

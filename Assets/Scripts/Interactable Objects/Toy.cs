@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Toy : MonoBehaviour
 {
-    Rigidbody rb;
+    public Rigidbody rb;
 
     void Awake()
     {
@@ -17,8 +17,8 @@ public class Toy : MonoBehaviour
             GrabbingController.Instance.UnGrabObject();
         }
 
-        float horizontalForce = 1.5f;
-        float verticalForce = 3.5f;
+        float horizontalForce = 0.75f;
+        float verticalForce = 1.6f;
         Vector3 randomForce = new Vector3(Random.Range(-horizontalForce, horizontalForce), verticalForce, Random.Range(-horizontalForce, horizontalForce));
         rb.AddForce(randomForce, ForceMode.Impulse);
         rb.AddTorque(Random.onUnitSphere * 3f);

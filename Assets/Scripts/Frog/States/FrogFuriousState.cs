@@ -17,6 +17,7 @@ public class FrogFuriousState : FrogBaseState
 
         frog.rb.interpolation = RigidbodyInterpolation.Interpolate;
         frog.rb.useGravity = false;
+        frog.Furious = true;
         GameManager.FrogEnterFurious();
     }
 
@@ -25,6 +26,7 @@ public class FrogFuriousState : FrogBaseState
         frog.DisableMovement = false;
 
         if (!frog.ShouldOverridePosition) frog.rb.useGravity = true;
+        frog.Furious = false;
         GameManager.FrogExitFurious();
     }
 

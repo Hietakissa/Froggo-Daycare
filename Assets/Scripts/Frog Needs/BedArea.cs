@@ -1,4 +1,3 @@
-using HietakissaUtils;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,8 +21,9 @@ public class BedArea : MonoBehaviour
                 //frog.stats.energyStat.DisableConsumption = false;
                 frog.DisableMovement = false;
 
-                frog.rb.AddForce(Maf.Direction(frog.rb.position, Vector3.up * 4f) * 5f, ForceMode.Impulse);
+                //frog.rb.AddForce(Maf.Direction(frog.rb.position, Vector3.up * 4f) * 5f, ForceMode.Impulse);
 
+                frog.Sleeping = false;
                 frogs.Remove(frog);
             }
         }
@@ -37,6 +37,9 @@ public class BedArea : MonoBehaviour
             //frog.stats.energyStat.DisableConsumption = true;
             frog.DisableMovement = true;
             frogs.Add(frog);
+            frog.Sleeping = true;
+            //frog.animator.Play(FrogAnimation.SleepStanding);
+            frog.animator.PlayRandom(FrogAnimation.SleepStanding, FrogAnimation.SleepFaceDown);
         }
     }
 
@@ -47,7 +50,9 @@ public class BedArea : MonoBehaviour
             frog.stats.consumptionMultiplier = 1f;
             //frog.stats.energyStat.DisableConsumption = false;
             frog.DisableMovement = false;
+            frog.Sleeping = false;
             frogs.Remove(frog);
+            frog.GoIdle();
         }
     }
 }

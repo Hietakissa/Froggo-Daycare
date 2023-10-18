@@ -20,6 +20,7 @@ public class Potty : MonoBehaviour
             lastFrog = frog;
             frog.OverridePosition = pottyPosition;
             frog.EnterState(FrogState.Potty);
+            frog.animator.Play(FrogAnimation.PottySit);
         }
     }
 

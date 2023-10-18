@@ -1,4 +1,8 @@
+using HietakissaUtils;
+using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Book : MonoBehaviour, IInteractable
 {
@@ -10,15 +14,30 @@ public class Book : MonoBehaviour, IInteractable
     [SerializeField] Transform[] menus;
 
     [SerializeField] Transform hatButtonHolder;
+    [SerializeField] Transform hatButtonHolder2;
 
     [SerializeField] Transform[] generalBookmarkPages;
     [SerializeField] Transform[] hatBookmarkPages;
+
+    [SerializeField] Image xpBarImage;
+    [SerializeField] TextMeshProUGUI[] xpTexts;
+    float xpBarFillAmount;
+    float xpBarFillTargetAmount;
+
+    [SerializeField] float xpBarFillSpeed;
 
     void Awake()
     {
         Instance = this;
 
         PlayerData.bookLookTransform = bookLookTransform;
+    }
+
+    void Start()
+    {
+        LevelManager.Instance.OnXPGain += GainedXP;
+        LevelManager.Instance.AddXP(0);
+
         StartUsingBook();
     }
 
@@ -69,6 +88,7 @@ public class Book : MonoBehaviour, IInteractable
 
     public void StopUsingBook()
     {
+        OpenMenu(0);
         GameManager.ExitBook();
         PlayerData.usingBook = false;
 
@@ -82,10 +102,29 @@ public class Book : MonoBehaviour, IInteractable
     {
         Debug.Log($"Unlocked hat {id}");
         
-        if (hatButtonHolder == null)
+        if (id < 4) hatButtonHolder.GetChild(id).gameObject.SetActive(true);
+        else hatButtonHolder2.GetChild(id - 4).gameObject.SetActive(true);
+    }
+
+    void GainedXP(int currentXP, int maxXP)
+    {
+        xpBarFillTargetAmount = currentXP / (float)maxXP;
+        if (fillXPBarRoutine != null) StopCoroutine(fillXPBarRoutine);
+        fillXPBarRoutine = StartCoroutine(FillXPBar());
+
+        foreach (TextMeshProUGUI text in xpTexts) text.text = $"New Hat: {currentXP}/{maxXP}";
+    }
+
+    Coroutine fillXPBarRoutine;
+    IEnumerator FillXPBar()
+    {
+        while (xpBarFillAmount != xpBarFillTargetAmount)
         {
-            Debug.Log("Hat button holder / book stuff hasn't been implemented yet!");
+            xpBarFillAmount = Mathf.Lerp(xpBarFillAmount, xpBarFillTargetAmount, xpBarFillSpeed * Time.deltaTime);
+            //if ((xpBarFillAmount - xpBarFillTargetAmount).Abs() < 0.02f) xpBarFillAmount = xpBarFillTargetAmount;
+
+            xpBarImage.fillAmount = xpBarFillAmount;
+            yield return null;
         }
-        else hatButtonHolder.GetChild(id).gameObject.SetActive(true);
     }
 }

@@ -49,7 +49,7 @@ public class Frog : MonoBehaviour, IGrabbable
 
     float waitUntilGettingPath;
 
-    Vector3 GetRandomPosition => PathfindingManager.Instance.GetRandomPosition();
+    Vector3 GetRandomPosition => PathfindingManager.Instance.GetRandomPosition(this);
 
     public event Action OnGrab;
     public event Action OnUnGrab;
@@ -63,13 +63,22 @@ public class Frog : MonoBehaviour, IGrabbable
 
     public float TimeNotOverriddenPositionFor;
 
+    public bool Underwater;
+    public bool Furious;
+    public bool Sleeping;
+
     float toyPlayTime;
     float accumulatedToyPlayChance;
 
     [HideInInspector] public Hat equippedHat;
+    [HideInInspector] public float lastHatEquipTime;
 
     [HideInInspector] public FrogAnimator animator;
     FloaterController floaterController;
+
+    public event Action OnFrogJump;
+    public event Action OnFrogChangeHat;
+    public event Action OnFrogPlay;
 
     void Awake()
     {
@@ -90,20 +99,16 @@ public class Frog : MonoBehaviour, IGrabbable
         //animator.applyRootMotion = true;
         //armature.localPosition = new Vector3(0f, 0.38f, 0f);
 
-        animator.PlayAnimation(FrogAnimation.Idle);
+        animator.Play(FrogAnimation.Idle);
 
         PauseManager.Instance.RegisterRigidbody(rb);
+        PathfindingManager.Instance.RegisterFrog(this);
         CalculatePathToRandomPosition();
     }
 
     void Update()
     {
         //if (NavMesh.CalculatePath(transform.position, navigationTarget.position, 1, path)) Debug.DrawRay(transform.position, Vector3.up * 15, Color.black);
-
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            animator.PlayAnimation(FrogAnimation.Dance);
-        }
 
         /*foreach (Vector3 corner in path.corners)
         {
@@ -148,10 +153,12 @@ public class Frog : MonoBehaviour, IGrabbable
 
         if (cannotMoveTime > 5f)
         {
-            if (floaterController.underwater && stats.hygieneStat.GetStatValue() != 100f) return;
+            if (floaterController.underwater/* && stats.hygieneStat.GetStatValue() != 100f*/) return;
 
             rb.AddForce(Maf.Direction(transform.position, new Vector3(0f, 10f, 0f)) * 7, ForceMode.VelocityChange);
             cannotMoveTime = 0f;
+
+            OnFrogJump?.Invoke();
         }
         else if (!hasPath && !isGrabbed && rb.velocity.magnitude < 1f)
         {
@@ -198,11 +205,15 @@ public class Frog : MonoBehaviour, IGrabbable
 
                 foreach (Collider col in toys)
                 {
+                    if (col.gameObject == PlayerData.lastGrabObject) continue;
+
                     if (col.CompareTag("Toy"))
                     {
                         col.GetComponent<Toy>().Fling();
                         stats.moodStat.IncreaseStat(40f);
-                        animator.PlayAnimation(FrogAnimation.Play1);
+                        animator.PlayRandom(FrogAnimation.Dance, FrogAnimation.Play1, FrogAnimation.Play2);
+                        OnFrogPlay?.Invoke();
+
                         return;
                     }
                 }
@@ -213,7 +224,7 @@ public class Frog : MonoBehaviour, IGrabbable
 
     public void EnterOven()
     {
-        stats.consumptionMultiplier = 100f;
+        stats.consumptionMultiplier = 8f;
     }
 
     public void ExitOven()
@@ -243,12 +254,15 @@ public class Frog : MonoBehaviour, IGrabbable
 
             cannotMoveTime = 0f;
 
+            animator.Play(FrogAnimation.Walk);
+
             //Debug.Log($"Path calculation succeeded for {gameObject.name}");
         }
 
         void CalculationFail()
         {
             //Debug.Log($"Path calculation failed for {gameObject.name}");
+            if (Underwater) return;
             cannotMoveTime += pathCalculationDelay;
 
         }
@@ -265,6 +279,24 @@ public class Frog : MonoBehaviour, IGrabbable
     public void HandleMovement()
     {
         //if (pathCorners == null || pathIndex == pathCorners.Length) return;
+
+        /*if (Sleeping)
+        {
+            animator.Play(FrogAnimation.SleepStanding);
+            return;
+        }
+        else */
+        /*if (!hasPath || DisableMovement || isGrabbed || Underwater)
+        {
+            //Debug.Log("Idle anim");
+            animator.Play(FrogAnimation.Idle);
+        }
+        else
+        {
+            //Debug.Log("Walk anim");
+            animator.Play(FrogAnimation.Walk);
+        }*/
+
         if (!hasPath || DisableMovement || rb.velocity.magnitude > 1f)
         {
             rb.freezeRotation = false;
@@ -272,6 +304,8 @@ public class Frog : MonoBehaviour, IGrabbable
         }
         else rb.freezeRotation = true;
 
+        
+        //animator.Play(FrogAnimation.Walk);
         rb.position += Maf.Direction(transform.position, nextPosition) * speed * Time.deltaTime;
         //rb.MovePosition((transform.position + Maf.Direction(transform.position, nextPosition)).normalized * speed * Time.deltaTime);
         //Debug.DrawRay(transform.position, Maf.Direction(transform.position, nextPosition), Color.green, 5f);
@@ -285,6 +319,8 @@ public class Frog : MonoBehaviour, IGrabbable
         if ((Vector3.Distance(transform.position, nextPosition) < stoppingDistance))
         {
             pathIndex++;
+
+            GoIdle();
 
             if (pathIndex < pathCorners.Length)
             {
@@ -308,6 +344,20 @@ public class Frog : MonoBehaviour, IGrabbable
         rb.constraints = RigidbodyConstraints.FreezeAll;
     }
 
+
+    public void GoIdle()
+    {
+        /*if (Sleeping)
+        {
+            animator.Play(FrogAnimation.SleepStanding);
+            return;
+        }*/
+
+        Debug.Log("Frog idle");
+
+        if (Furious) animator.Play(FrogAnimation.AngryIdle);
+        else animator.Play(FrogAnimation.Idle);
+    }
 
     public void EnterState(FrogState state)
     {
@@ -355,22 +405,18 @@ public class Frog : MonoBehaviour, IGrabbable
     public void StartGrab()
     {
         //if (ShouldOverridePosition) rb.isKinematic = false;
-
-        Debug.Log("Grabbed frog");
-
         isGrabbed = true;
         hasPath = false;
 
         ShouldOverridePosition = false;
 
+        GoIdle();
         EnterState(FrogState.Roaming);
         
         OnGrab?.Invoke();
     }
     public void StopGrab()
     {
-        Debug.Log("Ungrabbed frog");
-
         cannotMoveTime = 0f;
 
         isGrabbed = false;
@@ -382,6 +428,8 @@ public class Frog : MonoBehaviour, IGrabbable
 
     void CalculatePathToRandomPosition()
     {
+        if (Sleeping || Underwater || DisableMovement) return;
+
         CalculatePath(GetRandomPosition);
     }
 
@@ -404,12 +452,16 @@ public class Frog : MonoBehaviour, IGrabbable
             equippedHat.ActivateHat();
         }
 
+        lastHatEquipTime = Time.time;
+
         equippedHat = hat;
         //hatHolder.DestroyChildren();
 
         hatObject.parent = hatHolder;
         hatObject.localPosition = hatSO.offset;
-        hatObject.rotation = hatHolder.rotation;
+        hatObject.localRotation = hatSO.rotation.ToQuaternion();
+
+        OnFrogChangeHat?.Invoke();
     }
 }
 
@@ -441,6 +493,15 @@ public class StatController
         toiletStat.Consume(baseConsumption * consumptionMultiplier * Time.deltaTime);
     }
     
+    public void ForceSetStatsToZero()
+    {
+        hungerStat.DecreaseStat(100f);
+        moodStat.DecreaseStat(100f);
+        energyStat.DecreaseStat(100f);
+        hygieneStat.DecreaseStat(100f);
+        toiletStat.DecreaseStat(100f);
+    }
+
     public float GetLowestStat(out FrogStat stat)
     {
         float lowestStat = 100f;
@@ -502,7 +563,7 @@ public class Stat
     {
         amount = Mathf.Min(max - value, amount);
 
-        LevelManager.Instance.AddXP(amount);
+        LevelManager.Instance.AddXP(amount * 0.2f);
 
         value += amount;
         ClampStatValue();

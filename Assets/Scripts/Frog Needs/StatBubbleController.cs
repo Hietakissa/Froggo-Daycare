@@ -33,7 +33,8 @@ public class StatBubbleController : MonoBehaviour
 
     void OrientTowardsPlayer()
     {
-        Quaternion rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Maf.Direction(transform.position, PlayerData.cameraHolder.position).SetY(0f)), 30f * Time.deltaTime);
+        //Quaternion rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Maf.Direction(transform.position, PlayerData.cameraHolder.position).SetY(0f)), 30f * Time.deltaTime);
+        Quaternion rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(-PlayerData.cameraHolder.forward), 30f * Time.deltaTime);
         transform.rotation = rot;
     }
 }

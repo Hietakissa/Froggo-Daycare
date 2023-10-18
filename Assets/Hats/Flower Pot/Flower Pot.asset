@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5520b2a92c873784f9e7a31e40d14971, type: 3}
   m_Name: Flower Pot
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 470849586059723509, guid: d412b2d78178d714cbab97401b368eef, type: 3}
+  Prefab: {fileID: 6068958099818952, guid: b1b9fdc5c4d41b1428ca0d3280b06d66, type: 3}
   ID: 3
-  offset: {x: 0, y: 0.251, z: 0.1694}
+  offset: {x: 0, y: 0.241, z: 0.157}
+  rotation: {x: 0, y: 0, z: 0}

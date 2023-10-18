@@ -1,5 +1,5 @@
-using System;
 using UnityEngine;
+using System;
 
 public class GrabbableObject : MonoBehaviour, IGrabbable
 {
@@ -31,6 +31,14 @@ public class GrabbableObject : MonoBehaviour, IGrabbable
 
             rb.position = startPos;
             rb.rotation = startRot;
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.impulse.magnitude / Time.fixedDeltaTime >= 0.7f)
+        {
+            SoundManager.Instance.PlayGenericImpact(transform.position);
         }
     }
 

@@ -54,7 +54,9 @@ public class Hat : MonoBehaviour, IGrabbable
     {
         if (GameManager.TryGetFrog(collision.collider, out Frog frog))
         {
-            if (Time.time - lastEquipped < 2f) return;
+            //Debug.Log($"frog last had hat at {frog.lastHatEquipTime}, now is {Time.time}, enough time has gone by: {Time.time - frog.lastHatEquipTime > 1f}");
+
+            if (Time.time - lastEquipped < 2f || Time.time - frog.lastHatEquipTime < 1f) return;
 
             if (isGrabbed && PlayerData.lastGrabObject == gameObject)
             {
