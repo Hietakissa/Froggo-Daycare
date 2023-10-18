@@ -9083,13 +9083,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4223866735354280264, guid: 30ad99570ecfccb4788f3f7d5d8894b2,
         type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.06637906
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223866735354280264, guid: 30ad99570ecfccb4788f3f7d5d8894b2,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.06553697
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223866735354280264, guid: 30ad99570ecfccb4788f3f7d5d8894b2,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0739
+      value: 0.0713
       objectReference: {fileID: 0}
     - target: {fileID: 4223866735354280264, guid: 30ad99570ecfccb4788f3f7d5d8894b2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0384
+      value: -0.0388
       objectReference: {fileID: 0}
     - target: {fileID: 4223866735354280264, guid: 30ad99570ecfccb4788f3f7d5d8894b2,
         type: 3}
@@ -11177,6 +11187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f118795ecabad6c438f7a085a3bdae3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duckQuack: {fileID: 8300000, guid: 6c31ce3acdae473419d3a41aef243a7f, type: 3}
 --- !u!54 &8743505876433047128
 Rigidbody:
   m_ObjectHideFlags: 0

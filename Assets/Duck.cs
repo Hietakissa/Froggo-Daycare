@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Duck : MonoBehaviour
+public class Duck : MonoBehaviour, IInteractable
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] AudioClip duckQuack;
 
-    // Update is called once per frame
-    void Update()
+    public void Interact()
     {
-        
+        SoundManager.Instance.PlayPooledSoundAtPosition(duckQuack, transform.position);
     }
 }
