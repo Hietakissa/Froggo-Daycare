@@ -4486,7 +4486,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
-  m_ShadowAngle: 1.4
+  m_ShadowAngle: 0
 --- !u!4 &762168472
 Transform:
   m_ObjectHideFlags: 0
@@ -9130,6 +9130,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Daycare
       objectReference: {fileID: 0}
+    - target: {fileID: 8593118249048352897, guid: b164a2c9494b34847b8a0389faa9374a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: ebb0e63f7662ff94d98dde91274d4824,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
