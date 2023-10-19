@@ -825,6 +825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d4d164b378d8f4e85f6bd1b88495e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyHatClip: {fileID: 0}
 --- !u!1001 &2013976808949920874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1829,6 +1830,7 @@ MonoBehaviour:
   - {fileID: 5328628942313228038}
   - {fileID: 7598408363818784825}
   maxFoodAmount: 5
+  doorCloseSound: {fileID: 0}
 --- !u!1 &2892501604405297751 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7902073587722408650, guid: 58375af4895e36c4c933d096ac452667,

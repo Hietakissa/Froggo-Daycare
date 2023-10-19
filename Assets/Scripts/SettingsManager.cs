@@ -30,7 +30,7 @@ public class SettingsManager : MonoBehaviour
 
     public void SaveSettings()
     {
-        if (Application.platform != RuntimePlatform.WebGLPlayer) return;
+        if (Application.platform == RuntimePlatform.WebGLPlayer) return;
 #if !UNITY_EDITOR
         Serializer.Save(PlayerData.sensitivity.ToString(), "sensitivity");
         Serializer.Save(PlayerData.masterVolume.ToString(), "masterVolume");

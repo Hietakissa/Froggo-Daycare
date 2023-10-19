@@ -154,7 +154,7 @@ public class MovementController : MonoBehaviour
         {
             KeyCode crouchKey;
 
-            if (Application.platform != RuntimePlatform.WebGLPlayer) crouchKey = KeyCode.C;
+            if (Application.platform == RuntimePlatform.WebGLPlayer) crouchKey = KeyCode.C;
             else crouchKey = KeyCode.LeftControl;
 
             if (Input.GetKeyDown(crouchKey) || Input.GetKeyDown(KeyCode.C)) crouchKeyHeld = true;

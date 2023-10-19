@@ -7,6 +7,8 @@ public class Food : MonoBehaviour
 
     float spawnTime;
 
+    [SerializeField] AudioClip eatFoodClip;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -35,6 +37,7 @@ public class Food : MonoBehaviour
             Destroy(gameObject);
 
             GameManager.EatFood();
+            SoundManager.Instance.PlayPooledSoundAtPosition(eatFoodClip, transform.position);
         }
     }
 }

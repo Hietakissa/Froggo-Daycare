@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class TrashCan : MonoBehaviour
 {
+    [SerializeField] AudioClip destroyHatClip;
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.TryGetComponent(out Hat hat))
@@ -10,6 +12,7 @@ public class TrashCan : MonoBehaviour
 
             hat.DeactivateHat();
             Destroy(collision.gameObject);
+            SoundManager.Instance.PlayPooledSoundAtPosition(destroyHatClip, transform.position);
         }
     }
 }
