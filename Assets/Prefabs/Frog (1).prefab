@@ -2765,7 +2765,7 @@ MonoBehaviour:
   stats:
     hungerStat:
       DisableConsumption: 0
-      consumptionMultiplier: 0.9
+      consumptionMultiplier: 0.75
     moodStat:
       DisableConsumption: 0
       consumptionMultiplier: 1
@@ -2784,11 +2784,11 @@ MonoBehaviour:
   isGrabbed: 0
   rb: {fileID: 0}
   furiousThreshold: 30
-  statCountThreshold: 3
+  statCountThreshold: 0
   FuriousBounceMask:
     serializedVersion: 2
     m_Bits: 1216
-  BounceSpeed: 15
+  BounceSpeed: 12
   BounceDistanceOffset: 0.3
   speed: 2
   rotationSmoothing: 5

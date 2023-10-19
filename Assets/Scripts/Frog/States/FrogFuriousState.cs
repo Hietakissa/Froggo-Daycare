@@ -50,7 +50,7 @@ public class FrogFuriousState : FrogBaseState
         {
             if (hit.collider.TryGetComponent(out Rigidbody otherRB)) otherRB.AddForce(velocity, ForceMode.Impulse);
 
-            Vector3 randomOffset = Random.insideUnitSphere * 0.5f;
+            Vector3 randomOffset = Random.insideUnitSphere * 1.5f;
             randomOffset.y = 0f;
 
             velocity += frog.transform.InverseTransformDirection(randomOffset);

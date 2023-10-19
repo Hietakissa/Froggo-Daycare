@@ -24,7 +24,7 @@ public class FrogSpawner : MonoBehaviour
 
     void Update()
     {
-        if (!spawnFrogs) return;
+        if (!spawnFrogs || GameManager.IsPaused) return;
 
         frogSpawnTime += Time.deltaTime;
 

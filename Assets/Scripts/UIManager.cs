@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
 
     void Pause()
     {
-        pauseScreen.SetActive(true);
+        if (GameManager.ShowMenuOnPause) pauseScreen.SetActive(true);
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

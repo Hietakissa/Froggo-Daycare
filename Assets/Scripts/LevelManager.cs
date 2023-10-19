@@ -27,10 +27,11 @@ public class LevelManager : MonoBehaviour
         Instance = this;
 
         requiredXP = GetXPToNextLevel();
+    }
 
+    void Start()
+    {
         CheckForHatUnlock();
-
-        Debug.Log("Level manager awake");
     }
 
     void LateUpdate()

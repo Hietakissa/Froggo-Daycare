@@ -23,6 +23,8 @@ public static class GameManager
     public static bool IsPaused;
     static int frogCount;
 
+    public static bool ShowMenuOnPause;
+
     public static void Pause()
     {
         IsPaused = true;
@@ -60,6 +62,8 @@ public static class GameManager
         frogCount++;
         if (frogCount >= FrogWinCount)
         {
+            ShowMenuOnPause = true;
+
             Pause();
             OnWin?.Invoke();
         }
@@ -71,6 +75,8 @@ public static class GameManager
 
         if (FuriousFrogCount >= MaxFuriousFrogs)
         {
+            ShowMenuOnPause = true;
+
             FuriousFrogCount = 0;
             Pause();
             OnLose?.Invoke();

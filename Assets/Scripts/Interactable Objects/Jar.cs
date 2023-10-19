@@ -32,6 +32,7 @@ public class Jar : MonoBehaviour, IInteractable, IGrabbable
 
         PauseManager.Instance.UnregisterRigidbody(rb);
         Destroy(gameObject);
+        gameObject.SetActive(false);
 
         if (spawnAngry)
         {

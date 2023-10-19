@@ -91,6 +91,9 @@ public class Book : MonoBehaviour, IInteractable
     public void StartUsingBook()
     {
         //GameManager.Pause();
+        GameManager.ShowMenuOnPause = false;
+
+        GameManager.Pause();
         GameManager.EnterBook();
         PlayerData.usingBook = true;
 
@@ -100,6 +103,8 @@ public class Book : MonoBehaviour, IInteractable
 
     public void StopUsingBook()
     {
+        GameManager.ShowMenuOnPause = true;
+        GameManager.UnPause();
         OpenMenu(0);
         GameManager.ExitBook();
         PlayerData.usingBook = false;
