@@ -1,5 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections;
+using HietakissaUtils;
 using System.Linq;
 using UnityEngine;
 
@@ -9,11 +10,16 @@ public class FrogAnimator : MonoBehaviour
 
     Dictionary<FrogAnimation, int> animations = new Dictionary<FrogAnimation, int>();
 
-    FrogAnimation baseAnimation;
+    [SerializeField] FrogAnimation baseAnimation;
+
+    public FrogAnimation CurrentlyPlaying;
 
     Coroutine animCoroutine;
+    //Coroutine baseAnimCoroutine;
 
-    FrogAnimation[] BaseAnimations = { FrogAnimation.Idle, FrogAnimation.AngryIdle, FrogAnimation.FoodNear, FrogAnimation.Walk, FrogAnimation.SleepStanding, FrogAnimation.PottySit};
+    bool overridingAnimation;
+
+    static FrogAnimation[] BaseAnimations = { FrogAnimation.Idle, FrogAnimation.AngryIdle, FrogAnimation.FoodNear, FrogAnimation.Walk, FrogAnimation.SleepStanding, FrogAnimation.SleepFaceDown, FrogAnimation.PottySit};
 
     void Awake()
     {
@@ -45,36 +51,83 @@ public class FrogAnimator : MonoBehaviour
     //overriding one-off animations
     //one-off animations immediately play their own respective animation and then go back to the base animation
 
-    public void PlayAnimation(FrogAnimation anim)
+    public void Play(FrogAnimation anim)
     {
         //animator.Play(animations[anim]);
+        PlayAnimation(anim);
+    }
+
+    public void PlayRandom(params FrogAnimation[] anims)
+    {
+        //animator.Play(animations[anim]);
+        FrogAnimation anim = anims.RandomElement();
+        PlayAnimation(anim);
+    }
+
+    void PlayAnimation(FrogAnimation anim)
+    {
+        if (baseAnimation == anim)
+        {
+            Debug.Log($"Given animation '{anim}' was same as previous base animation '{baseAnimation}'");
+            return;
+        }
+
         if (BaseAnimations.Contains(anim))
         {
+            //if (baseAnimCoroutine != null) StopCoroutine(baseAnimCoroutine);
             baseAnimation = anim;
-            if (animCoroutine == null) ForcePlayAnimation(baseAnimation);
+            //baseAnimCoroutine = StartCoroutine(BaseAnimCoroutine());
+            
+            if (!overridingAnimation) ForcePlayAnimation(baseAnimation);
         }
         else
         {
-            if (animCoroutine != null) StopCoroutine(animCoroutine);
+            if (overridingAnimation) StopCoroutine(animCoroutine);
             animCoroutine = StartCoroutine(OverrideAnimCoroutine(anim));
         }
     }
 
     IEnumerator OverrideAnimCoroutine(FrogAnimation anim)
     {
+        overridingAnimation = true;
+
         ForcePlayAnimation(anim);
         float animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
 
-        Debug.Log($"Played one-off animation with a duration of {animationLength} seconds");
+        //Debug.Log($"Played one-off animation with a duration of {animationLength} seconds");
 
         yield return new WaitForSeconds(animationLength);
+        overridingAnimation = false;
 
+        Debug.Log("Force played base animation after overriding");
         ForcePlayAnimation(baseAnimation);
+        //baseAnimCoroutine = StartCoroutine(BaseAnimCoroutine());
     }
 
-    void ForcePlayAnimation(FrogAnimation anim, float transition = 0.5f)
+    /*IEnumerator BaseAnimCoroutine()
     {
-        animator.CrossFade(animations[anim], transition);
+        ForcePlayAnimation(baseAnimation);
+        float animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
+
+        Debug.Log($"Starting loop of base animation '{baseAnimation}' length: '{animationLength}'");
+
+        while (true)
+        {
+            yield return new WaitForSeconds(animationLength);
+            ForcePlayAnimation(baseAnimation, true);
+            animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
+            Debug.Log($"Loop anim '{baseAnimation}', again in '{animationLength}s'");
+        }
+    }*/
+
+    public void ForcePlayAnimation(FrogAnimation anim, bool stopPrevious = false, float transition = 0.5f)
+    {
+        CurrentlyPlaying = anim;
+        if (stopPrevious)
+        {
+            animator.Play(animations[anim]);
+        }
+        else animator.CrossFade(animations[anim], transition);
     }
 
     void OnEnable()

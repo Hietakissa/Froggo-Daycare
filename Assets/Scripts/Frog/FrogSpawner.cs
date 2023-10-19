@@ -9,7 +9,11 @@ public class FrogSpawner : MonoBehaviour
     [SerializeField] float frogSpawnDelay;
     float frogSpawnTime;
 
+    [SerializeField] AnimationCurve frogSpawnTimeCurve;
     [SerializeField] bool spawnFrogs;
+
+    bool frogSpawned = true;
+    Jar lastJar;
 
     void Awake()
     {
@@ -22,6 +26,8 @@ public class FrogSpawner : MonoBehaviour
 
         frogSpawnTime += Time.deltaTime;
 
+        frogSpawnDelay = frogSpawnTimeCurve.Evaluate((int)(Time.time / 60f));
+
         if (frogSpawnTime >= frogSpawnDelay)
         {
             frogSpawnTime -= frogSpawnDelay;
@@ -32,11 +38,15 @@ public class FrogSpawner : MonoBehaviour
 
     void SpawnJar()
     {
-        Instantiate(jarPrefab, transform.position, transform.rotation);
+        if (!frogSpawned) lastJar.Activate(true);
+        frogSpawned = false;
+        lastJar = Instantiate(jarPrefab, transform.position, transform.rotation).GetComponent<Jar>();
     }
 
-    public void SpawnFrog(Transform jarTransform)
+    public void SpawnFrog(Transform jarTransform, bool spawnAngry = false)
     {
-        Instantiate(frogPrefab, jarTransform.position, jarTransform.rotation);
+        frogSpawned = true;
+        Frog frog = Instantiate(frogPrefab, jarTransform.position, jarTransform.rotation).GetComponent<Frog>();
+        if (spawnAngry) frog.stats.ForceSetStatsToZero();
     }
 }

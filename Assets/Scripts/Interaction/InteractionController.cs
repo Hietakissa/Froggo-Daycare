@@ -92,6 +92,8 @@ public class InteractionController : MonoBehaviour
 
                         IGrabbable root = branch.RootObject.GetComponent<IGrabbable>();
 
+                        if (branch.RootObject.TryGetComponent(out Frog frog) && frog.StateIs(FrogState.Potty)) return;
+
                         PlayerData.lastGrab = root;
                         PlayerData.lastGrabObject = branch.RootObject;
                         grab = root;

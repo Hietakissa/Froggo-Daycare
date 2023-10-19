@@ -235,3 +235,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPos: {fileID: 1788180462889856011}
+  shatterSounds:
+  - {fileID: 8300000, guid: 3ce513b9f1649a94f9c9e7f0fb144578, type: 3}
+  impactSound: {fileID: 8300000, guid: b41a22e4fd595f048967960336ad80dd, type: 3}

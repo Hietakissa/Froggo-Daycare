@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using HietakissaUtils;
 using UnityEngine;
 
@@ -8,14 +9,24 @@ public class PathfindingManager : MonoBehaviour
     [SerializeField] Transform[] roamPoints;
     [SerializeField] float roamRadius;
 
+    Dictionary<Frog, Transform> frogRoamAreas = new Dictionary<Frog, Transform>();
+
     void Awake()
     {
         Instance = this;
     }
 
-    public Vector3 GetRandomPosition()
+    public void RegisterFrog(Frog frog)
     {
-        Vector3 randomPoint = roamPoints.RandomElement().position;
+        frogRoamAreas.Add(frog, roamPoints.RandomElement());
+    }
+
+    public Vector3 GetRandomPosition(Frog frog)
+    {
+        //Vector3 randomPoint = roamPoints.RandomElement().position;
+        if (Maf.RandomBool(35)) frogRoamAreas[frog] = roamPoints.RandomElement();
+
+        Vector3 randomPoint = frogRoamAreas[frog].position;
 
         Vector3 randomOffset = Random.insideUnitCircle * roamRadius;
         randomOffset.y = 0;
