@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: final_Potta
+  m_Name: final_purple 2
   m_Shader: {fileID: 4800000, guid: be891319084e9d147b09d89e80ce60e0, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -238,7 +238,7 @@ Material:
     m_Floats:
     - _1st2nd_Shades_Feather: 0.0001
     - _1st_ShadeColor_Feather: 0.0001
-    - _1st_ShadeColor_Step: 0.433
+    - _1st_ShadeColor_Step: 0.471
     - _2nd_ShadeColor_Feather: 0.0001
     - _2nd_ShadeColor_Step: 0
     - _AORemapMax: 1
@@ -270,7 +270,7 @@ Material:
     - _AutoRenderQueue: 1
     - _BaseColorOverridden: 0
     - _BaseColorVisible: 1
-    - _BaseColor_Step: 0.433
+    - _BaseColor_Step: 0.471
     - _BaseShade_Feather: 0.0001
     - _Base_Speed: 0
     - _Blend: 0
@@ -373,7 +373,7 @@ Material:
     - _Is_LightColor_Ap_RimLight: 1
     - _Is_LightColor_Base: 1
     - _Is_LightColor_HighColor: 1
-    - _Is_LightColor_MatCap: 0
+    - _Is_LightColor_MatCap: 1
     - _Is_LightColor_Outline: 1
     - _Is_LightColor_RimLight: 1
     - _Is_NormalMapForMatCap: 0
@@ -394,7 +394,7 @@ Material:
     - _MaterialID: 1
     - _Metallic: 0
     - _Mode: 0
-    - _Nearest_Distance: 0.5
+    - _Nearest_Distance: 0
     - _NormalMapSpace: 0
     - _NormalScale: 1
     - _OUTLINE: 0
@@ -405,7 +405,7 @@ Material:
     - _Offset_Z: 0
     - _OutlineOverridden: 0
     - _OutlineVisible: 1
-    - _Outline_Width: 4.13
+    - _Outline_Width: 8.3
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
     - _PPDMinSamples: 5
@@ -420,8 +420,8 @@ Material:
     - _RimLightOverridden: 0
     - _RimLightVisible: 1
     - _RimLight_FeatherOff: 0
-    - _RimLight_InsideMask: 0.0001
-    - _RimLight_Power: 0.1
+    - _RimLight_InsideMask: 0.058
+    - _RimLight_Power: 0.11
     - _Rotate_EmissiveUV: 0
     - _Rotate_MatCapUV: 0
     - _Rotate_NormalMapForMatCapUV: 0
@@ -512,15 +512,15 @@ Material:
     - _utsVersionY: 9
     - _utsVersionZ: 5
     m_Colors:
-    - _1st_ShadeColor: {r: 0.33935562, g: 0.7735849, b: 0.67363936, a: 1}
-    - _2nd_ShadeColor: {r: 0.35510862, g: 0.5175259, b: 0.5660378, a: 1}
+    - _1st_ShadeColor: {r: 0.5690984, g: 0.4515397, b: 0.6886792, a: 1}
+    - _2nd_ShadeColor: {r: 0.18253396, g: 0.16727483, b: 0.1981132, a: 1}
     - _AngelRingMaskColor: {r: 0, g: 1, b: 0, a: 1}
     - _AngelRing_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Ap_RimLightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColor: {r: 0.7367414, g: 1, b: 0.7216981, a: 1}
+    - _BaseColor: {r: 0.7553566, g: 0.5990566, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColorMaskColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.73674136, g: 1, b: 0.7216981, a: 1}
+    - _Color: {r: 0.7553566, g: 0.5990566, b: 1, a: 1}
     - _ColorShift: {r: 0, g: 0, b: 0, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
@@ -535,8 +535,8 @@ Material:
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineMaskColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Outline_Color: {r: 0.21306513, g: 0.33962262, b: 0.31755963, a: 1}
-    - _RimLightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Outline_Color: {r: 0.17590372, g: 0.13238698, b: 0.23584908, a: 1}
+    - _RimLightColor: {r: 0.64330345, g: 0.5991456, b: 0.8301887, a: 1}
     - _RimLightMaskColor: {r: 1, g: 0, b: 1, a: 1}
     - _SecondShadeMaskColor: {r: 0, g: 0, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
@@ -549,7 +549,7 @@ Material:
     - _ViewShift: {r: 0, g: 0, b: 0, a: 1}
     - emissive: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &8714556833511357398
+--- !u!114 &1899819905047576234
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

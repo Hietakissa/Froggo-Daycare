@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: final_Potta
+  m_Name: final green 3
   m_Shader: {fileID: 4800000, guid: be891319084e9d147b09d89e80ce60e0, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -373,7 +373,7 @@ Material:
     - _Is_LightColor_Ap_RimLight: 1
     - _Is_LightColor_Base: 1
     - _Is_LightColor_HighColor: 1
-    - _Is_LightColor_MatCap: 0
+    - _Is_LightColor_MatCap: 1
     - _Is_LightColor_Outline: 1
     - _Is_LightColor_RimLight: 1
     - _Is_NormalMapForMatCap: 0
@@ -405,7 +405,7 @@ Material:
     - _Offset_Z: 0
     - _OutlineOverridden: 0
     - _OutlineVisible: 1
-    - _Outline_Width: 4.13
+    - _Outline_Width: 8.22
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
     - _PPDMinSamples: 5
@@ -512,7 +512,7 @@ Material:
     - _utsVersionY: 9
     - _utsVersionZ: 5
     m_Colors:
-    - _1st_ShadeColor: {r: 0.33935562, g: 0.7735849, b: 0.67363936, a: 1}
+    - _1st_ShadeColor: {r: 0.3809185, g: 0.754717, b: 0.6933471, a: 1}
     - _2nd_ShadeColor: {r: 0.35510862, g: 0.5175259, b: 0.5660378, a: 1}
     - _AngelRingMaskColor: {r: 0, g: 1, b: 0, a: 1}
     - _AngelRing_Color: {r: 1, g: 1, b: 1, a: 1}
