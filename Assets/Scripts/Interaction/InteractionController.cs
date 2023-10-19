@@ -57,7 +57,7 @@ public class InteractionController : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GameManager.IsPaused) GameManager.UnPause();
+            if (GameManager.IsPaused && GameManager.GameRunning) GameManager.UnPause();
             else GameManager.Pause();
         }
         else

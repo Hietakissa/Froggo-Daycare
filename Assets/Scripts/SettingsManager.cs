@@ -160,6 +160,7 @@ public class SettingsManager : MonoBehaviour
     public static void Restart()
     {
         GameManager.IsPaused = false;
+        GameManager.GameRunning = true;
         SceneManager.LoadScene(0);
     }
 }

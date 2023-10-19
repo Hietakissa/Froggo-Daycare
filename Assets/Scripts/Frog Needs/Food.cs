@@ -24,8 +24,7 @@ public class Food : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log($"check time: {Time.time + 1f}")
-        if (Time.timeSinceLevelLoad - spawnTime > 1f || eaten) return;
+        if (Time.timeSinceLevelLoad - spawnTime < 1f || eaten) return;
 
         if (GameManager.TryGetFrog(collision.collider, out Frog frog))
         {
