@@ -41,7 +41,7 @@ public class Jar : MonoBehaviour, IInteractable, IGrabbable
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.impulse.magnitude / Time.fixedDeltaTime >= 0.7f)
+        if (collision.impulse.magnitude / Time.fixedDeltaTime >= 0.3f)
         {
             SoundManager.Instance.PlayPooledSoundAtPosition(impactSound, transform.position);
         }

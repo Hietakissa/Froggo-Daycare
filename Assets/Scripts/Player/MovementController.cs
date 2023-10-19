@@ -34,6 +34,10 @@ public class MovementController : MonoBehaviour
     [SerializeField] float sphereCastOffset = 0.05f;
     [SerializeField] float rayCastOffset = 0.05f;
 
+    [Header("Other")]
+    [SerializeField] AudioSource footstepSource;
+    [SerializeField] AudioClip footstepAudio;
+
     RaycastHit sphereCast;
     RaycastHit groundRay;
 
@@ -121,6 +125,12 @@ public class MovementController : MonoBehaviour
             else MoveDir();
             cc.Move((moveDir + velocity) * Time.deltaTime);
 
+            if (moveDir != Vector3.zero)
+            {
+                footstepSource.volume = 0.4f;
+            }
+            else footstepSource.volume = 0f;
+
             void MoveDir()
             {
                 //TODO somehow orient vector away from the slope
@@ -142,8 +152,13 @@ public class MovementController : MonoBehaviour
 
         void HandleCrouching()
         {
-            if (Input.GetKeyDown(KeyCode.LeftControl)) crouchKeyHeld = true;
-            else if (Input.GetKeyUp(KeyCode.LeftControl)) crouchKeyHeld = false;
+            KeyCode crouchKey;
+
+            if (Application.platform == RuntimePlatform.WebGLPlayer) crouchKey = KeyCode.C;
+            else crouchKey = KeyCode.LeftControl;
+
+            if (Input.GetKeyDown(crouchKey) || Input.GetKeyDown(KeyCode.C)) crouchKeyHeld = true;
+            else if (Input.GetKeyUp(crouchKey) || Input.GetKeyUp(KeyCode.C)) crouchKeyHeld = false;
 
             if (!isGrounded)
             {

@@ -2358,17 +2358,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.3686255
+      value: -1.15937
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.331
+      value: 0.499
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.4464362
+      value: -3.1874027
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
         type: 3}
@@ -2779,12 +2779,12 @@ MonoBehaviour:
       DisableConsumption: 0
       consumptionMultiplier: 0.5
     baseConsumption: 0.5
-    consumptionMultiplier: 50
+    consumptionMultiplier: 1
   frogName: Sammakko
   isGrabbed: 0
   rb: {fileID: 0}
   furiousThreshold: 30
-  statCountThreshold: 6
+  statCountThreshold: 3
   FuriousBounceMask:
     serializedVersion: 2
     m_Bits: 1216
@@ -2792,7 +2792,7 @@ MonoBehaviour:
   BounceDistanceOffset: 0.3
   speed: 2
   rotationSmoothing: 5
-  DisableMovement: 1
+  DisableMovement: 0
   ShouldOverridePosition: 0
   OverridePosition: {fileID: 0}
   hatHolder: {fileID: 1610413821590868544}
@@ -2877,7 +2877,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8f2e4b2b2caaba54caa25b5d5a248145, type: 3}
   changeHatSound: {fileID: 8300000, guid: 126622b235a4026498411ea85902e2cd, type: 3}
   jumpSound: {fileID: 8300000, guid: a99838e31eb145042952915bdc789363, type: 3}
-  impactThreshold: 0.5
+  playSounds:
+  - {fileID: 8300000, guid: 3c4491d27d12d2443b26ccc125b5bfc5, type: 3}
+  - {fileID: 8300000, guid: c78376e26cb3eeb4fb3beff75b91a576, type: 3}
+  bathDoneSound: {fileID: 8300000, guid: 45c0ff76789eed4498981577f52f00a6, type: 3}
+  impactThreshold: 0.3
 --- !u!82 &180013751799885474
 AudioSource:
   m_ObjectHideFlags: 0

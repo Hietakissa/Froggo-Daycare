@@ -162,3 +162,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nutrition: 70
+  eatFoodClip: {fileID: 8300000, guid: 126622b235a4026498411ea85902e2cd, type: 3}

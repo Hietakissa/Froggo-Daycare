@@ -8,6 +8,8 @@ public class Fridge : Appliance
     [SerializeField] int maxFoodAmount;
     int currentFoodAmount;
 
+    [SerializeField] AudioClip doorCloseSound;
+
     void Awake()
     {
         CheckForMissingFood();
@@ -18,7 +20,9 @@ public class Fridge : Appliance
         //Debug.Log("Door closed");
 
         //if (!food) SpawnFood();
-        /*if (!food)*/ CheckForMissingFood();
+        /*if (!food)*/
+        if (Time.time > 1f) SoundManager.Instance.PlayPooledSoundAtPosition(doorCloseSound, transform.position);
+        CheckForMissingFood();
     }
 
     void AteFood()

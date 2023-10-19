@@ -36,7 +36,7 @@ public class GrabbableObject : MonoBehaviour, IGrabbable
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.impulse.magnitude / Time.fixedDeltaTime >= 0.7f)
+        if (collision.impulse.magnitude / Time.fixedDeltaTime >= 0.3f)
         {
             SoundManager.Instance.PlayGenericImpact(transform.position);
         }

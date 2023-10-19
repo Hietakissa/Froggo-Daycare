@@ -33,9 +33,12 @@ public class DynamicDoor : MonoBehaviour, IGrabbable
         closedRot = transform.rotation;
 
         orientationAxis = GetOrientationAxis();
-
-        SnapShut();
         //text = transform.parent.GetComponentInChildren<TMP_Text>();
+    }
+    
+    void Start()
+    {
+        SnapShut();
     }
 
     void Update()

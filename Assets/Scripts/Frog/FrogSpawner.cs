@@ -15,6 +15,8 @@ public class FrogSpawner : MonoBehaviour
     bool frogSpawned = true;
     Jar lastJar;
 
+    [SerializeField] AudioClip frogArriveClip;
+
     void Awake()
     {
         Instance = this;
@@ -33,6 +35,7 @@ public class FrogSpawner : MonoBehaviour
             frogSpawnTime -= frogSpawnDelay;
             //SpawnFrog();
             SpawnJar();
+            SoundManager.Instance.PlayPooledSoundAtPosition(frogArriveClip, transform.position);
         }
     }
 
