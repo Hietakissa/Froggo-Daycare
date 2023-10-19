@@ -35,8 +35,8 @@ Material:
     - _Outline_Width: 14.3
     - _RimLight: 0
     m_Colors:
-    - _BaseColor: {r: 0.71625483, g: 0.6, b: 1, a: 1}
-    - _Color: {r: 0.71625483, g: 0.6, b: 1, a: 1}
+    - _BaseColor: {r: 0.8627451, g: 0.77254903, b: 1, a: 1}
+    - _Color: {r: 0.8627451, g: 0.77254903, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &1899819905047576234
 MonoBehaviour:
