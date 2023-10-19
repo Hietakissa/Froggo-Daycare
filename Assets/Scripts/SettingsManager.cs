@@ -60,6 +60,12 @@ public class SettingsManager : MonoBehaviour
         }
 #endif
 
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            PlayerData.sensitivity = 1f;
+            PlayerData.masterVolume = 80;
+            PlayerData.musicVolume = 55;
+        }
 
 
         //PlayerData.sensitivity = 1f;

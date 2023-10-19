@@ -31,9 +31,6 @@ public class SoundManager : MonoBehaviour
 
     public void PlayGenericImpact(Vector3 position)
     {
-        //GameObject sound = Instantiate(genericImpactSoundPrefab, position, Quaternion.identity);
-        //sound.GetComponent<AudioSource>().pitch = GetPitch();
-        //Destroy(sound, 5);
         if (Time.time < 0.5f) return;
 
         PlayPooledSoundAtPosition(genericImpact, position);

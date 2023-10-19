@@ -1827,37 +1827,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 366529032}
   m_CullTransparentMesh: 1
---- !u!1 &376717506
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 376717507}
-  m_Layer: 0
-  m_Name: Target
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &376717507
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 376717506}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.92, y: 0.011620427, z: -2.68}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &397354651
 GameObject:
   m_ObjectHideFlags: 0
@@ -8444,7 +8413,7 @@ PrefabInstance:
 
         Color Parade - Music
 
-        freesounds.org?
+        freesounds.org
 
         Morgan
         Skilly (Sketchfab) - 3D'
@@ -10588,18 +10557,18 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 5
-      inSlope: 35
-      outSlope: 35
+      value: 45
+      inSlope: -6.6666665
+      outSlope: -6.6666665
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 40
-      inSlope: 35
-      outSlope: 35
+      time: 3
+      value: 25
+      inSlope: -6.6666665
+      outSlope: -6.6666665
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -14086,7 +14055,6 @@ SceneRoots:
   - {fileID: 198163142}
   - {fileID: 406279325}
   - {fileID: 65428480484838536}
-  - {fileID: 376717507}
   - {fileID: 260712168}
   - {fileID: 2123412635}
   - {fileID: 2014192030}
