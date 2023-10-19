@@ -2784,7 +2784,7 @@ MonoBehaviour:
   isGrabbed: 0
   rb: {fileID: 0}
   furiousThreshold: 30
-  statCountThreshold: 0
+  statCountThreshold: 3
   FuriousBounceMask:
     serializedVersion: 2
     m_Bits: 1216
