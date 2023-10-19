@@ -9,10 +9,12 @@ public class Food : MonoBehaviour
 
     [SerializeField] AudioClip eatFoodClip;
 
+    bool eaten;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        spawnTime = Time.time + 0.5f;
+        spawnTime = Time.timeSinceLevelLoad;
     }
 
     void Start()
@@ -23,7 +25,7 @@ public class Food : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         //Debug.Log($"check time: {Time.time + 1f}")
-        if (Time.time < spawnTime) return;
+        if (Time.timeSinceLevelLoad - spawnTime > 1f || eaten) return;
 
         if (GameManager.TryGetFrog(collision.collider, out Frog frog))
         {
@@ -36,6 +38,7 @@ public class Food : MonoBehaviour
             PauseManager.Instance.UnregisterRigidbody(rb);
             Destroy(gameObject);
 
+            eaten = true;
             GameManager.EatFood();
             SoundManager.Instance.PlayPooledSoundAtPosition(eatFoodClip, transform.position);
         }

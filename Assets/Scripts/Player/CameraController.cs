@@ -70,7 +70,7 @@ public class CameraController : MonoBehaviour
         }
 
         lerpTime += Time.deltaTime * lerpSpeed;
-
+        
         transform.position = Vector3.Slerp(startPos, targetPos, lerpTime);
         transform.rotation = Quaternion.Slerp(startRot, targetRot, lerpTime);
     }
@@ -94,7 +94,7 @@ public class CameraController : MonoBehaviour
 
     void EnterBook()
     {
-        if (Time.time < 1f) lerpTime = 1f;
+        if (Time.timeSinceLevelLoad < 1f) lerpTime = 1f;
         else lerpTime = 0f;
 
         startPos = transform.position;

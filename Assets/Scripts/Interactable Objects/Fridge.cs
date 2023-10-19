@@ -21,7 +21,7 @@ public class Fridge : Appliance
 
         //if (!food) SpawnFood();
         /*if (!food)*/
-        if (Time.time > 1f) SoundManager.Instance.PlayPooledSoundAtPosition(doorCloseSound, transform.position);
+        if (Time.timeSinceLevelLoad > 1f) SoundManager.Instance.PlayPooledSoundAtPosition(doorCloseSound, transform.position);
         CheckForMissingFood();
     }
 
@@ -40,7 +40,7 @@ public class Fridge : Appliance
 
         //Debug.Log($"{currentFoodAmount} food, {missingFood} missing");
 
-        Debug.Log($"{currentFoodAmount}/{maxFoodAmount} food in the fridge, missing {missingFood}");
+        Debug.Log($"{currentFoodAmount} of {maxFoodAmount} food in the fridge, missing {missingFood}");
 
         for (int i = 0; i < missingFood; i++)
         {

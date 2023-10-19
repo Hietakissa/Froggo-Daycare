@@ -5,7 +5,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
 
-    int currentLevel = 1;
+    public int currentLevel = 1;
     int requiredXP;
     [SerializeField] float xp;
 
@@ -36,7 +36,11 @@ public class LevelManager : MonoBehaviour
 
     void LateUpdate()
     {
-        if (xpGained) OnXPGain?.Invoke((int)xp, requiredXP);
+        if (xpGained)
+        {
+            OnXPGain?.Invoke((int)xp, requiredXP);
+            xpGained = false;
+        }
     }
 
     public void AddXP(float xpToAdd)

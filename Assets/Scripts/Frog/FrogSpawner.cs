@@ -16,6 +16,7 @@ public class FrogSpawner : MonoBehaviour
     Jar lastJar;
 
     [SerializeField] AudioClip frogArriveClip;
+    [SerializeField] ParticleSystem frogPoof;
 
     void Awake()
     {
@@ -28,7 +29,7 @@ public class FrogSpawner : MonoBehaviour
 
         frogSpawnTime += Time.deltaTime;
 
-        frogSpawnDelay = frogSpawnTimeCurve.Evaluate((int)(Time.time / 60f));
+        frogSpawnDelay = frogSpawnTimeCurve.Evaluate((Time.timeSinceLevelLoad / 60f));
 
         if (frogSpawnTime >= frogSpawnDelay)
         {
@@ -50,6 +51,10 @@ public class FrogSpawner : MonoBehaviour
     {
         frogSpawned = true;
         Frog frog = Instantiate(frogPrefab, jarTransform.position, jarTransform.rotation).GetComponent<Frog>();
+        frogPoof.gameObject.transform.position = jarTransform.position;
+        frogPoof.Play();
+
+        GameManager.IncreaseFrogCount();
         if (spawnAngry) frog.stats.ForceSetStatsToZero();
     }
 }

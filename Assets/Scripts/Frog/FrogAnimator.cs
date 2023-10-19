@@ -68,7 +68,7 @@ public class FrogAnimator : MonoBehaviour
     {
         if (baseAnimation == anim)
         {
-            Debug.Log($"Given animation '{anim}' was same as previous base animation '{baseAnimation}'");
+            //Debug.Log($"Given animation '{anim}' was same as previous base animation '{baseAnimation}'");
             return;
         }
 
@@ -99,7 +99,7 @@ public class FrogAnimator : MonoBehaviour
         yield return new WaitForSeconds(animationLength);
         overridingAnimation = false;
 
-        Debug.Log("Force played base animation after overriding");
+        //Debug.Log("Force played base animation after overriding");
         ForcePlayAnimation(baseAnimation);
         //baseAnimCoroutine = StartCoroutine(BaseAnimCoroutine());
     }

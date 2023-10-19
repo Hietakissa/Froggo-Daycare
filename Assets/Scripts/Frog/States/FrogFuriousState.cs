@@ -62,4 +62,9 @@ public class FrogFuriousState : FrogBaseState
         frog.transform.position = frog.transform.position + velocity * Time.deltaTime;
         frog.rb.rotation = Quaternion.Slerp(frog.rb.rotation, Quaternion.LookRotation(velocity), 10f * Time.deltaTime);
     }
+
+    public override void FixedUpdateState()
+    {
+        
+    }
 }

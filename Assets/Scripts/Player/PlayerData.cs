@@ -23,9 +23,11 @@ public abstract class PlayerData
 
     public static LayerMask interactionMask;
 
-    public static float sensitivity;
+    public static float sensitivity = 0f;
     public static int masterVolume;
     public static int musicVolume;
+
+    public static bool settingsSet;
 
     public static bool ValidatePlayerReferences()
     {

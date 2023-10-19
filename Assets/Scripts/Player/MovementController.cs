@@ -68,8 +68,12 @@ public class MovementController : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.IsPaused) return;
-
+        if (GameManager.IsPaused)
+        {
+            footstepSource.volume = 0f;
+            return;
+        }
+        
         //Grounded check
         isGrounded = Physics.SphereCast(transform.position + Vector3.up * (sphereCastRadius + sphereCastOffset), sphereCastRadius, Vector3.down, out sphereCast, sphereCastOffset * 2);
         Physics.Raycast(transform.position + Vector3.up * rayCastOffset, Vector3.down, out groundRay, rayCastOffset * 2);

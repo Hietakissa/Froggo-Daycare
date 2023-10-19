@@ -31,6 +31,8 @@ public class FeedingChair : MonoBehaviour
             frog.ShouldOverridePosition = true;
             frog.stats.consumptionMultiplier = 0.7f;
 
+            occupied = true;
+
             Debug.Log("Frog entered feeding chair");
         }
     }

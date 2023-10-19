@@ -15,6 +15,8 @@ public class FrogSoundController : MonoBehaviour
 
     float lastHygiene;
 
+    float lastImpactSound;
+
     void Awake()
     {
         source = GetComponent<AudioSource>();
@@ -48,10 +50,11 @@ public class FrogSoundController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.impulse.magnitude / Time.fixedDeltaTime >= impactThreshold)
+        if (collision.impulse.magnitude / Time.fixedDeltaTime >= impactThreshold && Time.time - lastImpactSound > 0.2f)
         {
             //PlayAudioClip(impactSounds.RandomElement());
             SoundManager.Instance.PlayPooledSoundAtPosition(impactSounds.RandomElement(), transform.position);
+            lastImpactSound = Time.time;
         }
     }
 

@@ -24,4 +24,9 @@ public class FrogPottyState : FrogBaseState
     {
         frog.stats.toiletStat.IncreaseStat(12f * Time.deltaTime);
     }
+
+    public override void FixedUpdateState()
+    {
+        
+    }
 }

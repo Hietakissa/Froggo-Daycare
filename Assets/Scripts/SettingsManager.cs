@@ -22,33 +22,44 @@ public class SettingsManager : MonoBehaviour
     //[SerializeField] AudioMixerGroup musicVolumeGroup;
     [SerializeField] AudioMixer mixer;
 
-    void Start()
+    void Awake()
     {
         Instance = this;
+    }
+
+    void Start()
+    {
         LoadSettings();
     }
 
     public void SaveSettings()
     {
-        if (Application.platform == RuntimePlatform.WebGLPlayer) return;
-#if !UNITY_EDITOR
+        if (Application.platform == RuntimePlatform.WebGLPlayer || Application.isEditor) return;
+
+        Debug.Log("saving settings");
         Serializer.Save(PlayerData.sensitivity.ToString(), "sensitivity");
         Serializer.Save(PlayerData.masterVolume.ToString(), "masterVolume");
         Serializer.Save(PlayerData.musicVolume.ToString(), "musicVolume");
-#endif
     }
 
     void LoadSettings()
     {
-        //loading not implemented
-#if UNITY_EDITOR
-        PlayerData.sensitivity = 1f;
-        PlayerData.masterVolume = 80;
-        PlayerData.musicVolume = 55;
+        //Debug.Log($"Load settings, is editor {Application.isEditor}, should apply defaults: {PlayerData.sensitivity == 0f && (Application.platform == RuntimePlatform.WebGLPlayer || Application.isEditor)}");
 
-#else
-        if (Application.platform != RuntimePlatform.WebGLPlayer)
+        if (PlayerData.settingsSet) return;
+
+        if (PlayerData.sensitivity == 0f && (Application.platform == RuntimePlatform.WebGLPlayer || Application.isEditor))
         {
+            Debug.Log("Sensitivity was 0, applying default settings");
+
+            PlayerData.sensitivity = 1f;
+            PlayerData.masterVolume = 80;
+            PlayerData.musicVolume = 55;
+        }
+        else
+        {
+            Debug.Log("loading settings");
+
             if (Serializer.SaveDataExists("sensitivity")) PlayerData.sensitivity = float.Parse(Serializer.Load("sensitivity"));
             else PlayerData.sensitivity = 1f;
 
@@ -58,15 +69,8 @@ public class SettingsManager : MonoBehaviour
             if (Serializer.SaveDataExists("musicVolume")) PlayerData.musicVolume = int.Parse(Serializer.Load("musicVolume"));
             else PlayerData.musicVolume = 55;
         }
-#endif
 
-        if (Application.platform == RuntimePlatform.WebGLPlayer)
-        {
-            PlayerData.sensitivity = 1f;
-            PlayerData.masterVolume = 80;
-            PlayerData.musicVolume = 55;
-        }
-
+        PlayerData.settingsSet = true;
 
         //PlayerData.sensitivity = 1f;
         UpdateSensitivity();

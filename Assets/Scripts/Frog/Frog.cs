@@ -221,6 +221,12 @@ public class Frog : MonoBehaviour, IGrabbable
         }
     }
 
+    void FixedUpdate()
+    {
+        if (GameManager.IsPaused) return;
+
+        currentState.FixedUpdateState();
+    }
 
     public void EnterOven()
     {
@@ -278,25 +284,6 @@ public class Frog : MonoBehaviour, IGrabbable
 
     public void HandleMovement()
     {
-        //if (pathCorners == null || pathIndex == pathCorners.Length) return;
-
-        /*if (Sleeping)
-        {
-            animator.Play(FrogAnimation.SleepStanding);
-            return;
-        }
-        else */
-        /*if (!hasPath || DisableMovement || isGrabbed || Underwater)
-        {
-            //Debug.Log("Idle anim");
-            animator.Play(FrogAnimation.Idle);
-        }
-        else
-        {
-            //Debug.Log("Walk anim");
-            animator.Play(FrogAnimation.Walk);
-        }*/
-
         if (!hasPath || DisableMovement || rb.velocity.magnitude > 1f)
         {
             rb.freezeRotation = false;
@@ -304,14 +291,9 @@ public class Frog : MonoBehaviour, IGrabbable
         }
         else rb.freezeRotation = true;
 
-        
-        //animator.Play(FrogAnimation.Walk);
-        rb.position += Maf.Direction(transform.position, nextPosition) * speed * Time.deltaTime;
-        //rb.MovePosition((transform.position + Maf.Direction(transform.position, nextPosition)).normalized * speed * Time.deltaTime);
-        //Debug.DrawRay(transform.position, Maf.Direction(transform.position, nextPosition), Color.green, 5f);
-
-        //lookRotation = Vector3.Lerp(lookRotation, Maf.Direction(transform.position, nextPosition), rotationSmoothing * Time.deltaTime);
-        //transform.forward = transform.TransformDirection(lookRotation);
+        animator.Play(FrogAnimation.Walk);
+        //rb.position += Maf.Direction(transform.position, nextPosition) * speed * Time.deltaTime;
+        rb.MovePosition(rb.position + Maf.Direction(rb.position, nextPosition) * speed * Time.deltaTime);
 
         Quaternion lookRotation = Quaternion.LookRotation(Maf.Direction(transform.position, nextPosition));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSmoothing * Time.deltaTime);

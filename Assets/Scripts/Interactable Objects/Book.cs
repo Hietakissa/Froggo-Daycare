@@ -1,5 +1,4 @@
 using System.Collections;
-using HietakissaUtils;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
@@ -131,11 +130,18 @@ public class Book : MonoBehaviour, IInteractable
 
     void GainedXP(int currentXP, int maxXP)
     {
+        if (LevelManager.Instance.currentLevel >= 10)
+        {
+            xpBarImage.fillAmount = 0f;
+            foreach (TextMeshProUGUI text in xpTexts) text.text = $"All hats unlocked!";
+            return;
+        }
+
         xpBarFillTargetAmount = currentXP / (float)maxXP;
         if (fillXPBarRoutine != null) StopCoroutine(fillXPBarRoutine);
         fillXPBarRoutine = StartCoroutine(FillXPBar());
 
-        foreach (TextMeshProUGUI text in xpTexts) text.text = $"New Hat: {currentXP}/{maxXP}";
+        foreach (TextMeshProUGUI text in xpTexts) text.text = $"XP Until Next Hat Unlock: {currentXP}/{maxXP}";
     }
 
     Coroutine fillXPBarRoutine;

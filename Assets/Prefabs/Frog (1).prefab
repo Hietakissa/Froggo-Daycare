@@ -2498,17 +2498,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.845768
+      value: 4.4487667
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.34
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.326119
+      value: -3.7121978
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
         type: 3}
@@ -2905,7 +2905,7 @@ MonoBehaviour:
   stats:
     hungerStat:
       DisableConsumption: 0
-      consumptionMultiplier: 0.75
+      consumptionMultiplier: 0.5
     moodStat:
       DisableConsumption: 0
       consumptionMultiplier: 1
@@ -2914,10 +2914,10 @@ MonoBehaviour:
       consumptionMultiplier: 1.3
     hygieneStat:
       DisableConsumption: 0
-      consumptionMultiplier: 0.8
+      consumptionMultiplier: 0.7
     toiletStat:
       DisableConsumption: 0
-      consumptionMultiplier: 0.5
+      consumptionMultiplier: 0.65
     baseConsumption: 0.5
     consumptionMultiplier: 1
   frogName: Sammakko
@@ -2928,7 +2928,7 @@ MonoBehaviour:
   FuriousBounceMask:
     serializedVersion: 2
     m_Bits: 1216
-  BounceSpeed: 12
+  BounceSpeed: 10
   BounceDistanceOffset: 0.3
   speed: 2
   rotationSmoothing: 5
@@ -2938,8 +2938,8 @@ MonoBehaviour:
   hatHolder: {fileID: 1610413821590868544}
   toyPlayChance: 15
   toyCheckRadius: 1.5
-  uprightTorque: 45
-  uprightTorqueDamping: 2
+  uprightTorque: 80
+  uprightTorqueDamping: 3
   TimeNotOverriddenPositionFor: 0
   Underwater: 0
   Furious: 0

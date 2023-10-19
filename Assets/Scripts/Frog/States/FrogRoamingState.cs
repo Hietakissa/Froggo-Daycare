@@ -12,6 +12,11 @@ public class FrogRoamingState : FrogBaseState
 
     public override void UpdateState()
     {
+        
+    }
+
+    public override void FixedUpdateState()
+    {
         frog.HandleMovement();
     }
 }
