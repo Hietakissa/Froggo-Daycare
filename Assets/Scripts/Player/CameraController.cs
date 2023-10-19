@@ -94,7 +94,8 @@ public class CameraController : MonoBehaviour
 
     void EnterBook()
     {
-        lerpTime = 0f;
+        if (Time.time < 1f) lerpTime = 1f;
+        else lerpTime = 0f;
 
         startPos = transform.position;
         startRot = transform.rotation;

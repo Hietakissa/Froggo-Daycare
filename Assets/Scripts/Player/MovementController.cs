@@ -152,8 +152,13 @@ public class MovementController : MonoBehaviour
 
         void HandleCrouching()
         {
-            if (Input.GetKeyDown(KeyCode.LeftControl)) crouchKeyHeld = true;
-            else if (Input.GetKeyUp(KeyCode.LeftControl)) crouchKeyHeld = false;
+            KeyCode crouchKey;
+
+            if (Application.platform != RuntimePlatform.WebGLPlayer) crouchKey = KeyCode.C;
+            else crouchKey = KeyCode.LeftControl;
+
+            if (Input.GetKeyDown(crouchKey) || Input.GetKeyDown(KeyCode.C)) crouchKeyHeld = true;
+            else if (Input.GetKeyUp(crouchKey) || Input.GetKeyUp(KeyCode.C)) crouchKeyHeld = false;
 
             if (!isGrounded)
             {

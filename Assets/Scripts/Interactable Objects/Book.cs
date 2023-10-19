@@ -1,8 +1,8 @@
-using HietakissaUtils;
 using System.Collections;
-using TMPro;
-using UnityEngine;
+using HietakissaUtils;
 using UnityEngine.UI;
+using UnityEngine;
+using TMPro;
 
 public class Book : MonoBehaviour, IInteractable
 {
@@ -10,6 +10,7 @@ public class Book : MonoBehaviour, IInteractable
 
     [SerializeField] Transform bookLookTransform;
     Bookmark activeBookmark;
+    int activeBookmarkIndex;
 
     [SerializeField] Transform[] menus;
 
@@ -25,6 +26,10 @@ public class Book : MonoBehaviour, IInteractable
     float xpBarFillTargetAmount;
 
     [SerializeField] float xpBarFillSpeed;
+
+    [SerializeField] AudioClip uiClickClip;
+    [SerializeField] AudioClip pageTurnClip;
+    [SerializeField] AudioSource uiClickSource;
 
     void Awake()
     {
@@ -43,8 +48,15 @@ public class Book : MonoBehaviour, IInteractable
 
     public void SelectBookmark(Bookmark bookmark)
     {
+        if (activeBookmark != null && activeBookmark.index != bookmark.index)
+        {
+            uiClickSource.pitch = SoundManager.Instance.GetPitch();
+            uiClickSource.PlayOneShot(pageTurnClip);
+        }
+
         if (activeBookmark != null) activeBookmark.UnSelect();
         activeBookmark = bookmark;
+        activeBookmarkIndex = bookmark.index;
         Debug.Log($"Selected bookmark {activeBookmark.index}");
 
         OpenMenu(0);
@@ -104,6 +116,12 @@ public class Book : MonoBehaviour, IInteractable
         
         if (id < 4) hatButtonHolder.GetChild(id).gameObject.SetActive(true);
         else hatButtonHolder2.GetChild(id - 4).gameObject.SetActive(true);
+    }
+
+    public void UIClickSound()
+    {
+        uiClickSource.pitch = SoundManager.Instance.GetPitch();
+        uiClickSource.PlayOneShot(uiClickClip);
     }
 
     void GainedXP(int currentXP, int maxXP)

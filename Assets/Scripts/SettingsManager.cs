@@ -1,9 +1,9 @@
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 using HietakissaUtils;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
-using UnityEngine.Audio;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -30,6 +30,7 @@ public class SettingsManager : MonoBehaviour
 
     public void SaveSettings()
     {
+        if (Application.platform != RuntimePlatform.WebGLPlayer) return;
 #if !UNITY_EDITOR
         Serializer.Save(PlayerData.sensitivity.ToString(), "sensitivity");
         Serializer.Save(PlayerData.masterVolume.ToString(), "masterVolume");
@@ -46,14 +47,17 @@ public class SettingsManager : MonoBehaviour
         PlayerData.musicVolume = 55;
 
 #else
-        if (Serializer.SaveDataExists("sensitivity")) PlayerData.sensitivity = float.Parse(Serializer.Load("sensitivity"));
-        else PlayerData.sensitivity = 1f;
+        if (Application.platform != RuntimePlatform.WebGLPlayer)
+        {
+            if (Serializer.SaveDataExists("sensitivity")) PlayerData.sensitivity = float.Parse(Serializer.Load("sensitivity"));
+            else PlayerData.sensitivity = 1f;
 
-        if (Serializer.SaveDataExists("masterVolume")) PlayerData.masterVolume = int.Parse(Serializer.Load("masterVolume"));
-        else PlayerData.masterVolume = 80;
+            if (Serializer.SaveDataExists("masterVolume")) PlayerData.masterVolume = int.Parse(Serializer.Load("masterVolume"));
+            else PlayerData.masterVolume = 80;
 
-        if (Serializer.SaveDataExists("musicVolume")) PlayerData.musicVolume = int.Parse(Serializer.Load("musicVolume"));
-        else PlayerData.musicVolume = 55;
+            if (Serializer.SaveDataExists("musicVolume")) PlayerData.musicVolume = int.Parse(Serializer.Load("musicVolume"));
+            else PlayerData.musicVolume = 55;
+        }
 #endif
 
 
