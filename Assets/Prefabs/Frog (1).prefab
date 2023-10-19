@@ -2252,7 +2252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frog: {fileID: 6806481310771227652}
-  minBubbleThreshold: 65
+  minBubbleThreshold: 75
   statBubbles:
   - {fileID: 585985313816177526}
   - {fileID: 1433360708486953866}
@@ -2918,7 +2918,7 @@ MonoBehaviour:
     toiletStat:
       DisableConsumption: 0
       consumptionMultiplier: 0.65
-    baseConsumption: 0.5
+    baseConsumption: 0.45
     consumptionMultiplier: 1
   frogName: Sammakko
   isGrabbed: 0
