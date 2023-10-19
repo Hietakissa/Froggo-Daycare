@@ -34,6 +34,10 @@ public class MovementController : MonoBehaviour
     [SerializeField] float sphereCastOffset = 0.05f;
     [SerializeField] float rayCastOffset = 0.05f;
 
+    [Header("Other")]
+    [SerializeField] AudioSource footstepSource;
+    [SerializeField] AudioClip footstepAudio;
+
     RaycastHit sphereCast;
     RaycastHit groundRay;
 
@@ -120,6 +124,12 @@ public class MovementController : MonoBehaviour
             if (PlayerData.usingBook) moveDir = Vector3.zero;
             else MoveDir();
             cc.Move((moveDir + velocity) * Time.deltaTime);
+
+            if (moveDir != Vector3.zero)
+            {
+                footstepSource.volume = 0.4f;
+            }
+            else footstepSource.volume = 0f;
 
             void MoveDir()
             {

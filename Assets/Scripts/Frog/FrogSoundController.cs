@@ -7,18 +7,28 @@ public class FrogSoundController : MonoBehaviour
     [SerializeField] AudioClip changeHatSound;
     [SerializeField] AudioClip jumpSound;
     [SerializeField] AudioClip[] playSounds;
+    [SerializeField] AudioClip bathDoneSound;
     [SerializeField] float impactThreshold;
 
     AudioSource source;
+    Frog frog;
+
+    float lastHygiene;
 
     void Awake()
     {
         source = GetComponent<AudioSource>();
 
-        Frog frog = GetComponent<Frog>();
+        frog = GetComponent<Frog>();
         frog.OnFrogJump += FrogJumped;
         frog.OnFrogChangeHat += FrogChangedHat;
         frog.OnFrogPlay += FrogPlayed;
+    }
+
+    void Update()
+    {
+        if (frog.Underwater && frog.stats.hygieneStat.GetStatValue() == 100f && lastHygiene < 100f) SoundManager.Instance.PlayPooledSoundAtPosition(bathDoneSound, transform.position);
+        lastHygiene = frog.stats.hygieneStat.GetStatValue();
     }
 
     void FrogJumped()

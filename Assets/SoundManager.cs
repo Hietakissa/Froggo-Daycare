@@ -1,6 +1,5 @@
 using UnityEngine.Audio;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class SoundManager : MonoBehaviour
 {
@@ -10,6 +9,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] float pitchDeviation = 0.22f;
 
     [SerializeField] AudioClip genericImpact;
+    [SerializeField] AudioClip bathSplash;
 
     GameObject[] soundObjects = new GameObject[10];
     AudioSource[] soundSources = new AudioSource[10];
@@ -25,6 +25,7 @@ public class SoundManager : MonoBehaviour
             soundSources[i] = soundObjects[i].AddComponent<AudioSource>();
             soundSources[i].outputAudioMixerGroup = masterMixer;
             soundSources[i].playOnAwake = false;
+            soundSources[i].spatialBlend = 1f;
         }
     }
 
@@ -36,6 +37,11 @@ public class SoundManager : MonoBehaviour
         if (Time.time < 0.5f) return;
 
         PlayPooledSoundAtPosition(genericImpact, position);
+    }
+
+    public void PlaySplashSound(Vector3 position)
+    {
+        PlayPooledSoundAtPosition(bathSplash, position);
     }
 
     public void PlayPooledSoundAtPosition(AudioClip clip, Vector3 position)

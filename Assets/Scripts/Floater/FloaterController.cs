@@ -11,6 +11,9 @@ public class FloaterController : MonoBehaviour
     [HideInInspector] public Rigidbody rb;
 
     [HideInInspector] public bool underwater;
+    bool lastUnderwater;
+
+    float lastSplashTime;
 
     void Awake()
     {
@@ -33,7 +36,12 @@ public class FloaterController : MonoBehaviour
                 floater.Process();
             }
         }
-        
+
+        if (underwater != lastUnderwater && Time.time - lastSplashTime > 0.5f)
+        {
+            SoundManager.Instance.PlaySplashSound(transform.position);
+            lastSplashTime = Time.time;
+        }
 
         if (underwater)
         {
@@ -54,5 +62,7 @@ public class FloaterController : MonoBehaviour
             rb.drag = 0f;
             rb.angularDrag = 0.05f;
         }
+
+        lastUnderwater = underwater;
     }
 }
