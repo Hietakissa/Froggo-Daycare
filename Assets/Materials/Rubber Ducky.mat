@@ -31,11 +31,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _1st_ShadeMap:
-        m_Texture: {fileID: 2800000, guid: dfc3b281b34db84428d4eb0a3f9df3f6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 55000cd3a1487ca44a72bf380e82d605, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _2nd_ShadeMap:
-        m_Texture: {fileID: 2800000, guid: dfc3b281b34db84428d4eb0a3f9df3f6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 55000cd3a1487ca44a72bf380e82d605, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AngelRing_Sampler:
@@ -127,7 +127,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: dfc3b281b34db84428d4eb0a3f9df3f6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 55000cd3a1487ca44a72bf380e82d605, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
@@ -371,7 +371,7 @@ Material:
     - _Is_LightColor_2nd_Shade: 1
     - _Is_LightColor_AR: 1
     - _Is_LightColor_Ap_RimLight: 1
-    - _Is_LightColor_Base: 1
+    - _Is_LightColor_Base: 0
     - _Is_LightColor_HighColor: 1
     - _Is_LightColor_MatCap: 1
     - _Is_LightColor_Outline: 1
