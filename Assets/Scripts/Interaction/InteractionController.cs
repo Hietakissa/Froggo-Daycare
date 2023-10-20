@@ -9,6 +9,9 @@ public class InteractionController : MonoBehaviour
 
     RaycastHit hit;
 
+    [SerializeField] GameObject cursorActiveObject;
+    [SerializeField] GameObject cursorInactiveObject;
+
     void Awake()
     {
         PlayerData.interactionMask = interactionMask;
@@ -26,6 +29,9 @@ public class InteractionController : MonoBehaviour
 
         if (PlayerData.usingBook)
         {
+            cursorActiveObject.SetActive(false);
+            cursorInactiveObject.SetActive(false);
+
             if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape))
             {
                 Book.Instance.StopUsingBook();
@@ -79,47 +85,69 @@ public class InteractionController : MonoBehaviour
         void HandleInteraction()
         {
             //Physics.Raycast(PlayerData.cameraTransform.position, PlayerData.cameraTransform.forward, out hit, interactionRange, interactionMask)
+
+            if (PlayerData.grabbingObject) return;
+
             if (Physics.Raycast(PlayerData.cameraTransform.position, PlayerData.cameraTransform.forward, out hit, interactionRange, interactionMask))
             {
-                if (Input.GetMouseButtonDown(0))
+                IGrabbable grab;
+                bool hasGrab = false;
+
+                if (hit.collider.TryGetComponent(out GrabBranch branch))
                 {
-                    IGrabbable grab;
-                    bool hasGrab = false;
+                    Debug.Log($"Grabbed branch of {branch.RootObject.name}");
 
-                    if (hit.collider.TryGetComponent(out GrabBranch branch))
-                    {
-                        Debug.Log($"Grabbed branch of {branch.RootObject.name}");
+                    IGrabbable root = branch.RootObject.GetComponent<IGrabbable>();
 
-                        IGrabbable root = branch.RootObject.GetComponent<IGrabbable>();
+                    if (branch.RootObject.TryGetComponent(out Frog frog) && frog.StateIs(FrogState.Potty)) return;
 
-                        if (branch.RootObject.TryGetComponent(out Frog frog) && frog.StateIs(FrogState.Potty)) return;
+                    PlayerData.lastGrab = root;
+                    PlayerData.lastGrabObject = branch.RootObject;
+                    grab = root;
 
-                        PlayerData.lastGrab = root;
-                        PlayerData.lastGrabObject = branch.RootObject;
-                        grab = root;
+                    PlayerData.GrabIsDoor = false;
 
-                        PlayerData.GrabIsDoor = false;
+                    hasGrab = true;
+                }
+                else if (hit.collider.TryGetComponent(out grab))
+                {
+                    PlayerData.lastGrab = grab;
+                    PlayerData.lastGrabObject = hit.collider.gameObject;
 
-                        hasGrab = true;
-                    }
-                    else if (hit.collider.TryGetComponent(out grab))
-                    {
-                        PlayerData.lastGrab = grab;
-                        PlayerData.lastGrabObject = hit.collider.gameObject;
+                    PlayerData.lastGrabPoint = hit.point;
+                    PlayerData.GrabIsDoor = hit.collider.TryGetComponent(out DynamicDoor door);
 
-                        PlayerData.lastGrabPoint = hit.point;
-                        PlayerData.GrabIsDoor = hit.collider.TryGetComponent(out DynamicDoor door);
+                    hasGrab = true;
+                }
 
-                        hasGrab = true;
-                    }
+                if (hasGrab)
+                {
+                    cursorActiveObject.SetActive(true);
+                    cursorInactiveObject.SetActive(false);
 
-                    if (hasGrab)
+                    if (Input.GetMouseButtonDown(0))
                     {
                         GrabbingController.Instance.GrabObject();
                         grab.StartGrab();
                     }
                 }
-                else if (Input.GetKeyDown(KeyCode.E) && hit.collider.TryGetComponent(out IInteractable interact)) interact.Interact();
+                else
+                {
+                    cursorActiveObject.SetActive(false);
+                    cursorInactiveObject.SetActive(true);
+                    if (Input.GetKeyDown(KeyCode.E) && hit.collider.TryGetComponent(out IInteractable interact)) interact.Interact();
+                }
+            }
+            else
+            {
+                cursorActiveObject.SetActive(false);
+                cursorInactiveObject.SetActive(true);
+            }
+
+            if (PlayerData.grabbingObject)
+            {
+                cursorActiveObject.SetActive(true);
+                cursorInactiveObject.SetActive(false);
             }
         }
 

@@ -16,15 +16,17 @@ public static class GameManager
     public static event Action OnWin;
     public static event Action OnLose;
 
-    public static int FuriousFrogCount;
     public const int MaxFuriousFrogs = 5;
     public const int FrogWinCount  = 12;
+    public static int FuriousFrogCount;
+    public static int FrogCount;
 
     public static bool IsPaused;
-    static int frogCount;
 
     public static bool ShowMenuOnPause;
     public static bool GameRunning = true;
+
+    public static bool TutorialShown;
 
     public static void Pause()
     {
@@ -60,8 +62,8 @@ public static class GameManager
 
     public static void IncreaseFrogCount()
     {
-        frogCount++;
-        if (frogCount >= FrogWinCount)
+        FrogCount++;
+        if (FrogCount >= FrogWinCount)
         {
             ShowMenuOnPause = false;
             GameRunning = false;

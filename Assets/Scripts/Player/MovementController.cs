@@ -131,7 +131,7 @@ public class MovementController : MonoBehaviour
 
             if (moveDir != Vector3.zero)
             {
-                footstepSource.volume = 0.4f;
+                footstepSource.volume = 0.2f;
             }
             else footstepSource.volume = 0f;
 

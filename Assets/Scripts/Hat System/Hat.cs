@@ -82,6 +82,8 @@ public class Hat : MonoBehaviour, IGrabbable
 
         PauseManager.Instance.RegisterRigidbody(rb);
 
+        transform.localScale = hatSO.scale;
+
         lastEquipped = Time.time;
     }
 

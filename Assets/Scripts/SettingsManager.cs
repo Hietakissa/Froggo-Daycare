@@ -161,6 +161,8 @@ public class SettingsManager : MonoBehaviour
     {
         GameManager.IsPaused = false;
         GameManager.GameRunning = true;
+        GameManager.FuriousFrogCount = 0;
+        GameManager.FrogCount = 0;
         SceneManager.LoadScene(0);
     }
 }

@@ -7,4 +7,5 @@ public class HatSO : ScriptableObject
     public int ID;
     public Vector3 offset;
     public Vector3 rotation;
+    public Vector3 scale;
 }
