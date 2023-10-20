@@ -15,6 +15,8 @@ public class HelperText : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.IsPaused) return;
+
         time += Time.deltaTime;
 
         if (time > 60f)

@@ -16,6 +16,7 @@ public class Jar : MonoBehaviour, IInteractable, IGrabbable
 
     public void Interact()
     {
+        Debug.Log("interacted with jar");
         Activate();
     }
 
@@ -24,7 +25,7 @@ public class Jar : MonoBehaviour, IInteractable, IGrabbable
         FrogSpawner.Instance.SpawnFrog(spawnPos, spawnAngry);
         LevelManager.Instance.AddXP(100);
 
-        if (PlayerData.lastGrabObject == gameObject)
+        if (PlayerData.grabbingObject && PlayerData.lastGrabObject == gameObject)
         {
             Debug.Log("Jar ungrabbed object");
             GrabbingController.Instance.UnGrabObject();

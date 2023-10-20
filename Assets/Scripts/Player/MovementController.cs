@@ -58,6 +58,9 @@ public class MovementController : MonoBehaviour
         PlayerData.playerTransform = transform;
         PlayerData.cameraHolder = transform.Find("Camera Holder");
 
+        PlayerData.lastGrabObject = null;
+        PlayerData.grabbingObject = false;
+
         Debug.Log($"Furious frogs: {GameManager.FuriousFrogCount}");
     }
 

@@ -19,6 +19,7 @@ public class GrabbingController : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        PlayerData.grabbingObject = false;
     }
 
     void Update()

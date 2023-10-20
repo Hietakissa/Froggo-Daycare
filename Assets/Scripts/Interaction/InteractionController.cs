@@ -120,10 +120,18 @@ public class InteractionController : MonoBehaviour
                     hasGrab = true;
                 }
 
+                Debug.Log($"has grab: {hasGrab}");
+
                 if (hasGrab)
                 {
                     cursorActiveObject.SetActive(true);
                     cursorInactiveObject.SetActive(false);
+
+                    if (Input.GetKeyDown(KeyCode.E) && hit.collider.TryGetComponent(out IInteractable interact))
+                    {
+                        interact.Interact();
+                        return;
+                    }
 
                     if (Input.GetMouseButtonDown(0))
                     {
@@ -135,7 +143,6 @@ public class InteractionController : MonoBehaviour
                 {
                     cursorActiveObject.SetActive(false);
                     cursorInactiveObject.SetActive(true);
-                    if (Input.GetKeyDown(KeyCode.E) && hit.collider.TryGetComponent(out IInteractable interact)) interact.Interact();
                 }
             }
             else
