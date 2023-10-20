@@ -92,11 +92,10 @@ public class InteractionController : MonoBehaviour
             {
                 IGrabbable grab;
                 bool hasGrab = false;
+                bool hasInteract = false;
 
                 if (hit.collider.TryGetComponent(out GrabBranch branch))
                 {
-                    Debug.Log($"Grabbed branch of {branch.RootObject.name}");
-
                     IGrabbable root = branch.RootObject.GetComponent<IGrabbable>();
 
                     if (branch.RootObject.TryGetComponent(out Frog frog) && frog.StateIs(FrogState.Potty)) return;
@@ -120,18 +119,24 @@ public class InteractionController : MonoBehaviour
                     hasGrab = true;
                 }
 
-                Debug.Log($"has grab: {hasGrab}");
+                if (hit.collider.TryGetComponent(out IInteractable interact))
+                {
+                    cursorActiveObject.SetActive(true);
+                    cursorInactiveObject.SetActive(false);
+
+                    hasInteract = true;
+
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        interact.Interact();
+                        return;
+                    }
+                }
 
                 if (hasGrab)
                 {
                     cursorActiveObject.SetActive(true);
                     cursorInactiveObject.SetActive(false);
-
-                    if (Input.GetKeyDown(KeyCode.E) && hit.collider.TryGetComponent(out IInteractable interact))
-                    {
-                        interact.Interact();
-                        return;
-                    }
 
                     if (Input.GetMouseButtonDown(0))
                     {
@@ -139,7 +144,8 @@ public class InteractionController : MonoBehaviour
                         grab.StartGrab();
                     }
                 }
-                else
+
+                if (!hasGrab && !hasInteract)
                 {
                     cursorActiveObject.SetActive(false);
                     cursorInactiveObject.SetActive(true);

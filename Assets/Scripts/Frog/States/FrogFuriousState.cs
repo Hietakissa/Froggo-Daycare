@@ -32,6 +32,11 @@ public class FrogFuriousState : FrogBaseState
 
     public override void UpdateState()
     {
+        
+    }
+
+    public override void FixedUpdateState()
+    {
         if (frog.isGrabbed || frog.ShouldOverridePosition) return;
 
         if (Vector3.Distance(frog.rb.position, Vector3.up) >= 30f) frog.rb.position = Vector3.up;
@@ -59,12 +64,8 @@ public class FrogFuriousState : FrogBaseState
         }
 
         //frog.rb.position = frog.rb.position + velocity * Time.deltaTime;
-        frog.transform.position = frog.transform.position + velocity * Time.deltaTime;
+        //frog.transform.position = frog.transform.position + velocity * Time.deltaTime;
+        frog.rb.MovePosition(frog.rb.position + velocity * Time.deltaTime);
         frog.rb.rotation = Quaternion.Slerp(frog.rb.rotation, Quaternion.LookRotation(velocity), 10f * Time.deltaTime);
-    }
-
-    public override void FixedUpdateState()
-    {
-        
     }
 }

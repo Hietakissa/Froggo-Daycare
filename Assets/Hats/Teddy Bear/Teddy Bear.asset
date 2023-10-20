@@ -15,3 +15,5 @@ MonoBehaviour:
   Prefab: {fileID: 207988969290964253, guid: 50d44fb3d1cd3cc41ad30ee9ecf33673, type: 3}
   ID: 2
   offset: {x: 0, y: 0.163, z: 0.182}
+  rotation: {x: 0, y: 0, z: 0}
+  scale: {x: 1, y: 1, z: 1}

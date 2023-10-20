@@ -638,7 +638,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 146585679}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Floaters
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2275,7 +2275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 415808103}
   - component: {fileID: 415808104}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Floater (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5994,16 +5994,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751998936}
-  m_LocalRotation: {x: -0, y: 0.2756921, z: -0, w: 0.9612461}
-  m_LocalPosition: {x: 0, y: 0, z: 11.8874}
+  m_LocalRotation: {x: -0, y: 0.7396465, z: -0, w: 0.6729957}
+  m_LocalPosition: {x: 0, y: 0, z: 8.874}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 171907986}
-  m_LocalEulerAnglesHint: {x: 0, y: 32.007, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 95.403, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.7558, y: 0.5836}
+  m_AnchoredPosition: {x: 12.987, y: 0.5835999}
   m_SizeDelta: {x: 1.9101, y: 1.177}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &751998938
@@ -6029,7 +6029,7 @@ MonoBehaviour:
   m_text: 'You can get food in the fridge.
 
     You can grab objects with the ''Left
-    Mouse Button'' when the cursor lights up.'
+    Mouse Button'' or interact with them when the cursor lights up.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6038,8 +6038,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4293787453
-  m_fontColor: {r: 0.23921567, g: 1, b: 0.9301923, a: 1}
+    rgba: 4291900935
+  m_fontColor: {r: 0.027100407, g: 0.21017452, b: 0.8207547, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6056,7 +6056,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.7
+  m_fontSize: 1.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7515,7 +7515,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1001558076}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Grab Transform Override
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8398,7 +8398,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1093502316}
   - component: {fileID: 1093502317}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Floater (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9592,7 +9592,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1318493886}
   - component: {fileID: 1318493887}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Floater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10837,7 +10837,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1623444234}
   - component: {fileID: 1623444235}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Floater (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13475,7 +13475,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1837481482}
   - component: {fileID: 1837481483}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Floater (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18864,7 +18864,7 @@ PrefabInstance:
     - target: {fileID: 6409761863497957846, guid: 11638c130c9862f41a079ff16001ec18,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6409761863497957846, guid: 11638c130c9862f41a079ff16001ec18,
         type: 3}

@@ -2498,17 +2498,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.4487667
+      value: 2.4278815
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.34
+      value: 0.033075094
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.7121978
+      value: 6.4882755
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55fe5b4d224f22b47ad37dc748b7c8a4,
         type: 3}
@@ -2928,7 +2928,7 @@ MonoBehaviour:
   FuriousBounceMask:
     serializedVersion: 2
     m_Bits: 1216
-  BounceSpeed: 10
+  BounceSpeed: 7
   BounceDistanceOffset: 0.3
   speed: 2
   rotationSmoothing: 5

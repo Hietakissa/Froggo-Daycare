@@ -16,3 +16,4 @@ MonoBehaviour:
   ID: 6
   offset: {x: 0, y: 0.091, z: 0.233}
   rotation: {x: 75.118, y: 0, z: 0}
+  scale: {x: 1, y: 1, z: 1}
