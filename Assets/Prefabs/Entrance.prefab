@@ -2597,8 +2597,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4941936983967182528}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.9413362, z: -0, w: 0.33747017}
-  m_LocalPosition: {x: -17.423155, y: 34.975132, z: 25.132547}
+  m_LocalRotation: {x: -0, y: -0.42269686, z: -0, w: 0.90627116}
+  m_LocalPosition: {x: -16.159, y: 34.975132, z: 20.174}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2607,7 +2607,7 @@ Transform:
   - {fileID: 6017944477612830956}
   - {fileID: 4017962730341932304}
   m_Father: {fileID: 6349553839250444164}
-  m_LocalEulerAnglesHint: {x: 0, y: -140.554, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -50.01, z: 0}
 --- !u!1 &5323405624588684687
 GameObject:
   m_ObjectHideFlags: 0
@@ -5756,6 +5756,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivityInputField: {fileID: 1912018996861337116}
   sensitivitySlider: {fileID: 2888075764783998798}
+  masterVolumeInputField: {fileID: 0}
+  masterVolumeSlider: {fileID: 0}
+  musicVolumeInputField: {fileID: 0}
+  musicVolumeSlider: {fileID: 0}
+  mixer: {fileID: 0}
 --- !u!1001 &5027713805725835026
 PrefabInstance:
   m_ObjectHideFlags: 0
