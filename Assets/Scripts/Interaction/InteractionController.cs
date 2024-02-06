@@ -19,7 +19,7 @@ public class InteractionController : MonoBehaviour
 
     /// <summary>
     /// tosi rumaa spagettia!!!
-    /// toivottavasti ei tarvii ikinä enää koskee tähän koodiin (foreshadowing)
+    /// toivottavasti ei tarvii ikinï¿½ enï¿½ï¿½ koskee tï¿½hï¿½n koodiin (foreshadowing)
     /// </summary>
 
     void Update()
@@ -76,7 +76,7 @@ public class InteractionController : MonoBehaviour
         {
             if (PlayerData.grabbingObject && Input.GetMouseButtonUp(0))
             {
-                Debug.Log("Ungrabbed object because mouse was released");
+                //Debug.Log("Ungrabbed object because mouse was released");
                 GrabbingController.Instance.UnGrabObject();
                 //PlayerData.lastGrab.StopGrab();
                 return;

@@ -56,7 +56,7 @@ public class Book : MonoBehaviour, IInteractable
         if (activeBookmark != null) activeBookmark.UnSelect();
         activeBookmark = bookmark;
         activeBookmarkIndex = bookmark.index;
-        Debug.Log($"Selected bookmark {activeBookmark.index}");
+        //Debug.Log($"Selected bookmark {activeBookmark.index}");
 
         OpenMenu(0);
 
@@ -116,8 +116,8 @@ public class Book : MonoBehaviour, IInteractable
 
     public void UnlockHat(int id)
     {
-        Debug.Log($"Unlocked hat {id}");
-        
+        //Debug.Log($"Unlocked hat {id}");
+
         if (id < 4) hatButtonHolder.GetChild(id).gameObject.SetActive(true);
         else hatButtonHolder2.GetChild(id - 4).gameObject.SetActive(true);
     }

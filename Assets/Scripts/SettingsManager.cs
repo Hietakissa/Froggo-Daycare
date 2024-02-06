@@ -144,7 +144,7 @@ public class SettingsManager : MonoBehaviour
         musicVolumeSlider.SetValueWithoutNotify(PlayerData.musicVolume);
         musicVolumeInputField.text = PlayerData.musicVolume.ToString();
 
-        Debug.Log($"Setting music volume to {Maf.ReMap(0, 100, -80, 20, PlayerData.musicVolume)}");
+        //Debug.Log($"Setting music volume to {Maf.ReMap(0, 100, -80, 20, PlayerData.musicVolume)}");
         mixer.SetFloat("MusicVolume", Maf.ReMap(0, 100, -80, 20, PlayerData.musicVolume));
     }
 

@@ -13,7 +13,7 @@ public class Toy : MonoBehaviour
     {
         if (PlayerData.lastGrabObject == gameObject)
         {
-            Debug.Log("Toy ungrabbed object");
+            //Debug.Log("Toy ungrabbed object");
             GrabbingController.Instance.UnGrabObject();
         }
 

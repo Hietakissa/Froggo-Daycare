@@ -60,10 +60,10 @@ public class Hat : MonoBehaviour, IGrabbable
 
             if (isGrabbed && PlayerData.lastGrabObject == gameObject)
             {
-                Debug.Log("Hat ungrabbed object");
+                //Debug.Log("Hat ungrabbed object");
                 GrabbingController.Instance.UnGrabObject();
             }
-            
+
             //Destroy(hatCollider);
             //Destroy(rb);
             //Destroy(this);

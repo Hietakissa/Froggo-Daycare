@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class BathTubWater : MonoBehaviour
 {
+    public static float WaterHeight = 1.0647f;
     [SerializeField] float cleanRate;
 
     List<Frog> frogs = new List<Frog>();
@@ -34,7 +35,7 @@ public class BathTubWater : MonoBehaviour
             }
             frogCollidersInWater[frog]++; //Increment underwater collider count
 
-            Debug.Log($"Frog collider in water, total of {frogCollidersInWater[frog]}");
+            //Debug.Log($"Frog collider in water, total of {frogCollidersInWater[frog]}");
         }
     }
 
@@ -42,10 +43,10 @@ public class BathTubWater : MonoBehaviour
     {
         if (GameManager.TryGetFrog(other, out Frog frog))
         {
-            
+
             //frogs.Remove(frog);
             frogCollidersInWater[frog]--;
-            Debug.Log($"Frog collider exit water, total of {frogCollidersInWater[frog]}");
+            //Debug.Log($"Frog collider exit water, total of {frogCollidersInWater[frog]}");
             if (frogCollidersInWater[frog] <= 0)
             {
                 frogCollidersInWater.Remove(frog);

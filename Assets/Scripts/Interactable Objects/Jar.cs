@@ -16,7 +16,7 @@ public class Jar : MonoBehaviour, IInteractable, IGrabbable
 
     public void Interact()
     {
-        Debug.Log("interacted with jar");
+        //Debug.Log("interacted with jar");
         Activate();
     }
 
@@ -27,7 +27,7 @@ public class Jar : MonoBehaviour, IInteractable, IGrabbable
 
         if (PlayerData.grabbingObject && PlayerData.lastGrabObject == gameObject)
         {
-            Debug.Log("Jar ungrabbed object");
+            //Debug.Log("Jar ungrabbed object");
             GrabbingController.Instance.UnGrabObject();
         }
 
@@ -51,11 +51,11 @@ public class Jar : MonoBehaviour, IInteractable, IGrabbable
 
     public void StartGrab()
     {
-        
+
     }
 
     public void StopGrab()
     {
-        
+
     }
 }

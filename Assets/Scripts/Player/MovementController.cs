@@ -61,7 +61,7 @@ public class MovementController : MonoBehaviour
         PlayerData.lastGrabObject = null;
         PlayerData.grabbingObject = false;
 
-        Debug.Log($"Furious frogs: {GameManager.FuriousFrogCount}");
+        //Debug.Log($"Furious frogs: {GameManager.FuriousFrogCount}");
     }
 
     void Start()
@@ -76,7 +76,7 @@ public class MovementController : MonoBehaviour
             footstepSource.volume = 0f;
             return;
         }
-        
+
         //Grounded check
         isGrounded = Physics.SphereCast(transform.position + Vector3.up * (sphereCastRadius + sphereCastOffset), sphereCastRadius, Vector3.down, out sphereCast, sphereCastOffset * 2);
         Physics.Raycast(transform.position + Vector3.up * rayCastOffset, Vector3.down, out groundRay, rayCastOffset * 2);
@@ -141,9 +141,9 @@ public class MovementController : MonoBehaviour
             void MoveDir()
             {
                 //TODO somehow orient vector away from the slope
-                //joo ruma ja pitkä rivi koodia, en jaksa tehä hienompaa rn
+                //joo ruma ja pitkï¿½ rivi koodia, en jaksa tehï¿½ hienompaa rn
                 if (OnSteepGround()) moveDir = Vector3.ProjectOnPlane(Vector3.down, groundRay.normal);
-                else moveDir = (PlayerData.playerTransform.forward * vertical + PlayerData.playerTransform.right * horizontal).normalized; 
+                else moveDir = (PlayerData.playerTransform.forward * vertical + PlayerData.playerTransform.right * horizontal).normalized;
                 moveDir *= speed * GetSpeedMultiplier();
 
 

@@ -21,7 +21,7 @@ public class FeedingChair : MonoBehaviour
 
             if (PlayerData.lastGrabObject == frog.gameObject)
             {
-                Debug.Log("Feeding chair ungrabbed object");
+                //Debug.Log("Feeding chair ungrabbed object");
                 GrabbingController.Instance.UnGrabObject();
             }
 
@@ -33,7 +33,7 @@ public class FeedingChair : MonoBehaviour
 
             occupied = true;
 
-            Debug.Log("Frog entered feeding chair");
+            //Debug.Log("Frog entered feeding chair");
         }
     }
 

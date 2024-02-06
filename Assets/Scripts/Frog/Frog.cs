@@ -335,7 +335,7 @@ public class Frog : MonoBehaviour, IGrabbable
             return;
         }*/
 
-        Debug.Log("Frog idle");
+        //Debug.Log("Frog idle");
 
         if (Furious) animator.Play(FrogAnimation.AngryIdle);
         else animator.Play(FrogAnimation.Idle);
@@ -394,7 +394,7 @@ public class Frog : MonoBehaviour, IGrabbable
 
         GoIdle();
         EnterState(FrogState.Roaming);
-        
+
         OnGrab?.Invoke();
     }
     public void StopGrab()
@@ -430,7 +430,7 @@ public class Frog : MonoBehaviour, IGrabbable
         if (equippedHat != null)
         {
             Debug.Log("Already had a hat");
-            
+
             equippedHat.ActivateHat();
         }
 
@@ -474,7 +474,7 @@ public class StatController
         hygieneStat.Consume(baseConsumption * consumptionMultiplier * Time.deltaTime);
         toiletStat.Consume(baseConsumption * consumptionMultiplier * Time.deltaTime);
     }
-    
+
     public void ForceSetStatsToZero()
     {
         hungerStat.DecreaseStat(100f);
@@ -517,7 +517,7 @@ public class StatController
 
         return lowestStat;
     }
-    
+
     public int GetStatsUnderThreshold(float threshold)
     {
         int count = 0;

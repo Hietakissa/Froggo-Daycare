@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class FloaterController : MonoBehaviour
@@ -6,6 +7,9 @@ public class FloaterController : MonoBehaviour
 
     [SerializeField] float uprightTorque = 60;
     [SerializeField] float uprightTorqueDamping = 2;
+    [SerializeField] Transform rippleEffect;
+    [Tooltip("Ripple Effect Size is about 2 from the small rubber duck, for example. 3.5 for a frog.")]
+    [SerializeField] float rippleEffectSize = 2f;
 
     [HideInInspector] public LayerMask waterMask;
     [HideInInspector] public Rigidbody rb;
@@ -14,6 +18,12 @@ public class FloaterController : MonoBehaviour
     bool lastUnderwater;
 
     float lastSplashTime;
+    bool ripplePrefabMissing; //ripple could be null so but we don't need the red error
+    bool gotRipple; //Water effects instantiated once already
+    bool skimming; //Making costant contact with the BathwaterSurface
+    bool inTriggerSurface; //Used to get the inverse of OnTriggerStay
+    Transform currentRippleTransform; //Instantiated water effect
+    ParticleSystem currentRippleParticleSystem; //its PS
 
     void Awake()
     {
@@ -22,10 +32,18 @@ public class FloaterController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         foreach (Floater floater in floaters) floater.Init(this);
+
+        if (rippleEffect == null)
+        {
+            Debug.LogWarning($"{gameObject} has unassigned Ripple effect prefab, will not get ripples when in water");
+            ripplePrefabMissing = true;
+        }
     }
 
     void FixedUpdate()
     {
+        skimming = inTriggerSurface;
+
         underwater = false;
 
         foreach (Floater floater in floaters)
@@ -45,6 +63,9 @@ public class FloaterController : MonoBehaviour
 
         if (underwater)
         {
+            //Debug.Log($"<color=2BC3FF> {gameObject} floating! Water height: {BathTubWater.WaterHeight}</color>");
+
+
             rb.drag = 2f;
             rb.angularDrag = 2f;
 
@@ -63,6 +84,69 @@ public class FloaterController : MonoBehaviour
             rb.angularDrag = 0.05f;
         }
 
+
+        inTriggerSurface = false;
         lastUnderwater = underwater;
+    }
+
+    void Update()
+    {
+        if (!ripplePrefabMissing)
+        {
+            if (!gotRipple)
+            {
+                //if (rippleEffect != null)
+                currentRippleTransform = Instantiate(rippleEffect, transform.position, quaternion.identity);
+                currentRippleParticleSystem = currentRippleTransform.GetComponent<ParticleSystem>();
+                var main = currentRippleParticleSystem.main;
+                main.startSize = rippleEffectSize;
+                gotRipple = true;
+            }
+            else
+            {
+                if (skimming)
+                {
+                    if (!currentRippleParticleSystem.isEmitting)
+                        currentRippleParticleSystem.Play();
+
+
+                    currentRippleTransform.position = new Vector3(
+                        transform.position.x,
+                        BathTubWater.WaterHeight,
+                        transform.position.z);
+                }
+                else
+                {
+                    if (currentRippleParticleSystem.isEmitting)
+                    {
+                        currentRippleParticleSystem.Stop();
+                    }
+                }
+
+            }
+        }
+    }
+
+    /* void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("WaterSurface"))
+        {
+            skimming = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("WaterSurface"))
+        {
+            skimming = false;
+        }
+    } */
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("WaterSurface"))
+        {
+            inTriggerSurface = true;
+        }
     }
 }

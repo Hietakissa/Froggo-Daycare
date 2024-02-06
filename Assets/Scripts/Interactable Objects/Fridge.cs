@@ -40,7 +40,7 @@ public class Fridge : Appliance
 
         //Debug.Log($"{currentFoodAmount} food, {missingFood} missing");
 
-        Debug.Log($"{currentFoodAmount} of {maxFoodAmount} food in the fridge, missing {missingFood}");
+        //Debug.Log($"{currentFoodAmount} of {maxFoodAmount} food in the fridge, missing {missingFood}");
 
         for (int i = 0; i < missingFood; i++)
         {
